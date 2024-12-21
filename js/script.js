@@ -72,48 +72,8 @@ const config = {
                 rankColor: ""
             },
             {
-                inGameName: "YOURSENIOR",
-                rank: "Webmaster",
-                skinUrlOrPathToFile: "",
-                rankColor: ""
-            },
-            {
                 inGameName: "Ashu__XD",
                 rank: "Discord manager",
-                skinUrlOrPathToFile: "",
-                rankColor: ""
-            }
-        ],
-        Staff: [
-            {
-                inGameName: "Devil_Silent",
-                rank: "Helper++",
-                skinUrlOrPathToFile: "",
-                rankColor: ""
-            },
-            {
-                inGameName: "Amogh_is_0p",
-                rank: "Helper++",
-                skinUrlOrPathToFile: "",
-                rankColor: ""
-            },
-            {
-                inGameName: "NotVikrAnt ",
-                rank: "Helper+",
-                skinUrlOrPathToFile: "",
-                rankColor: ""
-            },
-            {
-                inGameName: "shivaXD",
-                rank: "Helper+",
-                skinUrlOrPathToFile: "",
-                rankColor: ""
-            }
-        ],
-        builders: [
-            {
-                inGameName: "YOURSENIOR",
-                rank: "Builder++",
                 skinUrlOrPathToFile: "",
                 rankColor: ""
             }
