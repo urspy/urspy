@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpyMC About</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Lexend:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* Default font for the body */
+            background-color: #1b1b1b;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Align items at the top */
+            min-height: 100vh; /* Full height */
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', cursive; /* Minecraft font for the title */
+            color: #00ff00;
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .timeline {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            border-left: 2px solid #00ff00;
+            padding-left: 20px; /* Padding for better spacing */
+        }
+
+        .timeline-event {
+            position: relative;
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+
+        .timeline-event:before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: #00ff00;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        .event-date {
+            font-family: 'Press Start 2P', cursive; /* Minecraft font for dates */
+            font-weight: bold;
+            color: #00ff00;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .event-description {
+            font-family: 'Lexend', sans-serif; /* Lexend font for description */
+            background-color: rgba(50, 50, 50, 0.8);
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            font-weight: normal; /* Normal font weight for description */
+            font-size: 16px; /* Normal font size for description */
+        }
+
+        /* Tree Decoration */
+        .tree {
+            position: absolute;
+            top: -50px;
+            left: -25px;
+            width: 50px;
+            height: 50px;
+            background: url('https://example.com/path/to/tree.png') no-repeat center center; /* Replace with your tree image URL */
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>SpyMC About</h1>
+    <div class="timeline">
+        <div class="tree"></div>
+        <div class="timeline-event">
+            <div class="event-date">May 22, 2023</div>
+            <div class="event-description">The official launch of SpyMC by owner YourSenior marked a significant milestone in our journey.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">June 2, 2023</div>
+            <div class="event-description">Ashu was appointed as Co-Owner of SpyMC, bringing new energy and vision to the team.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">August 17, 2023</div>
+            <div class="event-description">Dhruv and Shubham joined as leaders of SpyMC, contributing their expertise to enhance our community.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">October 11, 2023</div>
+            <div class="event-description">SpyMC achieved a remarkable milestone, reaching 70 players online simultaneously.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">November 16, 2023</div>
+            <div class="event-description">Continuing our growth, SpyMC celebrated reaching 100 players online, showcasing our expanding community.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">February 3, 2024</div>
+            <div class="event-description">The launch of SpyMC Season 2 introduced exciting new features and experiences for our players.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">April 9, 2024</div>
+            <div class="event-description">The addition of Bedwars, PvP 1.8, and Lifesteal provided players with thrilling new gameplay options.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">May 19, 2024</div>
+            <div class="event-description">SpyMC's Discord community reached an impressive 2000 members, fostering greater engagement and collaboration.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">June 11, 2024</div>
+            <div class="event-description">The SpyMC network celebrated over 300,000 unique players across our Minecraft servers, a testament to our success.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">August 28, 2024</div>
+            <div class="event-description">Nightmarry joined as the official developer of SpyMC, enhancing our technical capabilities and development.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">September 1, 2024</div>
+            <div class="event-description">The launch of SpyMC Season 3 promised even more adventures and improvements for our dedicated players.</div>
+        </div>
+    </div>
+</body>
+
+</html>
