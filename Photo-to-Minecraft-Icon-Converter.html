@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Easily convert your photos into Minecraft-style icons with our online tool. Upload any image, preview it as a Minecraft icon, and download it instantly. Powered by SpyMC.">
+  <title>Photo to Minecraft Icon Converter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .btn-minecraft {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 12px 20px;
+      border: 4px solid #2e7d32;
+      font-weight: bold;
+      font-size: 18px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px #1b5e20;
+      display: inline-block;
+      text-align: center;
+      transition: transform 0.2s ease-in-out, background-color 0.3s ease;
+    }
+    .btn-minecraft:hover {
+      background-color: #43a047;
+      transform: translateY(-3px);
+    }
+    .btn-minecraft:active {
+      box-shadow: 0 2px #1b5e20;
+      transform: translateY(2px);
+    }
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+    footer a {
+      color: #4caf50;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white font-sans min-h-screen flex flex-col items-center justify-center gap-6">
+
+  <h1 class="text-3xl font-bold text-center">Minecraft Icon Converter</h1>
+
+  <div>
+    <label for="imageUpload" class="block text-gray-300 mb-2 text-lg text-center">Upload a Photo</label>
+    <input 
+      type="file" 
+      id="imageUpload" 
+      class="bg-gray-700 border border-gray-600 rounded py-2 px-3 text-gray-300 focus:ring-2 focus:ring-green-500 focus:outline-none"
+      accept="image/*"
+    >
+  </div>
+
+  <div>
+    <button id="convertBtn" class="btn-minecraft">Convert to Minecraft Icon</button>
+  </div>
+
+  <div class="w-32 h-32 bg-gray-700 rounded flex items-center justify-center overflow-hidden border-4 border-green-500 shadow-md">
+    <canvas id="canvas" width="64" height="64"></canvas>
+  </div>
+
+  <div>
+    <button id="downloadBtn" class="btn-minecraft">Download Icon</button>
+  </div>
+
+  <script>
+    const imageUpload = document.getElementById('imageUpload');
+    const previewCanvas = document.getElementById('canvas');
+    const ctx = previewCanvas.getContext('2d');
+    const convertBtn = document.getElementById('convertBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    let uploadedImage;
+
+    // Preview uploaded image
+    imageUpload.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            uploadedImage = img;
+            ctx.clearRect(0, 0, previewCanvas.width, previewCanvas.height); // Clear previous image
+            // Resize the image to fit 64x64 canvas size
+            ctx.drawImage(img, 0, 0, 64, 64); // Resize the image to 64x64 pixels
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Convert image to Minecraft icon (simplified: resize image)
+    convertBtn.addEventListener('click', () => {
+      if (!uploadedImage) {
+        alert('Please upload an image first.');
+        return;
+      }
+      
+      // Resize the image to 64x64 pixels
+      ctx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+      ctx.drawImage(uploadedImage, 0, 0, 64, 64); // Resize the image to 64x64 pixels
+      alert('This feature has resized your image to Minecraft icon size (64x64).');
+    });
+
+    // Download the image with a fixed name 'server-icon.png'
+    downloadBtn.addEventListener('click', () => {
+      if (!uploadedImage) {
+        alert('Please upload an image first.');
+        return;
+      }
+
+      // Use the fixed file name 'server-icon.png'
+      const fileName = 'server-icon.png';
+
+      // Create a data URL for the canvas image
+      const dataUrl = previewCanvas.toDataURL('image/png');
+      
+      // Create a temporary link element to trigger the download
+      const link = document.createElement('a');
+      link.href = dataUrl;
+      link.download = fileName;  // Set the download file name to 'server-icon.png'
+      link.click();  // Trigger the download
+    });
+  </script>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>Powered by <a href="https://spymc.xyz" target="_blank">SpyMC</a> | Minecraft Icon Converter</p>
+  </footer>
+
+</body>
+</html>
