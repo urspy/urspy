@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join the SpyMC Discord community to connect with gamers, Minecraft enthusiasts, and SpyMC network players! Click the button to join and see the growing community count!">
+    <meta name="keywords" content="SpyMC, Discord, Minecraft, SpyMC Discord, gaming community, Minecraft servers, join SpyMC, SpyMC Network">
+    <meta name="author" content="SpyMC Network">
+    <meta property="og:title" content="Join the SpyMC Discord Community">
+    <meta property="og:description" content="Connect with the SpyMC gaming network and Minecraft community. Join now to meet fellow gamers!">
+    <meta property="og:url" content="https://discord.spymc.xyz">
+    <meta property="og:image" content="https://cdn.discordapp.com/icons/921023003981144125/a_3d448e19d990ae2b89f87b8854148dc4.gif?size=2048">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SpyMC Discord - Join the Community!">
+    <meta name="twitter:description" content="Be part of the SpyMC gaming network and Minecraft community. Click to join now!">
+    <meta name="twitter:image" content="https://cdn.discordapp.com/icons/921023003981144125/a_3d448e19d990ae2b89f87b8854148dc4.gif?size=2048">
+    <title>SpyMC Discord - Join the Community!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100%;
+            font-family: "Arial", sans-serif;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(145deg, #202225, #5865f2);
+            color: white;
+            text-align: center;
+        }
+        .discount {
+            margin-bottom: 20px;
+            animation: glow 2s infinite;
+        }
+        .discount img {
+            max-width: 300px;
+            width: 35%;
+            height: auto;
+            border-radius: 10px;
+        }
+        @keyframes glow {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px #5865f2);
+            }
+            50% {
+                filter: drop-shadow(0 0 20px #ffffff);
+            }
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #fefefe;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        #counter-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #ffdd57;
+        }
+        #counter {
+            margin-right: 10px;
+        }
+        .view-icon {
+            width: 40px;
+            height: 40px;
+            fill: #ffdd57;
+        }
+        button {
+            padding: 15px 40px;
+            font-size: 1.5em;
+            background-color: #5865f2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #4752c4;
+        }
+        footer {
+            margin-top: 50px;
+            font-size: 0.9em;
+            color: #cccccc;
+        }
+        footer a {
+            color: #ffdd57;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            button {
+                padding: 10px 30px;
+                font-size: 1.2em;
+            }
+            .discount img {
+                max-width: 200px;
+                width: 45%;
+            }
+            #counter-container {
+                font-size: 2em;
+            }
+            .view-icon {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="discount">
+        <img src="https://cdn.discordapp.com/icons/921023003981144125/a_3d448e19d990ae2b89f87b8854148dc4.gif?size=2048" alt="Join Discord">
+    </div>
+    <h1>Join Our Discord</h1>
+    <p>Be part of the SpyMC community! Click the button to join and see the total number of members who visited!.</p>
+    <div id="counter-container">
+        <span id="counter">Loading...</span>
+        <svg class="view-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 5c-7.633 0-11.7 6.547-11.98 6.993a1 1 0 0 0 0 1.014c.28.447 4.347 6.993 11.98 6.993 7.633 0 11.7-6.547 11.98-6.993a1 1 0 0 0 0-1.014C23.7 11.547 19.633 5 12 5zm0 12c-3.866 0-6.934-2.982-8.337-4.5C5.066 10.982 8.134 8 12 8s6.934 2.982 8.337 4.5c-1.403 1.518-4.471 4.5-8.337 4.5zm0-7a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"/>
+        </svg>
+    </div>
+    <button id="joinButton">Join Discord</button>
+
+    <footer>
+        <p>Powered by <a href="https://spymc.xyz" target="_blank">SpyMC</a></p>
+    </footer>
+
+    <script>
+        const API_KEY = "$2a$10$SB4EIy4nW0LtAQFKGkXwN.gC/WAcWGMWivSrU.BX0vJ8vjQxmanFW"; // Your JSONBin API Key
+        const BIN_ID = "677e2965e41b4d34e471b912"; // Your JSONBin Bin ID
+        const BASE_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+        const DISCORD_LINK = "https://discord.spymc.xyz"; // Redirect link
+
+        const counterElement = document.getElementById("counter");
+        const joinButton = document.getElementById("joinButton");
+
+        // Fetch the current counter value and increment it on page load
+        async function fetchAndIncrementCounter() {
+            try {
+                const response = await fetch(BASE_URL, {
+                    headers: {
+                        "X-Master-Key": API_KEY
+                    }
+                });
+                const data = await response.json();
+                const currentClicks = data.record.clicks || 0;
+                const newClicks = currentClicks + 1;
+
+                // Update the counter on the page
+                counterElement.textContent = newClicks;
+
+                // Update the counter on the server
+                await fetch(BASE_URL, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-Master-Key": API_KEY
+                    },
+                    body: JSON.stringify({ clicks: newClicks })
+                });
+            } catch (error) {
+                console.error("Error fetching or updating counter:", error);
+                counterElement.textContent = "Error!";
+            }
+        }
+
+        // Increment the counter and redirect to Discord on button click
+        async function incrementCounter() {
+            try {
+                const currentClicks = parseInt(counterElement.textContent, 10);
+                const newClicks = currentClicks + 1;
+
+                await fetch(BASE_URL, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-Master-Key": API_KEY
+                    },
+                    body: JSON.stringify({ clicks: newClicks })
+                });
+
+                counterElement.textContent = newClicks;
+                window.location.href = DISCORD_LINK;
+            } catch (error) {
+                console.error("Error updating counter:", error);
+                window.location.href = DISCORD_LINK; // Redirect even if counter fails
+            }
+        }
+
+        // Attach event listener to the button
+        joinButton.addEventListener("click", incrementCounter);
+
+        // Load the counter and increment on page load
+        fetchAndIncrementCounter();
+    </script>
+</body>
+      </html>
