@@ -1,36 +1,23 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"></meta>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"></meta>
     <title>Minecraft Server Status</title>
     <style>
         body {
-            background-color: #121212;
-            color: #fff;
-            font-family: 'Poppins', sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+            background-image: url('minecraft-background.jpg');
+            font-family: Arial, sans-serif;
         }
         .server-box {
-            background: linear-gradient(135deg, #232526, #414345);
             padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            width: 300px;
-            transition: transform 0.3s ease-in-out;
-        }
-        .server-box:hover {
-            transform: translateY(-5px);
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s; /* Smooth transition for highlight effect */
         }
         h1 {
-            font-size: 20px;
+            font-size: 24px;
             margin-bottom: 10px;
         }
         .status {
@@ -38,93 +25,162 @@
         }
         .ping {
             font-style: italic;
-            color: #ddd;
+            color: #777;
         }
+        /* Unique colors for each server box */
+        .server1 { background-color: #ffcccb; } /* Light red */
+        .server2 { background-color: #c2f0c2; } /* Light green */
+        .server3 { background-color: #cce7ff; } /* Light blue */
+        .server4 { background-color: #f9e79f; } /* Light yellow */
+        .server5 { background-color: #f5c6e1; } /* Light pink */
+        .server6 { background-color: #d6eaf8; } /* Light sky blue */
+        .server7 { background-color: #d4efdf; } /* Light mint green */
+        .server8 { background-color: #f7d794; } /* Light peach */
+
+        /* Player count bar */
         .player-bar-container {
-            background-color: #333;
+            background-color: #ddd;
             border-radius: 5px;
             overflow: hidden;
             margin-top: 10px;
-            height: 8px;
         }
         .player-bar {
-            height: 100%;
+            height: 20px;
             background-color: #6D9E35;
-            width: 0%;
-            transition: width 0.5s ease-in-out;
+            width: 0%; /* Initial width, will be updated dynamically */
         }
+
+        /* Highlight styles */
         .online {
-            border: 2px solid #4CAF50;
+            border: 2px solid #4CAF50; /* Green border for online */
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5); /* Green glow */
         }
         .offline {
-            border: 2px solid #f44336;
+            border: 2px solid #f44336; /* Red border for offline */
+            box-shadow: 0 0 10px rgba(244, 67, 54, 0.5); /* Red glow */
         }
     </style>
 </head>
 <body>
-    <h1>Minecraft Server Status</h1>
-    <div class="container" id="servers"></div>
-    
+    <div class="server-box server1">
+        <h1>SENIOR NETWORK</h1>
+        <div id="serverStatus1">Loading...</div>
+        <div id="serverPing1">Loading...</div>
+        <div id="maxCapacity1">Max Capacity: Loading...</div>
+        <div class="player-bar-container">
+            <div class="player-bar" id="playerBar1"></div>
+        </div>
+    </div>
+    <div class="server-box server2">
+        <h1>SENIOR PVP</h1>
+        <div id="serverStatus2">Loading...</div>
+        <div id="serverPing2">Loading...</div>
+        <div id="maxCapacity2">Max Capacity: Loading...</div>
+        <div class="player-bar-container">
+            <div class="player-bar" id="playerBar2"></div>
+        </div>
+    </div>
+    <div class="server-box server3">
+        <h1>SENIOR LIFESTEAL</h1>
+        <div id="serverStatus3">Loading...</div>
+        <div id="serverPing3">Loading...</div>
+        <div id="maxCapacity3">Max Capacity: Loading...</div>
+        <div class="player-bar-container">
+            <div class="player-bar" id="playerBar3"></div>
+        </div>
+    </div>
+    <div class="server-box server4">
+        <h1>SENIOR PARKOUR</h1>
+        <div id="serverStatus4">Loading...</div>
+        <div id="serverPing4">Loading...</div>
+        <div id="maxCapacity4">Max Capacity: Loading...</div>
+        <div class="player-bar-container">
+            <div class="player-bar" id="playerBar4"></div>
+        </div>
+    </div>
+    <div class="server-box server5">
+        <h1>SENIOR LOBBY</h1>
+        <div id="serverStatus5">Loading...</div>
+        <div id="serverPing5">Loading...</div>
+        <div id="maxCapacity5">Max Capacity: Loading...</div>
+        <div class="player-bar-container">
+            <div class="player-bar" id="playerBar5"></div>
+        </div>
+    </div>
+    <div class="server-box server6">
+        <h1>SENIOR HUB</h1>
+        <div id="serverStatus6">Loading...</div>
+        <div id="serverPing6">Loading...</div>
+        <div id="maxCapacity6">Max Capacity: Loading...</div>
+        <div class="player-bar-container">
+            <div class="player-bar" id="playerBar6"></div>
+        </div>
+    </div>
+    <div class="server-box server7">
+        <h1>SENIOR 1.8PVP</h1>
+        <div id="serverStatus7">Loading...</div>
+        <div id="serverPing7">Loading...</div>
+        <div id="maxCapacity7">Max Capacity: Loading...</div>
+        <div class="player-bar-container">
+            <div class="player-bar" id="playerBar7"></div>
+        </div>
+    </div>
+    <div class="server-box server8">
+        <h1>SENIOR MINIGAMES</h1>
+        <div id="serverStatus8">Loading...</div>
+        <div id="serverPing8">Loading...</div>
+        <div id="maxCapacity8">Max Capacity: Loading...</div>
+        <div class="player-bar-container">
+            <div class="player-bar" id="playerBar8"></div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         var servers = [
-            { name: 'SENIOR NETWORK', ip: 'spymc.xyz', port: '25565' },
-            { name: 'SENIOR PVP', ip: '103.107.199.231', port: '25565' },
-            { name: 'SENIOR LIFESTEAL', ip: '103.107.199.231', port: '25575' },
-            { name: 'SENIOR PARKOUR', ip: 'stormview.aleforge.net', port: '25576' },
-            { name: 'SENIOR LOBBY', ip: 'stormview.aleforge.net', port: '25575' },
-            { name: 'SENIOR HUB', ip: '55.235.180.231', port: '25575' },
-            { name: 'SENIOR 1.8PVP', ip: '51.79.202.195', port: '25567' },
-            { name: 'SENIOR MINIGAMES', ip: '51.79.132.99', port: '25565' }
+            { ip: 'spymc.xyz', port: '25565', statusId: 'serverStatus1', pingId: 'serverPing1', barId: 'playerBar1', capacityId: 'maxCapacity1' },
+            { ip: '103.107.199.231', port: '25565', statusId: 'serverStatus2', pingId: 'serverPing2', barId: 'playerBar2', capacityId: 'maxCapacity2' },
+            { ip: '103.107.199.231', port: '25575', statusId: 'serverStatus3', pingId: 'serverPing3', barId: 'playerBar3', capacityId: 'maxCapacity3' },
+            { ip: 'stormview.aleforge.net', port: '25576', statusId: 'serverStatus4', pingId: 'serverPing4', barId: 'playerBar4', capacityId: 'maxCapacity4' },
+            { ip: 'stormview.aleforge.net', port: '25575', statusId: 'serverStatus5', pingId: 'serverPing5', barId: 'playerBar5', capacityId: 'maxCapacity5' },
+            { ip: '55.235.180.231', port: '25575', statusId: 'serverStatus6', pingId: 'serverPing6', barId: 'playerBar6', capacityId: 'maxCapacity6' },
+            { ip: '51.79.202.195', port: '25567', statusId: 'serverStatus7', pingId: 'serverPing7', barId: 'playerBar7', capacityId: 'maxCapacity7' },
+            { ip: '51.79.132.99', port: '25565', statusId: 'serverStatus8', pingId: 'serverPing8', barId: 'playerBar8', capacityId: 'maxCapacity8' }
         ];
-        
-        function createServerBoxes() {
-            var container = document.getElementById("servers");
-            servers.forEach(server => {
-                var serverDiv = document.createElement("div");
-                serverDiv.classList.add("server-box");
-                serverDiv.innerHTML = `
-                    <h1>${server.name}</h1>
-                    <div class="status" id="status-${server.ip}">Loading...</div>
-                    <div class="ping" id="ping-${server.ip}">Loading...</div>
-                    <div class="player-bar-container">
-                        <div class="player-bar" id="bar-${server.ip}"></div>
-                    </div>
-                `;
-                container.appendChild(serverDiv);
-            });
-        }
-        
+
         function updateServerStatus() {
-            servers.forEach(server => {
-                var url = `https://api.minetools.eu/ping/${server.ip}/${server.port}`;
+            servers.forEach(function(server) {
+                var url = 'https://api.minetools.eu/ping/' + server.ip + '/' + server.port;
                 $.getJSON(url, function(data) {
-                    var statusDiv = $(`#status-${server.ip}`);
-                    var pingDiv = $(`#ping-${server.ip}`);
-                    var playerBar = $(`#bar-${server.ip}`);
-                    var serverBox = statusDiv.closest('.server-box');
-                    
+                    var serverBox = $('#' + server.statusId).closest('.server-box');
                     if (data.error) {
-                        statusDiv.html('Server Offline');
-                        pingDiv.html('');
-                        playerBar.css('width', '0%');
-                        serverBox.removeClass('online').addClass('offline');
+                        $('#' + server.statusId).html('Server Offline');
+                        $('#' + server.pingId).html('');
+                        $('#' + server.capacityId).html('Max Capacity: N/A'); // Set capacity to N/A when offline
+                        $('#' + server.barId).css('width', '0%'); // Set player bar to 0 when offline
+                        serverBox.removeClass('online').addClass('offline'); // Highlight offline
                     } else {
-                        statusDiv.html(`Players Online: ${data.players.online}`);
-                        pingDiv.html(`Ping: ${data.latency.toFixed(2)} ms`);
-                        var playerPercent = (data.players.online / data.players.max) * 100;
-                        playerBar.css('width', playerPercent + '%');
-                        serverBox.removeClass('offline').addClass('online');
+                        // Show only the current player count
+                        $('#' + server.statusId).html('Players Online: ' + data.players.online);
+                        $('#' + server.pingId).html('Ping: ' + data.latency.toFixed(2) + ' ms'); // Limit ping to 2 decimal places
+                        $('#' + server.capacityId).html('Max Capacity: ' + data.players.max); // Show max capacity
+                        var playerCount = data.players.online;
+                        var maxCapacity = data.players.max;
+                        var playerBarWidth = (playerCount / maxCapacity) * 100;
+                        $('#' + server.barId).css('width', playerBarWidth + '%');
+                        serverBox.removeClass('offline').addClass('online'); // Highlight online
                     }
                 }).fail(function() {
-                    $(`#status-${server.ip}`).html('Error fetching data');
-                    $(`#ping-${server.ip}`).html('');
-                    $(`#bar-${server.ip}`).css('width', '0%');
+                    $('#' + server.statusId).html('Error fetching data');
+                    $('#' + server.pingId).html('');
+                    $('#' + server.capacityId).html('Max Capacity: N/A'); // Set capacity to N/A when error
+                    $('#' + server.barId).css('width', '0%'); // Set player bar to 0 on error
+                    serverBox.removeClass('online').addClass('offline'); // Highlight offline
                 });
             });
         }
-        
-        createServerBoxes();
+
+        // Update server status every 3 seconds
         updateServerStatus();
         setInterval(updateServerStatus, 3000);
     </script>
