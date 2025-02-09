@@ -44,7 +44,7 @@ const config = {
         builders: "rgba(247, 2, 176, 0.5)",
     },
     adminTeamPage: {
-        leaders & Developers: [
+        leaders: [
             {
                 inGameName: "YOURSENIOR",
                 rank: "Owner",
