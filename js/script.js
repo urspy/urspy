@@ -66,12 +66,6 @@ const config = {
                 rankColor: ""
             },
             {
-                inGameName: "Nightmary",
-                rank: "Developer",
-                skinUrlOrPathToFile: "",
-                rankColor: ""
-            },
-            {
                 inGameName: "Ashu__XD",
                 rank: "Discord manager",
                 skinUrlOrPathToFile: "",
@@ -87,7 +81,7 @@ const config = {
     Emails are sent via https://formsubmit.co/
     */
     contactPage: {
-        email: "astronavta@example.com"
+        email: "support@spymc.xyz"
     }
 }
 
