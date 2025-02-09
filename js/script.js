@@ -44,7 +44,7 @@ const config = {
         builders: "rgba(247, 2, 176, 0.5)",
     },
     adminTeamPage: {
-        leaders: [
+        leaders & Developers: [
             {
                 inGameName: "YOURSENIOR",
                 rank: "Owner",
@@ -54,20 +54,6 @@ const config = {
             {
                 inGameName: "Ashu__XD",
                 rank: "Co-Owner",
-                skinUrlOrPathToFile: "",
-                rankColor: ""
-            }
-        ],
-        developers: [
-            {
-                inGameName: "YOURSENIOR",
-                rank: "Developer",
-                skinUrlOrPathToFile: "",
-                rankColor: ""
-            },
-            {
-                inGameName: "Ashu__XD",
-                rank: "Discord manager",
                 skinUrlOrPathToFile: "",
                 rankColor: ""
             }
