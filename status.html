@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Server Status</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .server-box {
+            background: linear-gradient(135deg, #232526, #414345);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 300px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .server-box:hover {
+            transform: translateY(-5px);
+        }
+        h1 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .status {
+            font-weight: bold;
+        }
+        .ping {
+            font-style: italic;
+            color: #ddd;
+        }
+        .player-bar-container {
+            background-color: #333;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+            height: 8px;
+        }
+        .player-bar {
+            height: 100%;
+            background-color: #6D9E35;
+            width: 0%;
+            transition: width 0.5s ease-in-out;
+        }
+        .online {
+            border: 2px solid #4CAF50;
+        }
+        .offline {
+            border: 2px solid #f44336;
+        }
+    </style>
+</head>
+<body>
+    <h1>Minecraft Server Status</h1>
+    <div class="container" id="servers"></div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var servers = [
+            { name: 'SENIOR NETWORK', ip: 'spymc.xyz', port: '25565' },
+            { name: 'SENIOR PVP', ip: '103.107.199.231', port: '25565' },
+            { name: 'SENIOR LIFESTEAL', ip: '103.107.199.231', port: '25575' },
+            { name: 'SENIOR PARKOUR', ip: 'stormview.aleforge.net', port: '25576' },
+            { name: 'SENIOR LOBBY', ip: 'stormview.aleforge.net', port: '25575' },
+            { name: 'SENIOR HUB', ip: '55.235.180.231', port: '25575' },
+            { name: 'SENIOR 1.8PVP', ip: '51.79.202.195', port: '25567' },
+            { name: 'SENIOR MINIGAMES', ip: '51.79.132.99', port: '25565' }
+        ];
+        
+        function createServerBoxes() {
+            var container = document.getElementById("servers");
+            servers.forEach(server => {
+                var serverDiv = document.createElement("div");
+                serverDiv.classList.add("server-box");
+                serverDiv.innerHTML = `
+                    <h1>${server.name}</h1>
+                    <div class="status" id="status-${server.ip}">Loading...</div>
+                    <div class="ping" id="ping-${server.ip}">Loading...</div>
+                    <div class="player-bar-container">
+                        <div class="player-bar" id="bar-${server.ip}"></div>
+                    </div>
+                `;
+                container.appendChild(serverDiv);
+            });
+        }
+        
+        function updateServerStatus() {
+            servers.forEach(server => {
+                var url = `https://api.minetools.eu/ping/${server.ip}/${server.port}`;
+                $.getJSON(url, function(data) {
+                    var statusDiv = $(`#status-${server.ip}`);
+                    var pingDiv = $(`#ping-${server.ip}`);
+                    var playerBar = $(`#bar-${server.ip}`);
+                    var serverBox = statusDiv.closest('.server-box');
+                    
+                    if (data.error) {
+                        statusDiv.html('Server Offline');
+                        pingDiv.html('');
+                        playerBar.css('width', '0%');
+                        serverBox.removeClass('online').addClass('offline');
+                    } else {
+                        statusDiv.html(`Players Online: ${data.players.online}`);
+                        pingDiv.html(`Ping: ${data.latency.toFixed(2)} ms`);
+                        var playerPercent = (data.players.online / data.players.max) * 100;
+                        playerBar.css('width', playerPercent + '%');
+                        serverBox.removeClass('offline').addClass('online');
+                    }
+                }).fail(function() {
+                    $(`#status-${server.ip}`).html('Error fetching data');
+                    $(`#ping-${server.ip}`).html('');
+                    $(`#bar-${server.ip}`).css('width', '0%');
+                });
+            });
+        }
+        
+        createServerBoxes();
+        updateServerStatus();
+        setInterval(updateServerStatus, 3000);
+    </script>
+</body>
+</html>
