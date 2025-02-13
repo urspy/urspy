@@ -1,4 +1,4 @@
-## Welcome to SpyMC 👋  
+## Welcome to SpyMC - Senior Network 👋  
 
 ### 🛡️ Your Gateway to Epic Minecraft Adventures!  
 
