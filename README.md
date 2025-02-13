@@ -13,7 +13,8 @@ SpyMC is more than just a Minecraft server—it's a vibrant **community** of gam
 ### 🚀 Join the Fun  
 - **Minecraft Server IP**: `spymc.xyz`  
 - **Website**: [www.spymc.xyz](https://www.spymc.xyz)  
-- **Discord**: [discord.spymc.xyz](https://discord.spymc.xyz)  
+- **Discord**: [discord.spymc.xyz](https://discord.spymc.xyz)
+- **Owner**: [senior.spymc.xyz](https://senior.spymc.xyz)  
 - **Socials**:  
   - Instagram: [@spymc.xyz](https://www.instagram.com/spymc.xyz)  
   - YouTube: [@urspy](https://www.youtube.com/@urspy)  
