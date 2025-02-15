@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpyMC - FAQ</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #161b22;
+            padding: 10px 20px;
+        }
+        .hamburger {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background: #161b22;
+            display: flex;
+            flex-direction: column;
+            padding-top: 60px;
+            transition: left 0.3s ease;
+        }
+        .sidebar.active {
+            left: 0;
+        }
+        .link {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 15px;
+            display: block;
+            transition: background 0.3s ease;
+        }
+        .link:hover, .link.active {
+            background: #21262d;
+        }
+        .faq-container {
+            max-width: 800px;
+            margin: auto;
+            text-align: left;
+        }
+        .faq-item {
+            background: #161b22;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #30363d;
+        }
+        .faq-item:hover {
+            background: #21262d;
+        }
+        .faq-question {
+            font-size: 18px;
+            font-weight: bold;
+            color: #58a6ff;
+        }
+        .faq-answer {
+            display: none;
+            padding-top: 10px;
+            color: #8b949e;
+            font-size: 16px;
+        }
+        a {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            margin-top: 20px;
+            padding: 15px;
+            background: #161b22;
+            color: #ffffff;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h2>SpyMC</h2>
+        <div class="hamburger" onclick="toggleMenu()">
+            &#9776;
+        </div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <a href="#" class="link active">Home</a>
+        <a href="rules.html" class="link">Rules</a>
+        <a href="admin-team.html" class="link">Team</a>
+        <a href="search.html" class="link">Tier</a>
+        <a href="https://solo.to/yoursenior" class="link">Owner</a>
+    </div>
+    
+    <h1>SpyMC - Frequently Asked Questions</h1>
+    <div class="faq-container">
+        <div class="faq-item" onclick="toggleFAQ(this)">
+            <p class="faq-question">What is SpyMC?</p>
+            <p class="faq-answer">SpyMC is a premium Minecraft server offering various game modes and a great community.</p>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+            <p class="faq-question">Who is the owner of SpyMC?</p>
+            <p class="faq-answer">SpyMC is owned and managed by Senior.</p>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+            <p class="faq-question">When was SpyMC started?</p>
+            <p class="faq-answer">SpyMC was launched in November 2021.</p>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+            <p class="faq-question">Who is Ashu?</p>
+            <p class="faq-answer">Ashu is the co-owner of SpyMC, appointed in February 2022.</p>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+            <p class="faq-question">How can I donate or buy ranks?</p>
+            <p class="faq-answer">You can purchase ranks via our Discord. Join <a href="https://discord.spymc.xyz" target="_blank">discord.spymc.xyz</a> for more details.</p>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+            <p class="faq-question">How do I get a free "Spy Rank"?</p>
+            <p class="faq-answer">Join our Discord and create a ticket in the <strong>🔖・ᴛɪᴄᴋᴇᴛ</strong> channel to receive this free rank, along with exclusive rewards!</p>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+            <p class="faq-question">Is SpyMC a chill server?</p>
+            <p class="faq-answer">Yes! SpyMC is a great place to chill, play, and connect with others.</p>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+            <p class="faq-question">What game modes do you offer?</p>
+            <p class="faq-answer">We offer Survival, Creative, Mini-Games, PvP, and more exciting modes!</p>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+            <p class="faq-question">Where can I get support?</p>
+            <p class="faq-answer">Join our Discord at <a href="https://discord.spymc.xyz" target="_blank">discord.spymc.xyz</a> for help!</p>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2025 SpyMC. All rights reserved. | Created with ❤️ by Senior</p>
+    </div>
+    
+    <script>
+        function toggleFAQ(element) {
+            let answer = element.querySelector(".faq-answer");
+            answer.style.display = answer.style.display === "block" ? "none" : "block";
+        }
+        
+        function toggleMenu() {
+            let sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("active");
+        }
+    </script>
+</body>
+</html>
