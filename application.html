@@ -9,16 +9,17 @@
         (function(){
             emailjs.init("A7evAgMHCeYUT3zVg");
         })();
-
+        
         function sendEmail(event) {
             event.preventDefault();
             
             const form = event.target;
-            const submitButton = document.getElementById("submitBtn");
+            const submitButton = form.querySelector("button[type='submit']");
             const loadingOverlay = document.getElementById("loadingOverlay");
 
-            submitButton.disabled = true;  // Disable the button
-            loadingOverlay.style.display = "flex"; // Show loading animation
+            // Show loading overlay
+            loadingOverlay.style.display = "flex";
+            submitButton.disabled = true;
 
             const emailParams = {
                 to_email1: "ashuaryan989@gmail.com",
@@ -32,16 +33,14 @@
             })
             .then(function(response) {
                 console.log("Application sent to secondary email successfully.");
-                setTimeout(() => {
-                    loadingOverlay.style.display = "none"; // Hide loading animation
-                    document.getElementById("successModal").style.display = "block";
-                    submitButton.disabled = false; // Re-enable the button
-                }, 2000); // 2-second delay to make it feel smooth
+                document.getElementById("successModal").style.display = "block";
             })
             .catch(function(error) {
                 alert("Failed to submit application. Please try again.");
-                submitButton.disabled = false; // Re-enable the button in case of error
-                loadingOverlay.style.display = "none"; // Hide loading animation
+            })
+            .finally(() => {
+                loadingOverlay.style.display = "none";
+                submitButton.disabled = false;
             });
         }
 
@@ -116,9 +115,31 @@
             background: linear-gradient(45deg, #ffaa00, #00aaff);
             transform: scale(1.05);
         }
-        button:disabled {
-            background: gray;
-            cursor: not-allowed;
+
+        /* Loading Overlay */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .loading-overlay .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #00aaff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         /* Success Modal */
@@ -158,42 +179,6 @@
             background: #00cc66;
         }
 
-        /* Loading Overlay */
-        .loading-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #00aaff;
-            animation: spin 1s linear infinite;
-        }
-        .loading-text {
-            color: #fff;
-            margin-top: 15px;
-            font-size: 18px;
-        }
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -207,7 +192,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+<div class="container">
         <h2>SpyMC Staff Application</h2>
         <form onsubmit="sendEmail(event)">
             <h3>Basic Information</h3>
@@ -251,11 +236,11 @@
 
             <button type="submit">Submit Application</button>
         </form>
+    </div>
 
-    <!-- Loading Screen -->
+    <!-- Loading Overlay -->
     <div id="loadingOverlay" class="loading-overlay">
-        <div class="loading-spinner"></div>
-        <p class="loading-text">Submitting your application...</p>
+        <div class="spinner"></div>
     </div>
 
     <!-- Success Modal -->
