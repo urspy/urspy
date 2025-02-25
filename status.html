@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpyMC Live Server Status</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f5f7;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .status-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9fafc;
+            border: 1px solid #e5e8eb;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .status-online {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .status-offline {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .player-bar-container {
+            width: 100%;
+            background: #e9ecef;
+            border-radius: 5px;
+            height: 10px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .player-bar {
+            height: 100%;
+            width: 0%;
+            background: #007bff;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            margin-top: 20px;
+        }
+
+        canvas {
+            width: 100%;
+            max-height: 300px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>SpyMC Live Server Status</h1>
+            <p>Real-time updates on server activity, players, and ping.</p>
+        </div>
+
+        <div id="servers"></div>
+        <canvas id="playerChart"></canvas>
+
+        <div class="footer">
+            <p>Powered by SpyMC | Live Status System</p>
+        </div>
+    </div>
+
+    <script>
+        const servers = {
+            "SPYMC": "spymc.xyz:25565",
+            "FFA": "103.107.199.231:25565",
+            "LifeSteal": "103.107.199.231:25575",
+            "Crystal": "stormview.aleforge.net:25575",
+            "FFA2": "139.99.33.51:25565",
+            "OG": "51.79.163.70:25565",
+            "Lobby": "stormview.aleforge.net:25576"
+        };
+
+        let playerData = {};
+        let timeLabels = [];
+        let chart = null;
+
+        function createServerElements() {
+            const serverContainer = document.getElementById('servers');
+            serverContainer.innerHTML = '';
+
+            for (const [name, ip] of Object.entries(servers)) {
+                playerData[name] = [];
+
+                const serverHTML = `
+                    <div class="status-box">
+                        <div>
+                            <p><strong>${name} Server:</strong></p>
+                            <p><span id="${name}Status">Checking...</span></p>
+                        </div>
+                        <div>
+                            <p><strong>Players:</strong></p>
+                            <p><span id="${name}PlayerCount">0 / 0</span></p>
+                            <div class="player-bar-container">
+                                <div class="player-bar" id="${name}PlayerBar"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <p><strong>Ping:</strong></p>
+                            <p><span id="${name}Ping">-</span> ms</p>
+                        </div>
+                    </div>
+                `;
+                serverContainer.innerHTML += serverHTML;
+            }
+        }
+
+        async function fetchPing(serverIP, name) {
+            try {
+                const pingAPI = `https://cloudflare-dns.com/dns-query?name=${serverIP}&type=A`;
+                const startTime = performance.now();
+                await fetch(pingAPI, { headers: { 'Accept': 'application/dns-json' } });
+                const ping = Math.round(performance.now() - startTime);
+
+                document.getElementById(`${name}Ping`).innerText = `${ping} ms`;
+                return ping;
+            } catch (error) {
+                console.error(`Ping Error (${name}):`, error);
+                document.getElementById(`${name}Ping`).innerText = "-";
+                return "-";
+            }
+        }
+
+        async function fetchServerStatus() {
+            let currentTime = new Date().toLocaleTimeString();
+            timeLabels.push(currentTime);
+            if (timeLabels.length > 5) timeLabels.shift();
+
+            for (const [name, ip] of Object.entries(servers)) {
+                try {
+                    let response = await fetch(`https://api.mcstatus.io/v2/status/java/${ip}`);
+                    let data = await response.json();
+
+                    if (data.online) {
+                        let onlinePlayers = data.players.online;
+                        let maxPlayers = data.players.max || 100;
+                        let ping = await fetchPing(ip.split(":")[0], name);
+
+                        document.getElementById(`${name}Status`).innerHTML = `<span class="status-online">Online</span>`;
+                        document.getElementById(`${name}PlayerCount`).innerText = `${onlinePlayers} / ${maxPlayers}`;
+
+                        let playerPercentage = (onlinePlayers / 100 ) * 100;
+                        document.getElementById(`${name}PlayerBar`).style.width = `${playerPercentage}%`;
+
+                        playerData[name].push(onlinePlayers);
+                        if (playerData[name].length > 10) playerData[name].shift();
+                    } else {
+                        document.getElementById(`${name}Status`).innerHTML = `<span class="status-offline">Offline</span>`;
+                        document.getElementById(`${name}PlayerCount`).innerText = "- / -";
+                        document.getElementById(`${name}PlayerBar`).style.width = "0%";
+                        document.getElementById(`${name}Ping`).innerText = "-";
+                    }
+                } catch (error) {
+                    console.error(`Error fetching ${name}:`, error);
+                }
+            }
+
+            updateChart();
+        }
+
+        function createChart() {
+            const ctx = document.getElementById('playerChart').getContext('2d');
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: timeLabels,
+                    datasets: Object.keys(servers).map((name, index) => ({
+                        label: name,
+                        data: playerData[name],
+                        borderColor: `hsl(${index * 100}, 70%, 50%)`,
+                        backgroundColor: `hsla(${index * 100}, 70%, 50%, 0.2)`,
+                        fill: true,
+                        tension: 0.3
+                    }))
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true },
+                        x: { display: true }
+                    }
+                }
+            });
+        }
+
+        function updateChart() {
+            chart.data.labels = timeLabels;
+            chart.data.datasets.forEach(dataset => {
+                dataset.data = playerData[dataset.label];
+            });
+            chart.update();
+        }
+
+        createServerElements();
+        createChart();
+        fetchServerStatus();
+        setInterval(fetchServerStatus, 3000);
+    </script>
+
+</body>
+</html>
