@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpyMC About</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Lexend:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+            background-color: #0d0d0d;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            color: #00ffcc;
+            font-size: 36px;
+            margin: 20px 0;
+            text-shadow: 0px 0px 10px rgba(0, 255, 204, 0.8);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .timeline {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            border-left: 3px solid #00ffcc;
+            padding-left: 20px;
+            animation: slideIn 1.5s ease-in-out;
+        }
+
+        .timeline-event {
+            position: relative;
+            margin: 40px 0;
+            padding-left: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .timeline-event:before {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 10px;
+            width: 24px;
+            height: 24px;
+            background-color: #00ffcc;
+            border-radius: 50%;
+            box-shadow: 0px 0px 10px rgba(0, 255, 204, 0.8);
+        }
+
+        .event-date {
+            font-family: 'Press Start 2P', cursive;
+            font-weight: bold;
+            color: #00ffcc;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .event-description {
+            background: rgba(25, 25, 25, 0.9);
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0px 0px 10px rgba(0, 255, 204, 0.5);
+            font-size: 16px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .timeline-event:hover .event-description {
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .timeline-event.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+  </style>
+</head>
+
+<body>
+    <h1>SpyMC About</h1>
+    <div class="timeline">
+        <div class="tree"></div>
+        <div class="timeline-event">
+            <div class="event-date">May 22, 2023</div>
+            <div class="event-description">The official launch of SpyMC by owner YourSenior marked a significant milestone in our journey.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">June 2, 2023</div>
+            <div class="event-description">Ashu was appointed as Co-Owner of SpyMC, bringing new energy and vision to the team.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">August 17, 2023</div>
+            <div class="event-description">Dhruv and Shubham joined as leaders of SpyMC, contributing their expertise to enhance our community.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">October 11, 2023</div>
+            <div class="event-description">SpyMC achieved a remarkable milestone, reaching 70 players online simultaneously.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">November 16, 2023</div>
+            <div class="event-description">Continuing our growth, SpyMC celebrated reaching 100 players online, showcasing our expanding community.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">February 3, 2024</div>
+            <div class="event-description">The launch of SpyMC Season 2 introduced exciting new features and experiences for our players.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">April 9, 2024</div>
+            <div class="event-description">The addition of Bedwars, PvP 1.8, and Lifesteal provided players with thrilling new gameplay options.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">May 19, 2024</div>
+            <div class="event-description">SpyMC's Discord community reached an impressive 2000 members, fostering greater engagement and collaboration.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">June 11, 2024</div>
+            <div class="event-description">The SpyMC network celebrated over 300,000 unique players across our Minecraft servers, a testament to our success.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">August 28, 2024</div>
+            <div class="event-description">Nightmarry joined as the official developer of SpyMC, enhancing our technical capabilities and development.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">September 1, 2024</div>
+            <div class="event-description">The launch of SpyMC Season 3 promised even more adventures and improvements for our dedicated players.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">14-12-2024 03:16 PM</div>
+            <div class="event-description">SpyMC LifeSteal Season 5 launched, bringing fresh challenges and new gameplay mechanics.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">21-12-2024 12:24 PM</div>
+            <div class="event-description">Parkour gamemodes were introduced, adding a thrilling test of agility and skill.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">27-12-2024 04:19 PM</div>
+            <div class="event-description">SpyMC Tier Test Results went live, allowing players to see their rankings and rewards.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">04-01-2025 04:47 PM</div>
+            <div class="event-description">Crystal PvP gamemode launched, offering intense and strategic battles.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">20-01-2025 05:16 PM</div>
+            <div class="event-description">SpyMC suffered a major server attack and was temporarily disabled.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">25-01-2025 05:16 PM</div>
+            <div class="event-description">After relentless efforts by YourSenior and Ashu, SpyMC was successfully restored.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">22-01-2025 08:49 PM</div>
+            <div class="event-description">SpyMC made a strong comeback with the OG PvP experience, reigniting classic battles.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">29-01-2025 02:40 PM</div>
+            <div class="event-description">SpyMC LifeSteal Season 6 kicked off with new features and competitive enhancements.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">29-01-2025 02:40 PM</div>
+            <div class="event-description">FFA Season 6 was launched, bringing fast-paced and action-packed gameplay.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">04-02-2025 01:23 PM</div>
+            <div class="event-description">OG PvP was shut down and replaced with a brand-new FFA server.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="event-date">Yesterday at 05:35 PM</div>
+            <div class="event-description">SpyMC SPY Rank Guide was released, detailing rank features and benefits through the SpyMC Discord bot.</div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const events = document.querySelectorAll(".timeline-event");
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            events.forEach(event => {
+                observer.observe(event);
+            });
+        });
+    </script>
+</body>
+</html>
