@@ -3,171 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpyMC - FAQ</title>
+    <title>All Links Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0d1117;
-            color: #ffffff;
+            font-family: 'Press Start 2P', cursive;
+            background-color: #0d0d0d;
+            color: white;
             text-align: center;
+            margin: 0;
             padding: 20px;
-            overflow-x: hidden;
         }
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #161b22;
-            padding: 10px 20px;
-        }
-        .hamburger {
-            font-size: 24px;
-            cursor: pointer;
-        }
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -250px;
-            width: 250px;
-            height: 100%;
-            background: #161b22;
-            display: flex;
-            flex-direction: column;
-            padding-top: 60px;
-            transition: left 0.3s ease;
-        }
-        .sidebar.active {
-            left: 0;
-        }
-        .link {
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 15px;
-            display: block;
-            transition: background 0.3s ease;
-        }
-        .link:hover, .link.active {
-            background: #21262d;
-        }
-        .faq-container {
+        .container {
             max-width: 800px;
             margin: auto;
-            text-align: left;
         }
-        .faq-item {
-            background: #161b22;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid #30363d;
+        h1 {
+            color: #ffcc00;
+            text-shadow: 2px 2px 5px rgba(255, 204, 0, 0.8);
         }
-        .faq-item:hover {
-            background: #21262d;
+        .link-list {
+            list-style: none;
+            padding: 0;
         }
-        .faq-question {
-            font-size: 18px;
-            font-weight: bold;
-            color: #58a6ff;
+        .link-list li {
+            margin: 15px 0;
         }
-        .faq-answer {
-            display: none;
-            padding-top: 10px;
-            color: #8b949e;
-            font-size: 16px;
-        }
-        a {
-            color: #58a6ff;
+        .link-list a {
             text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .footer {
-            margin-top: 20px;
-            padding: 15px;
-            background: #161b22;
-            color: #ffffff;
+            color: white;
+            font-size: 16px;
+            padding: 12px 0;
+            display: inline-block;
+            background: linear-gradient(90deg, #ffcc00, #ff8800);
+            border-radius: 10px;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(255, 136, 0, 0.5);
+            text-transform: uppercase;
+            width: 550px;
             text-align: center;
-            font-size: 14px;
+        }
+        .link-list a:hover {
+            background: linear-gradient(90deg, #ff8800, #ffcc00);
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(255, 136, 0, 0.8);
         }
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <h2>SpyMC</h2>
-        <div class="hamburger" onclick="toggleMenu()">
-            &#9776;
-        </div>
+    <div class="container">
+        <h1>All Available Pages</h1>
+        <ul class="link-list">
+            <li><a href="https://www.spymc.xyz/">Home Page</a></li>
+            <li><a href="https://www.spymc.xyz/status">Status Page</a></li>
+            <li><a href="https://www.spymc.xyz/follow">All Social Media</a></li>
+            <li><a href="https://www.spymc.xyz/discord">Discord</a></li>
+            <li><a href="https://www.spymc.xyz/tac">Terms and Guidelines</a></li>
+            <li><a href="https://www.spymc.xyz/results">Results</a></li>
+            <li><a href="https://www.spymc.xyz/application">Application Page</a></li>
+            <li><a href="https://www.spymc.xyz/senior">Senior Page</a></li>
+            <li><a href="https://www.spymc.xyz/search.html">Player Tiers</a></li>
+            <li><a href="https://senior.spymc.xyz/mcstats.html">MC Stats</a></li>
+            <li><a href="https://senior.spymc.xyz/mc-icon.html">MC Icon</a></li>
+            <li><a href="https://interactive.spymc.xyz">Spy Games</a></li>
+        </ul>
     </div>
-
-    <div class="sidebar" id="sidebar">
-        <a href="#" class="link active">Home</a>
-        <a href="rules.html" class="link">Rules</a>
-        <a href="admin-team.html" class="link">Team</a>
-        <a href="search.html" class="link">Tier</a>
-        <a href="https://solo.to/yoursenior" class="link">Owner</a>
-        <a href="https://senior.spymc.xyz/mc-icon" class="link">Icon Covertor</a>
-        <a href="https://senior.spymc.xyz/mcstats.html" class="link">Mc stats</a>
-    </div>
-    
-    <h1></h1>
-    <div class="faq-container">
-        <div class="faq-item" onclick="toggleFAQ(this)">
-            <p class="faq-question">What is SpyMC?</p>
-            <p class="faq-answer">SpyMC is a premium Minecraft server offering various game modes and a great community.</p>
-        </div>
-        <div class="faq-item" onclick="toggleFAQ(this)">
-            <p class="faq-question">Who is the owner of SpyMC?</p>
-            <p class="faq-answer">SpyMC is owned and managed by Senior.</p>
-        </div>
-        <div class="faq-item" onclick="toggleFAQ(this)">
-            <p class="faq-question">When was SpyMC started?</p>
-            <p class="faq-answer">SpyMC was launched in November 2021.</p>
-        </div>
-        <div class="faq-item" onclick="toggleFAQ(this)">
-            <p class="faq-question">Who is Ashu?</p>
-            <p class="faq-answer">Ashu is the co-owner of SpyMC, appointed in February 2022.</p>
-        </div>
-        <div class="faq-item" onclick="toggleFAQ(this)">
-            <p class="faq-question">How can I donate or buy ranks?</p>
-            <p class="faq-answer">You can purchase ranks via our Discord. Join <a href="https://discord.spymc.xyz" target="_blank">discord.spymc.xyz</a> for more details.</p>
-        </div>
-        <div class="faq-item" onclick="toggleFAQ(this)">
-            <p class="faq-question">How do I get a free "Spy Rank"?</p>
-            <p class="faq-answer">Join our Discord and create a ticket in the <strong>🔖・ᴛɪᴄᴋᴇᴛ</strong> channel to receive this free rank, along with exclusive rewards!</p>
-        </div>
-        <div class="faq-item" onclick="toggleFAQ(this)">
-            <p class="faq-question">Is SpyMC a chill server?</p>
-            <p class="faq-answer">Yes! SpyMC is a great place to chill, play, and connect with others.</p>
-        </div>
-        <div class="faq-item" onclick="toggleFAQ(this)">
-            <p class="faq-question">What game modes do you offer?</p>
-            <p class="faq-answer">We offer Survival, Creative, Mini-Games, PvP, and more exciting modes!</p>
-        </div>
-        <div class="faq-item" onclick="toggleFAQ(this)">
-            <p class="faq-question">Where can I get support?</p>
-            <p class="faq-answer">Join our Discord at <a href="https://discord.spymc.xyz" target="_blank">discord.spymc.xyz</a> for help!</p>
-        </div>
-    </div>
-    
-    <div class="footer">
-        <p>&copy; 2025 SpyMC. All rights reserved. | Created with ❤️ by Senior</p>
-    </div>
-    
-    <script>
-        function toggleFAQ(element) {
-            let answer = element.querySelector(".faq-answer");
-            answer.style.display = answer.style.display === "block" ? "none" : "block";
-        }
-        
-        function toggleMenu() {
-            let sidebar = document.getElementById("sidebar");
-            sidebar.classList.toggle("active");
-        }
-    </script>
 </body>
 </html>
