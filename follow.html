@@ -1,197 +1,892 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <p>‎ </p><p>‎ </p>
-  <title>SpyMC - Senior Network</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <style>
-    /* Global Styles */
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #0e0e0e;
-      color: #ffffff;
-      overflow-y: auto; /* Enables vertical scrolling */
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpyMC | Ultimate Minecraft Network</title>
+    <meta name="description" content="SpyMC Minecraft Network - The most advanced Minecraft server network with minigames, survival, and unique gameplay experiences.(spymc.xyz)">
+    <link rel="shortcut icon" href="https://i.ibb.co/tMF05rbH/image69.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Base colors */
+            --bg-primary: #0a0a12;
+            --bg-secondary: #12121d;
+            --bg-tertiary: #1a1a2a;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --text-tertiary: rgba(255, 255, 255, 0.6);
+            --accent-primary: #6c5ce7;
+            --accent-secondary: #a29bfe;
+            --accent-tertiary: #fd79a8;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #d63031;
+            --info: #0984e3;
+            
+            /* Glass effect */
+            --glass-bg: rgba(30, 30, 50, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-highlight: rgba(255, 255, 255, 0.05);
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow-primary: 0 0 20px rgba(108, 92, 231, 0.5);
+            --glow-secondary: 0 0 20px rgba(162, 155, 254, 0.3);
+            
+            /* Transitions */
+            --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-medium: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+        }
 
-    /* Container */
-    .container {
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* Header Section */
-    .header {
-      background: linear-gradient(180deg, #ff4242, #1e1e1e);
-      padding: 20px 0;
-      border-bottom: -1px solid #ffffff;
-    }
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
 
-    .profile-image img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      border: 5px solid #ffffff;
-      margin-top: -75px;
-      box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(108, 92, 231, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(253, 121, 168, 0.15) 0%, transparent 25%);
+            background-size: cover;
+            background-attachment: fixed;
+            position: relative;
+            padding: 20px;
+        }
 
-    /* Profile Information */
-    .profile-info h1 {
-      margin: 20px 0;
-      font-size: 2.8em;
-      font-weight: bold;
-    }
+        /* Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
 
-    .profile-info p {
-      font-size: 1.1em;
-      line-height: 1.6;
-      margin: 20px 0;
-      color: #bbbbbb;
-    }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(108, 92, 231, 0.5);
+            animation: float linear infinite;
+            pointer-events: none;
+            filter: blur(1px);
+        }
 
-    /* Links Section */
-    .links {
-      margin-top: 30px;
-    }
+        .particle:nth-child(3n) {
+            background: rgba(253, 121, 168, 0.5);
+        }
 
-    .link-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #1a1a1a;
-      margin: 10px 0;
-      padding: 15px;
-      border-radius: 8px;
-      border: 1px solid #2c2c2c;
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
+        .particle:nth-child(5n) {
+            background: rgba(162, 155, 254, 0.5);
+        }
 
-    .link-item:hover {
-      background: #292929;
-      transform: translateY(-3px);
-    }
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-1200px) translateX(200px) rotate(360deg); opacity: 0; }
+        }
 
-    .icon {
-      flex: 0 0 50px;
-      font-size: 1.8em;
-    }
+        /* Floating cubes */
+        .cubes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
 
-    .icon.discord { color: #5865F2; }
-    .icon.youtube { color: #FF0000; }
-    .icon.instagram { color: #E1306C; }
-    .icon.twitter { color: #1DA1F2; }
-    .icon.spymc { color: #00FFCC; }
+        .cube {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: animateCube 25s linear infinite;
+            bottom: -150px;
+            opacity: 0.5;
+        }
 
-    .text {
-      flex: 1;
-      text-align: left;
-      margin-left: 10px;
-    }
+        .cube:nth-child(1) {
+            left: 10%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+            animation-duration: 20s;
+        }
 
-    .text p {
-      margin: 0;
-      font-size: 1.1em;
-      font-weight: bold;
-      color: #ffffff;
-    }
+        .cube:nth-child(2) {
+            left: 20%;
+            width: 30px;
+            height: 30px;
+            animation-delay: 2s;
+            animation-duration: 15s;
+        }
 
-    .text a {
-      color: #bbb;
-      text-decoration: none;
-      font-size: 1em;
-      display: block;
-      transition: color 0.2s ease;
-    }
+        .cube:nth-child(3) {
+            left: 25%;
+            width: 50px;
+            height: 50px;
+            animation-delay: 4s;
+        }
 
-    .text a:hover {
-      color: #ffffff;
-    }
+        .cube:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
 
-    /* Footer Section */
-    footer {
-      margin-top: 40px;
-      padding: 20px;
-      background-color: #1e1e1e;
-      color: #bbbbbb;
-      font-size: 0.9em;
-    }
+        .cube:nth-child(5) {
+            left: 65%;
+            width: 40px;
+            height: 40px;
+            animation-delay: 0s;
+        }
 
-    footer p {
-      margin: 0;
-    }
-  </style>
+        .cube:nth-child(6) {
+            left: 75%;
+            width: 100px;
+            height: 100px;
+            animation-delay: 3s;
+        }
+
+        .cube:nth-child(7) {
+            left: 90%;
+            width: 50px;
+            height: 50px;
+            animation-delay: 2s;
+            animation-duration: 22s;
+        }
+
+        @keyframes animateCube {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main content */
+        .content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s forwards 0.3s;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Server header */
+        .server-header {
+            text-align: center;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+
+        .server-logo {
+            height: 120px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px rgba(108, 92, 231, 0.5));
+            transition: var(--transition-medium);
+        }
+
+        .server-logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 30px rgba(108, 92, 231, 0.7));
+        }
+
+        .server-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px rgba(108, 92, 231, 0.3);
+        }
+
+        .server-tagline {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-weight: 500;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .server-ip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-tertiary);
+            padding: 16px 30px;
+            border-radius: 50px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-md), var(--glow-primary);
+            transition: var(--transition-medium);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .server-ip:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg), var(--glow-primary);
+        }
+
+        .server-ip::before {
+            content: 'Click to copy';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition-medium);
+        }
+
+        .server-ip:hover::before {
+            opacity: 1;
+        }
+
+        .server-ip i {
+            margin-right: 12px;
+            color: var(--accent-secondary);
+        }
+
+        /* Server info */
+        .server-info {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-md);
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 40px;
+            transition: var(--transition-medium);
+        }
+
+        .server-info:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .info-item {
+            background: var(--bg-tertiary);
+            border-radius: 16px;
+            padding: 20px;
+            transition: var(--transition-medium);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .info-item:hover {
+            background: var(--glass-highlight);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .info-label {
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .info-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .info-value i {
+            margin-right: 10px;
+            color: var(--accent-secondary);
+        }
+
+        /* Social links */
+        .social-section {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--accent-secondary);
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .social-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .social-links {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 25px 15px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: var(--transition-medium);
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .social-link:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            opacity: 0;
+            transition: var(--transition-medium);
+            z-index: -1;
+        }
+
+        .social-link:hover::before {
+            opacity: 0.2;
+        }
+
+        .social-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            transition: var(--transition-medium);
+        }
+
+        .social-link:hover .social-icon {
+            transform: scale(1.2);
+        }
+
+        .social-name {
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+            width: 100%;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: var(--transition-fast);
+            z-index: 10;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--glass-border);
+            white-space: nowrap;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Loading state */
+        .loading {
+            position: relative;
+            overflow: hidden;
+            color: transparent !important;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Status indicators */
+        .status-online {
+            color: var(--success);
+        }
+
+        .status-offline {
+            color: var(--danger);
+        }
+
+        /* DNS status */
+        .dns-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dns-status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dns-status-online {
+            background-color: var(--success);
+            box-shadow: 0 0 10px var(--success);
+        }
+
+        .dns-status-offline {
+            background-color: var(--danger);
+            box-shadow: 0 0 10px var(--danger);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .server-title {
+                font-size: 2.5rem;
+            }
+            
+            .server-tagline {
+                font-size: 1.1rem;
+            }
+            
+            .server-ip {
+                font-size: 1.2rem;
+                padding: 14px 25px;
+            }
+            
+            .info-item {
+                padding: 16px;
+            }
+            
+            .info-value {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .server-title {
+                font-size: 2rem;
+            }
+            
+            .server-logo {
+                height: 90px;
+            }
+            
+            .server-tagline {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Header Section -->
-    <div class="header">
-      <div class="profile-image">
-        <img src="https://i.ibb.co/LkLqBLv/logo.png" alt="Profile Picture">
-      </div>
+    <!-- Particles background -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Floating cubes -->
+    <div class="cubes">
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+    </div>
+    
+    <!-- Main content -->
+    <div class="content">
+        <!-- Header -->
+        <div class="server-header">
+            <img src="https://i.ibb.co/tMF05rbH/image69.png" alt="SpyMC Logo" class="server-logo">
+            <h1 class="server-title">SpyMC Network</h1>
+            <p class="server-tagline">SpyMC (spymc.xyz) is a vibrant platform that serves as the online hub for the gaming community. Managed and owned by YourSenior, the website showcases a variety of content related to the SpyMC Senior Network server..</p>
+            <div class="server-ip" id="serverIp">
+                <i class="fas fa-server"></i>
+                <span>spymc.xyz</span>
+            </div>
+        </div>
+        
+        <!-- Server info -->
+        <div class="server-info">
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Version</div>
+                    <div class="info-value"><i class="fas fa-code-branch"></i> <span id="serverVersion">1.8 - 1.20</span></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Players Online</div>
+                    <div class="info-value" id="playerCount"><i class="fas fa-users"></i> <span class="loading">Loading...</span></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">DNS Status</div>
+                    <div class="info-value"><i class="fas fa-globe"></i> <span class="dns-status" id="dnsStatus"><span class="dns-status-dot"></span> <span class="loading">Checking...</span></span></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Last Updated</div>
+                    <div class="info-value"><i class="fas fa-clock"></i> <span id="lastUpdated">Just now</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Social links -->
+        <div class="social-section">
+            <h3 class="section-title">Connect With Us</h3>
+            <div class="social-links">
+                <a href="https://www.spymc.xyz" class="social-link" target="_blank" data-tooltip="Official Website">
+                    <i class="fas fa-globe social-icon"></i>
+                    <span class="social-name">Website</span>
+                </a>
+                <a href="https://discord.spymc.xyz" class="social-link" target="_blank" data-tooltip="Join Our Discord">
+                    <i class="fab fa-discord social-icon"></i>
+                    <span class="social-name">Discord</span>
+                </a>
+                <a href="https://instagram.com/spymc.xyz" class="social-link" target="_blank" data-tooltip="Follow on Instagram">
+                    <i class="fab fa-instagram social-icon"></i>
+                    <span class="social-name">Instagram</span>
+                </a>
+                <a href="https://www.youtube.com/@urspy" class="social-link" target="_blank" data-tooltip="YouTube Channel">
+                    <i class="fab fa-youtube social-icon"></i>
+                    <span class="social-name">YouTube</span>
+                </a>
+                <a href="https://twitter.com/yoursenioryt" class="social-link" target="_blank" data-tooltip="Follow on X">
+                    <i class="fab fa-twitter social-icon"></i>
+                    <span class="social-name">Twitter/X</span>
+                </a>
+                <a href="mailto:gamerzofficail6@gmail.com" class="social-link" target="_blank" data-tooltip="Contact Support">
+                    <i class="fas fa-envelope social-icon"></i>
+                    <span class="social-name">Email</span>
+                </a>
+                <a href="https://www.tiktok.com/@spymc.xyz" class="social-link" target="_blank" data-tooltip="Follow on TikTok">
+                    <i class="fab fa-tiktok social-icon"></i>
+                    <span class="social-name">TikTok</span>
+                </a>
+                <a href="https://www.twitch.tv/spymc" class="social-link" target="_blank" data-tooltip="Watch on Twitch">
+                    <i class="fab fa-twitch social-icon"></i>
+                    <span class="social-name">Twitch</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            © 2023 SpyMC Network | All Rights Reserved | <span id="currentTime"></span>
+        </div>
     </div>
 
-    <!-- Profile Information -->
-    <div class="profile-info">
-      <h1>SpyMC - Senior Network</h1>
-      <p>The official website of SpyMC (spymc.xyz) is a vibrant platform that serves as the online hub for the gaming community. Managed and owned by YourSenior, the website showcases a variety of content related to the SpyMC Senior Network server..</p>
-    </div>
+    <!-- Tooltip element -->
+    <div class="tooltip" id="tooltip"></div>
 
-    <!-- Links Section -->
-    <div class="links">
-      <div class="link-item">
-        <div class="icon instagram"><i class="fas fa-globe"></i></div>
-        <div class="text">
-          <p>Owner ( YourSenior )</p>
-          <a href="https://solo.to/yoursenior" target="_blank">senior.spymc.xyz</a>
-        </div>
-      </div>
-      <div class="link-item">
-        <div class="icon discord"><i class="fab fa-discord"></i></div>
-        <div class="text">
-          <p>Discord</p>
-          <a href="https://discord.com/invite/spymc-minecraft-network-ip-spymc-xyz-921023003981144125" target="_blank">discord.spymc.xyz</a>
-        </div>
-      </div>
-      <div class="link-item">
-        <div class="icon youtube"><i class="fab fa-youtube"></i></div>
-        <div class="text">
-          <p>YouTube</p>
-          <a href="https://www.youtube.com/@urspy" target="_blank">youtube.com/@urspy</a>
-        </div>
-      </div>
-      <div class="link-item">
-        <div class="icon instagram"><i class="fab fa-instagram"></i></div>
-        <div class="text">
-          <p>Instagram</p>
-          <a href="https://instagram.com/spymc.xyz" target="_blank">instagram.com/spymc.xyz</a>
-        </div>
-      </div>
-      <div class="link-item">
-        <div class="icon twitter"><i class="fab fa-twitter"></i></div>
-        <div class="text">
-          <p>X</p>
-          <a href="https://twitter.com/yoursenioryt" target="_blank">twitter.com/yoursenioryt</a>
-        </div>
-      </div>
-      <div class="link-item">
-        <div class="icon spymc"><i class="fas fa-globe"></i></div>
-        <div class="text">
-          <p>SpyMC - SeniorNetwork</p>
-          <a href="https://www.spymc.xyz" target="_blank">spymc.xyz</a>
-        </div>
-      </div>
-    </div>
-  </div>
+    <script>
+        // Server configuration
+        const serverIP = 'spymc.xyz';
+        
+        // Initialize particles
+        function initParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = window.innerWidth < 768 ? 30 : 50;
+            
+            particlesContainer.innerHTML = '';
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 6 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                const left = Math.min(90, Math.random() * 100);
+                const top = Math.min(90, Math.random() * 100);
+                particle.style.left = `${left}%`;
+                particle.style.top = `${top}%`;
+                
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
 
-  <!-- Footer Section -->
-  <footer>
-    <p>&copy; 2025 SpyMC - Senior Nework. All rights reserved.</p>
-  </footer>
+        // Setup copy IP functionality
+        function setupCopyIP() {
+            const serverIp = document.getElementById('serverIp');
+            const tooltip = document.getElementById('tooltip');
+            
+            serverIp.addEventListener('click', () => {
+                navigator.clipboard.writeText(serverIP).then(() => {
+                    // Show tooltip
+                    const rect = serverIp.getBoundingClientRect();
+                    tooltip.textContent = 'Copied to clipboard!';
+                    tooltip.style.left = `${rect.left + rect.width/2 - tooltip.offsetWidth/2}px`;
+                    tooltip.style.top = `${rect.top - 40}px`;
+                    tooltip.style.opacity = '1';
+                    
+                    // Hide tooltip after 2 seconds
+                    setTimeout(() => {
+                        tooltip.style.opacity = '0';
+                    }, 2000);
+                    
+                    // Bounce animation
+                    anime({
+                        targets: serverIp,
+                        scale: [1, 1.1, 1],
+                        duration: 600,
+                        easing: 'easeOutElastic(1, .5)'
+                    });
+                });
+            });
+        }
+
+        // Setup tooltips for social links
+        function setupTooltips() {
+            const tooltip = document.getElementById('tooltip');
+            const socialLinks = document.querySelectorAll('.social-link');
+            
+            socialLinks.forEach(link => {
+                const tooltipText = link.getAttribute('data-tooltip');
+                
+                link.addEventListener('mouseenter', (e) => {
+                    tooltip.textContent = tooltipText;
+                    const rect = link.getBoundingClientRect();
+                    tooltip.style.left = `${rect.left + rect.width/2 - tooltip.offsetWidth/2}px`;
+                    tooltip.style.top = `${rect.top - 40}px`;
+                    tooltip.style.opacity = '1';
+                });
+                
+                link.addEventListener('mouseleave', () => {
+                    tooltip.style.opacity = '0';
+                });
+            });
+        }
+
+        // Check DNS status using Cloudflare DNS
+        async function checkDNSStatus() {
+            try {
+                const response = await fetch(`https://cloudflare-dns.com/dns-query?name=${serverIP.split(':')[0]}&type=A`, {
+                    headers: {
+                        'Accept': 'application/dns-json'
+                    }
+                });
+                
+                const data = await response.json();
+                const dnsStatusEl = document.getElementById('dnsStatus');
+                
+                if (data.Answer && data.Answer.length > 0) {
+                    dnsStatusEl.innerHTML = `<span class="dns-status-dot dns-status-online"></span> Online`;
+                    return true;
+                } else {
+                    dnsStatusEl.innerHTML = `<span class="dns-status-dot dns-status-offline"></span> Offline`;
+                    return false;
+                }
+            } catch (error) {
+                console.error('DNS check failed:', error);
+                const dnsStatusEl = document.getElementById('dnsStatus');
+                dnsStatusEl.innerHTML = `<span class="dns-status-dot dns-status-offline"></span> Error`;
+                return false;
+            }
+        }
+
+        // Fetch server status from mcstatus.io API
+        async function fetchServerStatus() {
+            try {
+                const response = await fetch(`https://api.mcstatus.io/v2/status/java/${serverIP}`);
+                const data = await response.json();
+                
+                return {
+                    online: data.online,
+                    players: {
+                        online: data.players?.online || 0,
+                        max: data.players?.max || 1000
+                    },
+                    version: data.version?.name || "1.8-1.20",
+                    motd: data.motd?.clean || "SpyMC Network"
+                };
+            } catch (error) {
+                console.error('Error fetching server status:', error);
+                return {
+                    online: false,
+                    players: {
+                        online: 0,
+                        max: 1000
+                    },
+                    version: "1.8-1.20"
+                };
+            }
+        }
+
+        // Update server stats with API data
+        async function updateServerStats() {
+            // Update current time
+            updateCurrentTime();
+            
+            // Check DNS first
+            const dnsOnline = await checkDNSStatus();
+            
+            // Then get server status
+            const data = await fetchServerStatus();
+            
+            // Update version
+            document.getElementById('serverVersion').textContent = data.version;
+            
+            // Update player count
+            const playerCountEl = document.getElementById('playerCount');
+            
+            if (data.online && dnsOnline) {
+                playerCountEl.innerHTML = `<i class="fas fa-users"></i> ${data.players.online}/${data.players.max}`;
+            } else {
+                playerCountEl.innerHTML = '<i class="fas fa-users"></i> Server Offline';
+            }
+            
+            // Update last updated time
+            document.getElementById('lastUpdated').textContent = 'Just now';
+            
+            // Schedule next update
+            setTimeout(updateServerStats, 30000); // Update every 30 seconds
+        }
+
+        // Update current time
+        function updateCurrentTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const dateString = now.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
+            document.getElementById('currentTime').textContent = `${dateString} ${timeString}`;
+        }
+
+        // Initialize everything
+        function init() {
+            initParticles();
+            setupCopyIP();
+            setupTooltips();
+            updateServerStats();
+            
+            // Update time every minute
+            setInterval(updateCurrentTime, 60000);
+            
+            // Add resize event listener
+            window.addEventListener('resize', initParticles);
+        }
+
+        // Start the application
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
 </body>
 </html>
-
