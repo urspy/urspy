@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpyMC Rank Shop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00f0ff;
+            --primary-dark: #0066ff;
+            --secondary: #ff00aa;
+            --accent: #00ffaa;
+            --dark: #0a0a12;
+            --darker: #050508;
+            --light: #e0e0ff;
+            --card-bg: rgba(15, 15, 25, 0.9);
+            --card-border: rgba(0, 240, 255, 0.2);
+            --text-muted: rgba(200, 200, 255, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 170, 0.05) 0%, transparent 25%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            height: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .ranks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .rank-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .rank-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.2);
+            border-color: rgba(0, 240, 255, 0.4);
+        }
+
+        .rank-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .rank-name {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .rank-price {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .rank-price span {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .rank-description {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            min-height: 80px;
+        }
+
+        .features-list {
+            margin-bottom: 25px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+
+        .feature i {
+            color: var(--accent);
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .buy-btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 170, 0.3);
+        }
+
+        .discord-note {
+            text-align: center;
+            color: var(--text-muted);
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .discord-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .discord-link:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--card-border);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .ranks-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .rank-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://i.ibb.co/tMF05rbH/image69.png" alt="SpyMC" class="logo">
+            <h1>SPYMC RANK SHOP</h1>
+            <p class="subtitle">Upgrade your experience with premium ranks featuring exclusive perks and cosmetics</p>
+        </header>
+
+        <div class="ranks-grid">
+            <!-- Sniper Rank -->
+            <div class="rank-card">
+                <div class="rank-header">
+                    <div class="rank-name">SNIPER</div>
+                    <div class="rank-price">$5.49 <span>/ ₹451</span></div>
+                </div>
+                <p class="rank-description">
+                    The ultimate prestige rank with exclusive cosmetics, VIP areas, and priority access.
+                </p>
+                <div class="features-list">
+                    <div class="feature">
+                        <i class="fas fa-crown"></i>
+                        <span>Exclusive Sniper tag</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-lock-open"></i>
+                        <span>VIP-only areas</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-bolt"></i>
+                        <span>Priority queue access</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-gem"></i>
+                        <span>Special cosmetics</span>
+                    </div>
+                </div>
+                <button class="buy-btn" onclick="redirectToDiscord()">
+                    PURCHASE NOW
+                </button>
+            </div>
+
+            <!-- Core Rank -->
+            <div class="rank-card">
+                <div class="rank-header">
+                    <div class="rank-name">CORE</div>
+                    <div class="rank-price">$4.39 <span>/ ₹363</span></div>
+                </div>
+                <p class="rank-description">
+                    Premium rank with enhanced gameplay features and special privileges.
+                </p>
+                <div class="features-list">
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Extended claims</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-home"></i>
+                        <span>Additional homes</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-rocket"></i>
+                        <span>Faster flying</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-paint-brush"></i>
+                        <span>Custom particles</span>
+                    </div>
+                </div>
+                <button class="buy-btn" onclick="redirectToDiscord()">
+                    PURCHASE NOW
+                </button>
+            </div>
+
+            <!-- Cyber Rank -->
+            <div class="rank-card">
+                <div class="rank-header">
+                    <div class="rank-name">CYBER</div>
+                    <div class="rank-price">$3.84 <span>/ ₹313</span></div>
+                </div>
+                <p class="rank-description">
+                    Enhanced rank with special cosmetics and gameplay advantages.
+                </p>
+                <div class="features-list">
+                    <div class="feature">
+                        <i class="fas fa-robot"></i>
+                        <span>Cyber-themed cosmetics</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-tools"></i>
+                        <span>Special crafting recipes</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Enhanced protections</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-paw"></i>
+                        <span>Exclusive pets</span>
+                    </div>
+                </div>
+                <button class="buy-btn" onclick="redirectToDiscord()">
+                    PURCHASE NOW
+                </button>
+            </div>
+        </div>
+
+        <div class="discord-note">
+            <p>All purchases are processed through our Discord server. <br>
+            Need help? Join our <a href="https://discord.spymc.xyz" class="discord-link" target="_blank">Discord</a> for support.</p>
+        </div>
+
+        <footer>
+            <p>© 2025 SpyMC Network. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        function redirectToDiscord() {
+            window.location.href = "https://discord.spymc.xyz";
+        }
+    </script>
+</body>
+</html>
