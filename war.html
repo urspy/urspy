@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpyMC WARZONE Rules</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00f0ff;
+            --primary-dark: #0066ff;
+            --secondary: #ff00aa;
+            --accent: #00ffaa;
+            --dark: #0a0a12;
+            --darker: #050508;
+            --light: #e0e0ff;
+            --card-bg: rgba(15, 15, 25, 0.9);
+            --card-border: rgba(0, 240, 255, 0.2);
+            --text-muted: rgba(200, 200, 255, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 170, 0.05) 0%, transparent 25%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            background: linear-gradient(to bottom, rgba(10,10,18,0.9), rgba(5,5,8,0.95));
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            height: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--card-border);
+            letter-spacing: 1px;
+        }
+
+        .rules-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .toc-section {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .toc-section:hover {
+            border-color: var(--accent);
+            box-shadow: 0 5px 20px rgba(0, 240, 255, 0.2);
+        }
+
+        .rules-list {
+            margin: 0;
+            padding: 0;
+        }
+
+        .rule-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed rgba(0, 240, 255, 0.2);
+        }
+
+        .rule-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .rule-number {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.2rem;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .rule-content {
+            flex: 1;
+        }
+
+        .rule-title {
+            color: var(--light);
+            font-weight: 700;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .rule-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .severity {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: 12px;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .ban {
+            background: rgba(255, 42, 42, 0.15);
+            color: #ff4747;
+            border: 1px solid #ff4747;
+        }
+
+        .kick {
+            background: rgba(255, 204, 0, 0.15);
+            color: #ffcc00;
+            border: 1px solid #ffcc00;
+        }
+
+        .warning {
+            background: rgba(255, 110, 0, 0.15);
+            color: #ff6e00;
+            border: 1px solid #ff6e00;
+        }
+
+        .note {
+            margin: 40px 0 30px;
+            padding: 20px;
+            background: rgba(0, 240, 255, 0.08);
+            border-left: 4px solid var(--primary);
+            border-radius: 5px;
+            color: var(--text-muted);
+            font-style: italic;
+            text-align: center;
+        }
+
+        .note strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            background: linear-gradient(to top, rgba(10,10,18,0.9), rgba(5,5,8,0.95));
+            border-top: 1px solid var(--card-border);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .rule-item {
+                flex-direction: column;
+            }
+            
+            .rule-number {
+                margin-bottom: 8px;
+                text-align: left;
+            }
+            
+            .severity {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://i.ibb.co/tMF05rbH/image69.png" alt="SpyMC" class="logo">
+        <h1>WARZONE COMBAT RULES</h1>
+        <p class="subtitle">Violations will be met with immediate consequences</p>
+    </header>
+
+    <div class="rules-container">
+        <div class="toc-section">
+            <h2>Core Combat Regulations</h2>
+            <ul class="rules-list">
+                <li class="rule-item">
+                    <div class="rule-number">1</div>
+                    <div class="rule-content">
+                        <div class="rule-title">No Cross-Teaming <span class="severity ban">Permaban</span></div>
+                        <div class="rule-desc">Alliances between different teams are strictly prohibited. Coordinate only with your registered teammates.</div>
+                    </div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">2</div>
+                    <div class="rule-content">
+                        <div class="rule-title">No Hacks or Exploits <span class="severity ban">Permaban</span></div>
+                        <div class="rule-desc">X-ray, KillAura, reach hacks, macros, autoclickers, or any unfair advantage modifications are prohibited.</div>
+                    </div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">3</div>
+                    <div class="rule-content">
+                        <div class="rule-title">Team Size Limit (5 Players) <span class="severity ban">DQ</span></div>
+                        <div class="rule-desc">No substitutions or mid-event joins allowed. Your registered squad is final when WAR begins.</div>
+                    </div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">4</div>
+                    <div class="rule-content">
+                        <div class="rule-title">No Combat Logging <span class="severity ban">DQ</span></div>
+                        <div class="rule-desc">Disconnecting during PvP engagement will result in automatic disqualification.</div>
+                    </div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">5</div>
+                    <div class="rule-content">
+                        <div class="rule-title">No Lag Machines <span class="severity ban">Permaban</span></div>
+                        <div class="rule-desc">Any attempt to crash or lag the server will result in permanent blacklisting.</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="toc-section">
+            <h2>Voice & Communication</h2>
+            <ul class="rules-list">
+                <li class="rule-item">
+                    <div class="rule-number">6</div>
+                    <div class="rule-content">
+                        <div class="rule-title">Mandatory Voice Chat <span class="severity kick">Kick</span></div>
+                        <div class="rule-desc">All participants must join the designated WARZONE voice channel for coordination.</div>
+                    </div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">7</div>
+                    <div class="rule-content">
+                        <div class="rule-title">No Voice Chat Abuse <span class="severity warning">Mute</span></div>
+                        <div class="rule-desc">Keep comms clear of spam, toxicity, or excessive noise. Strategic communication only.</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="toc-section">
+            <h2>Equipment Restrictions</h2>
+            <ul class="rules-list">
+                <li class="rule-item">
+                    <div class="rule-number">8</div>
+                    <div class="rule-content">
+                        <div class="rule-title">No Crystal PvP <span class="severity ban">DQ</span></div>
+                        <div class="rule-desc">End crystals and crystal-based combat tactics are strictly forbidden in WARZONE events.</div>
+                    </div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">9</div>
+                    <div class="rule-content">
+                        <div class="rule-title">Approved Mods Only <span class="severity ban">DQ</span></div>
+                        <div class="rule-desc">Only FPS/performance mods (Optifine, Sodium) allowed. Anything giving competitive advantage is banned.</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="toc-section">
+            <h2>Combat Zones</h2>
+            <ul class="rules-list">
+                <li class="rule-item">
+                    <div class="rule-number">10</div>
+                    <div class="rule-content">
+                        <div class="rule-title">No Safe Zones <span class="severity warning">Warning</span></div>
+                        <div class="rule-desc">All base protections are disabled when WAR begins. Every area is a combat zone.</div>
+                    </div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">11</div>
+                    <div class="rule-content">
+                        <div class="rule-title">No End War Tactics <span class="severity ban">DQ</span></div>
+                        <div class="rule-desc">Deliberately prolonging battles or avoiding engagement to stall the war is prohibited.</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="toc-section">
+            <h2>Conduct & Sportsmanship</h2>
+            <ul class="rules-list">
+                <li class="rule-item">
+                    <div class="rule-number">12</div>
+                    <div class="rule-content">
+                        <div class="rule-title">Respect All Participants <span class="severity kick">Kick</span></div>
+                        <div class="rule-desc">No toxicity, hate speech, or harassment. Keep trash talk minimal and good-natured.</div>
+                    </div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">13</div>
+                    <div class="rule-content">
+                        <div class="rule-title">Follow Staff Instructions <span class="severity ban">DQ</span></div>
+                        <div class="rule-desc">Refusal to comply with staff directives will result in immediate removal.</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="note">
+            <p><strong>WARZONE COMMAND DECREE:</strong> SpyMC staff reserves full authority to disqualify or ban any player/team violating these rules. All decisions are final. Play with honor, fight with skill, and may the best team prevail.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 SpyMC Network | WARZONE Combat Regulations v3.2 | Part of the SpyMC Terms of Service</p>
+    </footer>
+</body>
+</html>
