@@ -3,26 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpyMC | About</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>SpyMC - Timeline</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #6e45e2;
-            --primary-dark: #4a2dbb;
-            --secondary: #ff6b6b;
-            --accent: #ffd166;
-            --cyber-blue: #00f0ff;
-            --cyber-pink: #ff00aa;
-            --dark: #0f0f1a;
-            --darker: #070710;
-            --light: #f0f0ff;
-            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
-            --glass: rgba(20, 20, 40, 0.7);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --glass-highlight: rgba(255, 255, 255, 0.1);
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            --glow: 0 0 20px rgba(110, 69, 226, 0.6);
-            --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+            --primary: #00f0ff;
+            --primary-dark: #0066ff;
+            --secondary: #ff00aa;
+            --accent: #00ffaa;
+            --dark: #0a0a12;
+            --darker: #050508;
+            --light: #e0e0ff;
+            --card-bg: rgba(15, 15, 25, 0.9);
+            --card-border: rgba(0, 240, 255, 0.2);
+            --text-muted: rgba(200, 200, 255, 0.6);
         }
 
         * {
@@ -32,410 +29,419 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--darker);
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark);
             color: var(--light);
-            min-height: 100vh;
             background-image: 
-                radial-gradient(circle at 20% 30%, rgba(110, 69, 226, 0.15) 0%, transparent 25%),
-                radial-gradient(circle at 80% 70%, rgba(255, 107, 107, 0.15) 0%, transparent 25%),
-                linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.95));
-            background-size: cover;
-            background-attachment: fixed;
-            overflow-x: hidden;
+                radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 170, 0.05) 0%, transparent 25%);
+            min-height: 100vh;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
+            line-height: 1.6;
         }
 
-        /* Cyberpunk scanline effect */
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                rgba(18, 16, 16, 0) 50%, 
-                rgba(0, 0, 0, 0.25) 50%
-            );
-            background-size: 100% 4px;
-            pointer-events: none;
-            z-index: 1;
-            animation: scanline 6s linear infinite;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        @keyframes scanline {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-100vh); }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            height: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px var(--primary));
         }
 
         h1 {
             font-family: 'Orbitron', sans-serif;
-            color: var(--cyber-blue);
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin: 20px 0;
-            text-shadow: 
-                0 0 10px rgba(0, 240, 255, 0.8),
-                0 0 20px rgba(0, 240, 255, 0.5);
-            animation: fadeIn 1.5s var(--ease-out-quint);
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
             letter-spacing: 2px;
-            text-transform: uppercase;
-            position: relative;
-            padding-bottom: 15px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
         }
 
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: var(--gradient);
-            border-radius: 3px;
-            box-shadow: 0 0 10px var(--primary);
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--card-border);
         }
 
-        .timeline {
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .timeline-container {
             position: relative;
-            width: 90%;
             max-width: 800px;
             margin: 40px auto;
-            border-left: 3px solid var(--cyber-blue);
-            padding-left: 30px;
-            animation: slideIn 1.5s var(--ease-out-quint);
-            z-index: 2;
         }
 
-        .timeline::before {
+        /* Timeline line */
+        .timeline-container::after {
             content: '';
             position: absolute;
-            left: -3px;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
             top: 0;
-            height: 100%;
-            width: 3px;
-            background: linear-gradient(to bottom, transparent, var(--cyber-blue), transparent);
-            box-shadow: 0 0 10px var(--cyber-blue);
-        }
-
-        .timeline-event {
-            position: relative;
-            margin: 50px 0;
-            padding-left: 30px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s var(--ease-out-quint);
-        }
-
-        .timeline-event:before {
-            content: '';
-            position: absolute;
-            left: -15px;
-            top: 10px;
-            width: 24px;
-            height: 24px;
-            background: var(--gradient);
-            border-radius: 50%;
-            box-shadow: 
-                0 0 10px var(--primary),
-                0 0 20px var(--primary);
-            z-index: 2;
-        }
-
-        .event-date {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: bold;
-            color: var(--cyber-blue);
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            text-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
-            letter-spacing: 1px;
-        }
-
-        .event-description {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
             border-radius: 10px;
-            padding: 20px;
-            box-shadow: 
-                0 5px 15px rgba(0, 0, 0, 0.3),
-                inset 0 0 10px rgba(255, 255, 255, 0.05);
-            font-size: 1rem;
-            line-height: 1.6;
-            border: 1px solid var(--glass-border);
-            transition: all 0.6s var(--ease-out-quint);
-            position: relative;
-            overflow: hidden;
         }
 
-        .event-description::before {
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            margin-bottom: 30px;
+        }
+
+        /* Alternating sides */
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        /* Timeline dots */
+        .timeline-item::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(110, 69, 226, 0.1), transparent);
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.6s var(--ease-out-quint);
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+            box-shadow: 0 0 0 4px rgba(0, 255, 170, 0.3);
         }
 
-        .timeline-event:hover .event-description {
-            transform: translateY(-5px);
-            box-shadow: 
-                0 10px 25px rgba(0, 0, 0, 0.4),
-                inset 0 0 15px rgba(255, 255, 255, 0.1);
-            background: var(--glass-highlight);
+        .timeline-item:nth-child(odd)::after {
+            right: -10px;
         }
 
-        .timeline-event:hover .event-description::before {
-            opacity: 1;
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
         }
 
-        .timeline-event.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .timeline-content {
+            padding: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            position: relative;
+            transition: all 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .timeline-content:hover {
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.2);
+            transform: translateY(-3px);
         }
 
-        @keyframes slideIn {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .timeline-date {
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
         }
 
-        /* Special effects */
-        .special-corner {
+        .timeline-date i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        .timeline-text {
+            color: var(--light);
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .milestone-badge {
             position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle at center, var(--primary) 0%, transparent 70%);
-            filter: blur(80px);
-            opacity: 0.15;
-            z-index: 0;
+            top: -10px;
+            right: 20px;
+            background: var(--secondary);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
         }
 
-        .special-corner:nth-child(1) {
-            top: -100px;
-            right: -100px;
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
         }
 
-        .special-corner:nth-child(2) {
-            bottom: -100px;
-            left: -100px;
-            background: radial-gradient(circle at center, var(--secondary) 0%, transparent 70%);
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 10px 15px;
+            background: rgba(0, 240, 255, 0.1);
+            border-radius: 50px;
         }
 
-        /* Responsive adjustments */
+        .contact-item:hover {
+            color: var(--accent);
+            background: rgba(0, 240, 255, 0.2);
+        }
+
+        .contact-item i {
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--card-border);
+        }
+
         @media (max-width: 768px) {
-            .timeline {
-                width: 95%;
-                padding-left: 20px;
-            }
-            
-            .timeline-event {
-                margin: 40px 0;
-                padding-left: 25px;
-            }
-            
-            .event-date {
-                font-size: 1rem;
-            }
-            
-            .event-description {
-                padding: 15px;
-                font-size: 0.95rem;
-            }
-            
-            .special-corner {
-                width: 200px;
-                height: 200px;
-                filter: blur(60px);
-            }
-        }
-
-        @media (max-width: 480px) {
             h1 {
-                font-size: 1.8rem;
-                margin-bottom: 15px;
+                font-size: 2rem;
             }
             
-            .timeline {
-                border-left-width: 2px;
-                padding-left: 15px;
+            .timeline-container::after {
+                left: 31px;
             }
             
-            .timeline-event:before {
-                width: 18px;
-                height: 18px;
-                left: -11px;
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
             }
             
-            .event-date {
-                font-size: 0.9rem;
+            .timeline-item:nth-child(even) {
+                left: 0;
             }
             
-            .event-description {
-                padding: 12px;
-                font-size: 0.9rem;
-            }
-            
-            .special-corner {
-                width: 150px;
-                height: 150px;
-                filter: blur(40px);
+            .timeline-item::after {
+                left: 21px !important;
             }
         }
     </style>
 </head>
 <body>
-    <div class="special-corner"></div>
-    <div class="special-corner"></div>
-    
-    <h1>SpyMC Timeline</h1>
-    
-    <div class="timeline">
-        <div class="timeline-event">
-            <div class="event-date">May 22, 2023</div>
-            <div class="event-description">The official launch of SpyMC by owner YourSenior marked a significant milestone in our journey.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">June 2, 2023</div>
-            <div class="event-description">Ashu was appointed as Co-Owner of SpyMC, bringing new energy and vision to the team.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">August 17, 2023</div>
-            <div class="event-description">Dhruv and Shubham joined as leaders of SpyMC, contributing their expertise to enhance our community.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">October 11, 2023</div>
-            <div class="event-description">SpyMC achieved a remarkable milestone, reaching 70 players online simultaneously.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">November 16, 2023</div>
-            <div class="event-description">Continuing our growth, SpyMC celebrated reaching 100 players online, showcasing our expanding community.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">February 3, 2024</div>
-            <div class="event-description">The launch of SpyMC Season 2 introduced exciting new features and experiences for our players.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">April 9, 2024</div>
-            <div class="event-description">The addition of Bedwars, PvP 1.8, and Lifesteal provided players with thrilling new gameplay options.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">May 19, 2024</div>
-            <div class="event-description">SpyMC's Discord community reached an impressive 2000 members, fostering greater engagement and collaboration.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">June 11, 2024</div>
-            <div class="event-description">The SpyMC network celebrated over 300,000 unique players across our Minecraft servers, a testament to our success.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">August 28, 2024</div>
-            <div class="event-description">Nightmarry joined as the official developer of SpyMC, enhancing our technical capabilities and development.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">September 1, 2024</div>
-            <div class="event-description">The launch of SpyMC Season 3 promised even more adventures and improvements for our dedicated players.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">14-12-2024 03:16 PM</div>
-            <div class="event-description">SpyMC LifeSteal Season 5 launched, bringing fresh challenges and new gameplay mechanics.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">21-12-2024 12:24 PM</div>
-            <div class="event-description">Parkour gamemodes were introduced, adding a thrilling test of agility and skill.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">27-12-2024 04:19 PM</div>
-            <div class="event-description">SpyMC Tier Test Results went live, allowing players to see their rankings and rewards.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">04-01-2025 04:47 PM</div>
-            <div class="event-description">Crystal PvP gamemode launched, offering intense and strategic battles.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">20-01-2025 05:16 PM</div>
-            <div class="event-description">SpyMC suffered a major server attack and was temporarily disabled.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">25-01-2025 05:16 PM</div>
-            <div class="event-description">After relentless efforts by YourSenior and Ashu, SpyMC was successfully restored.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">22-01-2025 08:49 PM</div>
-            <div class="event-description">SpyMC made a strong comeback with the OG PvP experience, reigniting classic battles.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">29-01-2025 02:40 PM</div>
-            <div class="event-description">SpyMC LifeSteal Season 6 kicked off with new features and competitive enhancements.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">29-01-2025 02:40 PM</div>
-            <div class="event-description">FFA Season 6 was launched, bringing fast-paced and action-packed gameplay.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">04-02-2025 01:23 PM</div>
-            <div class="event-description">OG PvP was shut down and replaced with a brand-new FFA server.</div>
-        </div>
-        <div class="timeline-event">
-            <div class="event-date">Yesterday at 05:35 PM</div>
-            <div class="event-description">SpyMC SPY Rank Guide was released, detailing rank features and benefits through the SpyMC Discord bot.</div>
-        </div>
-    </div>
+    <div class="container">
+        <header>
+            <img src="https://i.ibb.co/tMF05rbH/image69.png" alt="SpyMC" class="logo">
+            <h1>SPYMC TIMELINE</h1>
+            <p class="subtitle">Our journey through the digital battlefield</p>
+        </header>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const events = document.querySelectorAll(".timeline-event");
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="milestone-badge">FOUNDATION</div>
+                    <div class="timeline-date"><i class="fas fa-rocket"></i> May 22, 2023</div>
+                    <div class="timeline-text">The official launch of SpyMC by owner <span class="highlight">YourSenior</span> marked a significant milestone in our journey.</div>
+                </div>
+            </div>
             
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.3,
-                rootMargin: "0px 0px -100px 0px"
-            });
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date"><i class="fas fa-user-plus"></i> June 2, 2023</div>
+                    <div class="timeline-text"><span class="highlight">Ashu</span> was appointed as Co-Owner of SpyMC, bringing new energy and vision to the team.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date"><i class="fas fa-users"></i> August 17, 2023</div>
+                    <div class="timeline-text"><span class="highlight">Dhruv</span> and <span class="highlight">Shubham</span> joined as leaders of SpyMC, contributing their expertise to enhance our community.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="milestone-badge">GROWTH</div>
+                    <div class="timeline-date"><i class="fas fa-chart-line"></i> October 11, 2023</div>
+                    <div class="timeline-text">SpyMC achieved a remarkable milestone, reaching <span class="highlight">70 players online</span> simultaneously.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date"><i class="fas fa-trophy"></i> November 16, 2023</div>
+                    <div class="timeline-text">Continuing our growth, SpyMC celebrated reaching <span class="highlight">100 players online</span>, showcasing our expanding community.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date"><i class="fas fa-calendar-alt"></i> February 3, 2024</div>
+                    <div class="timeline-text">The launch of <span class="highlight">SpyMC Season 2</span> introduced exciting new features and experiences for our players.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date"><i class="fas fa-gamepad"></i> April 9, 2024</div>
+                    <div class="timeline-text">The addition of <span class="highlight">Bedwars</span>, <span class="highlight">PvP 1.8</span>, and <span class="highlight">Lifesteal</span> provided players with thrilling new gameplay options.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="milestone-badge">COMMUNITY</div>
+                    <div class="timeline-date"><i class="fab fa-discord"></i> May 19, 2024</div>
+                    <div class="timeline-text">SpyMC's Discord community reached an impressive <span class="highlight">2000 members</span>, fostering greater engagement and collaboration.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date"><i class="fas fa-users"></i> June 11, 2024</div>
+                    <div class="timeline-text">The SpyMC network celebrated over <span class="highlight">300,000 unique players</span> across our Minecraft servers, a testament to our success.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date"><i class="fas fa-code"></i> August 28, 2024</div>
+                    <div class="timeline-text"><span class="highlight">Nightmarry</span> joined as the official developer of SpyMC, enhancing our technical capabilities and development.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date"><i class="fas fa-calendar-star"></i> September 1, 2024</div>
+                    <div class="timeline-text">The launch of <span class="highlight">SpyMC Season 3</span> promised even more adventures and improvements for our dedicated players.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="milestone-badge">EVOLUTION</div>
+                    <div class="timeline-date"><i class="fas fa-heartbeat"></i> December 14, 2024</div>
+                    <div class="timeline-text"><span class="highlight">SpyMC LifeSteal Season 5</span> launched, bringing fresh challenges and new gameplay mechanics.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date"><i class="fas fa-running"></i> December 21, 2024</div>
+                    <div class="timeline-text"><span class="highlight">Parkour gamemodes</span> were introduced, adding a thrilling test of agility and skill.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date"><i class="fas fa-clipboard-check"></i> December 27, 2024</div>
+                    <div class="timeline-text"><span class="highlight">SpyMC Tier Test Results</span> went live, allowing players to see their rankings and rewards.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date"><i class="fas fa-gem"></i> January 4, 2025</div>
+                    <div class="timeline-text"><span class="highlight">Crystal PvP gamemode</span> launched, offering intense and strategic battles.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="milestone-badge">CHALLENGES</div>
+                    <div class="timeline-date"><i class="fas fa-exclamation-triangle"></i> January 20, 2025</div>
+                    <div class="timeline-text">SpyMC suffered a <span class="highlight">major server attack</span> and was temporarily disabled.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date"><i class="fas fa-heart"></i> January 25, 2025</div>
+                    <div class="timeline-text">After relentless efforts by <span class="highlight">YourSenior</span> and <span class="highlight">Ashu</span>, SpyMC was successfully restored.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date"><i class="fas fa-shield-alt"></i> January 22, 2025</div>
+                    <div class="timeline-text">SpyMC made a strong comeback with the <span class="highlight">OG PvP experience</span>, reigniting classic battles.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date"><i class="fas fa-heart-broken"></i> January 29, 2025</div>
+                    <div class="timeline-text"><span class="highlight">SpyMC LifeSteal Season 6</span> kicked off with new features and competitive enhancements.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date"><i class="fas fa-fire"></i> January 29, 2025</div>
+                    <div class="timeline-text"><span class="highlight">FFA Season 6</span> was launched, bringing fast-paced and action-packed gameplay.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date"><i class="fas fa-sync-alt"></i> February 4, 2025</div>
+                    <div class="timeline-text"><span class="highlight">OG PvP</span> was shut down and replaced with a brand-new <span class="highlight">FFA server</span>.</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="milestone-badge">NOW</div>
+                    <div class="timeline-date"><i class="fas fa-robot"></i> Recent Update</div>
+                    <div class="timeline-text"><span class="highlight">SpyMC SPY Rank Guide</span> was released, detailing rank features and benefits through the SpyMC Discord bot.</div>
+                </div>
+            </div>
+        </div>
 
-            events.forEach(event => {
-                observer.observe(event);
-            });
+        <div class="contact-info">
+            <a href="https://www.spymc.xyz" class="contact-item" target="_blank">
+                <i class="fas fa-globe"></i> Official Website
+            </a>
+            <a href="https://discord.spymc.xyz" class="contact-item" target="_blank">
+                <i class="fab fa-discord"></i> Support Discord
+            </a>
+            <a href="https://instagram.com/spymc.xyz" class="contact-item" target="_blank">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://youtube.com/@urspy" class="contact-item" target="_blank">
+                <i class="fab fa-youtube"></i> YouTube
+            </a>
+        </div>
 
-            // Add hover effects
-            events.forEach(event => {
-                event.addEventListener('mouseenter', () => {
-                    anime({
-                        targets: event.querySelector('.event-description'),
-                        scale: 1.02,
-                        duration: 400,
-                        easing: 'easeOutElastic(1, .5)'
-                    });
-                });
-                
-                event.addEventListener('mouseleave', () => {
-                    anime({
-                        targets: event.querySelector('.event-description'),
-                        scale: 1,
-                        duration: 400,
-                        easing: 'easeOutElastic(1, .5)'
-                    });
-                });
-            });
-        });
-    </script>
+        <footer>
+            <p>© 2025 SpyMC Network. All rights reserved.</p>
+            <p>Part of the SpyMC Terms of Service | Last updated: May 2025</p>
+        </footer>
+    </div>
 </body>
 </html>
