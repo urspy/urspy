@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpyMC - Terms and Conditions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00f0ff;
+            --primary-dark: #0066ff;
+            --secondary: #ff00aa;
+            --accent: #00ffaa;
+            --dark: #0a0a12;
+            --darker: #050508;
+            --light: #e0e0ff;
+            --card-bg: rgba(15, 15, 25, 0.9);
+            --card-border: rgba(0, 240, 255, 0.2);
+            --text-muted: rgba(200, 200, 255, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 170, 0.05) 0%, transparent 25%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            height: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin: 25px 0 10px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .last-updated {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .toc-section {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .toc-section:hover {
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.1);
+        }
+
+        p, ul {
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        li:before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: var(--accent);
+        }
+
+        .contact-item i {
+            color: var(--primary);
+        }
+
+        .acceptance {
+            font-style: italic;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--card-border);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--card-border);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .toc-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://i.ibb.co/tMF05rbH/image69.png" alt="SpyMC" class="logo">
+            <h1>SPYMC TERMS AND CONDITIONS</h1>
+            <p class="subtitle">The official rules and guidelines governing the SpyMC network</p>
+            <div class="last-updated">Last Updated: March 2025</div>
+        </header>
+
+        <div class="toc-section">
+            <h2>1. General Rules</h2>
+            <p>These rules form the foundation of behavior on the SpyMC network:</p>
+            <ul>
+                <li><span class="highlight">Compliance:</span> All players must follow SpyMC rules as outlined in our Discord and website.</li>
+                <li><span class="highlight">Respect:</span> Harassment, hate speech, or discrimination of any kind is strictly prohibited.</li>
+                <li><span class="highlight">Exploits:</span> Any use of bugs, glitches, or unintended mechanics for advantage is forbidden.</li>
+                <li><span class="highlight">Advertising:</span> Promoting non-affiliated servers, products, or services is not allowed.</li>
+                <li><span class="highlight">Account Security:</span> You are solely responsible for your account's security and any actions taken using it.</li>
+                <li><span class="highlight">Impersonation:</span> Pretending to be staff members or other players is prohibited.</li>
+            </ul>
+        </div>
+
+        <div class="toc-section">
+            <h2>2. Gameplay & Fair Play</h2>
+            <p>Maintaining fair and enjoyable gameplay for all:</p>
+            <ul>
+                <li><span class="highlight">Cheating:</span> All forms of cheating including hacks, macros, scripts, or unauthorized modifications are banned.</li>
+                <li><span class="highlight">Automation:</span> AFK farming, auto-clickers, or any automation affecting gameplay balance is prohibited.</li>
+                <li><span class="highlight">Teaming:</span> Disruptive teaming or cross-teaming is forbidden unless explicitly allowed in specific game modes.</li>
+                <li><span class="highlight">Griefing:</span> Intentionally destroying others' builds or disrupting gameplay experiences is not permitted.</li>
+                <li><span class="highlight">Scamming:</span> Any form of scamming or deceptive practices will result in punishment.</li>
+                <li><span class="highlight">Trolling:</span> Repeatedly disrupting others' gameplay experience is not allowed.</li>
+            </ul>
+        </div>
+
+        <div class="toc-section">
+            <h2>3. Economy & Trading</h2>
+            <p>Rules governing in-game transactions:</p>
+            <ul>
+                <li><span class="highlight">Fair Trading:</span> All transactions must be transparent and mutually agreed upon.</li>
+                <li><span class="highlight">RMT Prohibition:</span> Real-money trading (RMT) of in-game items, currency, or accounts is strictly forbidden.</li>
+                <li><span class="highlight">Chargebacks:</span> Payment disputes or chargebacks will result in immediate account suspension.</li>
+                <li><span class="highlight">Market Manipulation:</span> Intentionally manipulating the in-game economy is prohibited.</li>
+                <li><span class="highlight">Duping:</span> Any form of item duplication or exploitation of economic systems is banned.</li>
+            </ul>
+        </div>
+
+        <div class="toc-section">
+            <h2>4. Donations & Purchases</h2>
+            <p>Guidelines for financial transactions:</p>
+            <ul>
+                <li><span class="highlight">Final Sales:</span> All purchases made on SpyMC's store are final with no refunds.</li>
+                <li><span class="highlight">No Immunity:</span> Purchased ranks or perks do not exempt players from server rules.</li>
+                <li><span class="highlight">Modification Rights:</span> SpyMC reserves the right to modify any purchased item, rank, or perk.</li>
+                <li><span class="highlight">Chargeback Policy:</span> Any payment disputes will result in permanent account termination.</li>
+                <li><span class="highlight">Tax Responsibility:</span> Players are responsible for any applicable taxes on purchases.</li>
+            </ul>
+        </div>
+
+        <div class="toc-section">
+            <h2>5. Rank Purchase Terms</h2>
+            <h3>Issued by: SpyMC (SeniorNetwork)</h3>
+            <h3>Date: January 30, 2025</h3>
+            <p>Specific terms for premium rank holders:</p>
+            <ul>
+                <li><span class="highlight">No Refunds:</span> All rank purchases are final with no refunds or back transfers.</li>
+                <li><span class="highlight">Account Binding:</span> Ranks cannot be transferred between accounts.</li>
+                <li><span class="highlight">Privilege Abuse:</span> Misuse of rank privileges may result in removal without refund.</li>
+                <li><span class="highlight">Payment Disputes:</span> Chargebacks will result in permanent network ban.</li>
+                <li><span class="highlight">No Immunity:</span> Rank holders must still follow all server rules.</li>
+                <li><span class="highlight">System Exploitation:</span> Any attempts to exploit the rank system will result in revocation.</li>
+                <li><span class="highlight">Invoice Requirement:</span> Users must upload purchase invoices for verification.</li>
+                <li><span class="highlight">Perk Changes:</span> SpyMC may modify rank perks at any time without notice.</li>
+            </ul>
+        </div>
+
+        <div class="toc-section">
+            <h2>6. Intellectual Property</h2>
+            <p>Ownership and content usage:</p>
+            <ul>
+                <li><span class="highlight">Server Content:</span> All SpyMC builds, plugins, and branding are protected intellectual property.</li>
+                <li><span class="highlight">No Replication:</span> Unauthorized use or redistribution of server content is prohibited.</li>
+                <li><span class="highlight">Player Creations:</span> Players grant SpyMC a non-exclusive license to use their in-game creations.</li>
+                <li><span class="highlight">Content Removal:</span> SpyMC may remove any content deemed inappropriate without notice.</li>
+            </ul>
+        </div>
+
+        <div class="toc-section">
+            <h2>7. Data & Privacy</h2>
+            <p>Our data handling practices:</p>
+            <ul>
+                <li><span class="highlight">Data Collection:</span> We collect necessary user data for moderation and security purposes.</li>
+                <li><span class="highlight">No Sharing:</span> Personal data is never sold or shared with third parties.</li>
+                <li><span class="highlight">Consent:</span> By using SpyMC, you consent to our data collection practices.</li>
+                <li><span class="highlight">Security:</span> We implement reasonable security measures to protect your data.</li>
+                <li><span class="highlight">Cookies:</span> Our website may use cookies for essential functionality.</li>
+            </ul>
+        </div>
+
+        <div class="toc-section">
+            <h2>8. Zero Tolerance for Hacks & Exploits</h2>
+            <p>Our strict policy against cheating:</p>
+            <ul>
+                <li><span class="highlight">Usage Ban:</span> Using any form of hack, cheat, or exploit results in permanent ban.</li>
+                <li><span class="highlight">Promotion:</span> Discussing, showcasing, or distributing cheats is strictly forbidden.</li>
+                <li><span class="highlight">Security:</span> Any attempt to bypass server security measures is prohibited.</li>
+                <li><span class="highlight">Reporting:</span> Players must report any discovered exploits immediately.</li>
+                <li><span class="highlight">No Jokes:</span> Even joking about hacks or exploits is considered promotion.</li>
+            </ul>
+        </div>
+
+        <div class="toc-section">
+            <h2>9. Staff Conduct & Security</h2>
+            <p>Expectations for staff members:</p>
+            <ul>
+                <li><span class="highlight">Integrity:</span> Staff must maintain server integrity and fair play at all times.</li>
+                <li><span class="highlight">No Abuse:</span> Abuse of staff powers will result in immediate removal.</li>
+                <li><span class="highlight">Confidentiality:</span> Leaking confidential server information is strictly prohibited.</li>
+                <li><span class="highlight">Security:</span> Any security threats will be met with legal consequences.</li>
+                <li><span class="highlight">Impartiality:</span> Staff must remain impartial in all decisions.</li>
+            </ul>
+        </div>
+
+        <div class="toc-section">
+            <h2>10. Modifications & Third-Party Content</h2>
+            <p>Rules regarding server modifications:</p>
+            <ul>
+                <li><span class="highlight">Approval Required:</span> Any changes to server settings require admin approval.</li>
+                <li><span class="highlight">No Promotion:</span> Unauthorized promotion of external content is forbidden.</li>
+                <li><span class="highlight">Third-Party Tools:</span> Sharing unapproved tools or modifications is prohibited.</li>
+                <li><span class="highlight">Client Mods:</span> Only approved client modifications may be used.</li>
+            </ul>
+        </div>
+
+        <div class="toc-section">
+            <h2>11. Enforcement & Appeals</h2>
+            <p>Our punishment and appeal system:</p>
+            <ul>
+                <li><span class="highlight">Staff Discretion:</span> All staff decisions are final and not open to public debate.</li>
+                <li><span class="highlight">Appeal Process:</span> Ban/mute appeals can be submitted via our website or Discord.</li>
+                <li><span class="highlight">Harassment:</span> Complaining about punishments in public chats will extend penalties.</li>
+                <li><span class="highlight">Severity:</span> Serious infractions may result in permanent blacklisting.</li>
+                <li><span class="highlight">Right to Act:</span> SpyMC reserves the right to take any necessary enforcement actions.</li>
+            </ul>
+        </div>
+
+        <div class="toc-section">
+            <h2>12. Terms Modifications</h2>
+            <p>About changes to these terms:</p>
+            <ul>
+                <li><span class="highlight">Updates:</span> SpyMC may update these terms at any time without prior notice.</li>
+                <li><span class="highlight">Continued Use:</span> Playing after changes constitutes acceptance of new terms.</li>
+                <li><span class="highlight">Responsibility:</span> It's your responsibility to regularly review these terms.</li>
+                <li><span class="highlight">Notification:</span> Major changes may be announced via Discord or website.</li>
+            </ul>
+        </div>
+
+        <div class="toc-section">
+            <h2>13. Legal & Liability</h2>
+            <p>Legal disclaimers and limitations:</p>
+            <ul>
+                <li><span class="highlight">No Liability:</span> SpyMC is not responsible for any damages or losses from using our services.</li>
+                <li><span class="highlight">Third-Party Services:</span> We are not liable for any third-party services we may utilize.</li>
+                <li><span class="highlight">Indemnification:</span> You agree to hold SpyMC harmless from any claims or disputes.</li>
+                <li><span class="highlight">Age Requirement:</span> By using our services, you confirm you meet the minimum age requirement.</li>
+                <li><span class="highlight">Jurisdiction:</span> These terms are governed by the laws of our operating jurisdiction.</li>
+            </ul>
+        </div>
+
+        <div class="contact-info">
+            <a href="https://www.spymc.xyz" class="contact-item" target="_blank">
+                <i class="fas fa-globe"></i> Website
+            </a>
+            <a href="https://discord.spymc.xyz" class="contact-item" target="_blank">
+                <i class="fab fa-discord"></i> Discord
+            </a>
+            <a href="https://instagram.com/spymc.xyz" class="contact-item" target="_blank">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://youtube.com/@urspy" class="contact-item" target="_blank">
+                <i class="fab fa-youtube"></i> YouTube
+            </a>
+        </div>
+
+        <div class="acceptance">
+            <p>By continuing to play on SpyMC, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions.</p>
+        </div>
+
+        <footer>
+            <p>© 2025 SpyMC Network. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
