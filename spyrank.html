@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpyMC - SPY RANK Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00f0ff;
+            --primary-dark: #0066ff;
+            --secondary: #ff00aa;
+            --accent: #00ffaa;
+            --dark: #0a0a12;
+            --darker: #050508;
+            --light: #e0e0ff;
+            --card-bg: rgba(15, 15, 25, 0.9);
+            --card-border: rgba(0, 240, 255, 0.2);
+            --text-muted: rgba(200, 200, 255, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 170, 0.05) 0%, transparent 25%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            height: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin: 25px 0 10px;
+        }
+
+        h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin: 20px 0 8px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .announcement {
+            color: var(--secondary);
+            font-size: 1rem;
+            margin-bottom: 30px;
+            text-align: center;
+            font-style: italic;
+            padding: 15px;
+            background: rgba(255, 0, 170, 0.1);
+            border-radius: 8px;
+        }
+
+        .guide-section {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .guide-section:hover {
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.1);
+        }
+
+        p, ul, ol {
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        ul, ol {
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        ul li:before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        ol {
+            list-style-type: none;
+            counter-reset: step-counter;
+        }
+
+        ol li {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        ol li:before {
+            content: counter(step-counter);
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .command {
+            background: rgba(0, 240, 255, 0.1);
+            border-left: 3px solid var(--primary);
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            color: var(--primary);
+            border-radius: 0 5px 5px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .command i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .example {
+            background: rgba(0, 255, 170, 0.1);
+            border-left: 3px solid var(--accent);
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+            font-size: 0.95rem;
+        }
+
+        .example-title {
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .example-title i {
+            margin-right: 8px;
+        }
+
+        .warning {
+            background: rgba(255, 0, 170, 0.1);
+            border-left: 3px solid var(--secondary);
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .warning-title {
+            color: var(--secondary);
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .warning-title i {
+            margin-right: 8px;
+        }
+
+        .note {
+            background: rgba(200, 200, 255, 0.1);
+            border-left: 3px solid var(--text-muted);
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+            font-size: 0.95rem;
+        }
+
+        .note-title {
+            color: var(--text-muted);
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .note-title i {
+            margin-right: 8px;
+        }
+
+        .perk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .perk-card {
+            background: rgba(0, 150, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .perk-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .perk-icon {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .perk-title {
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 10px 15px;
+            background: rgba(0, 240, 255, 0.1);
+            border-radius: 50px;
+        }
+
+        .contact-item:hover {
+            color: var(--accent);
+            background: rgba(0, 240, 255, 0.2);
+        }
+
+        .contact-item i {
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--card-border);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .guide-section {
+                padding: 20px;
+            }
+            
+            .perk-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://i.ibb.co/tMF05rbH/image69.png" alt="SpyMC" class="logo">
+            <h1>SPYMC SPY RANK GUIDE</h1>
+            <p class="subtitle">Comprehensive guide to the SPY rank system and Discord bot integration</p>
+            <div class="announcement">
+                <i class="fas fa-bullhorn"></i> Attention all agents! The SpyMC Discord bot is now operational for rank management and account verification.
+            </div>
+        </header>
+
+        <div class="guide-section">
+            <h2><i class="fas fa-terminal"></i> Command Reference</h2>
+            <p>All commands must be used in the <span class="highlight">#🎀・ꜱᴘʏ-ʀᴀɴᴋ</span> channel. Attempting to use them elsewhere will result in no response from the bot.</p>
+
+            <h3>Primary Commands</h3>
+            
+            <div class="command">
+                <i class="fas fa-keyboard"></i> !spy rank &lt;IGN&gt;
+            </div>
+            <p>The most important command that grants you the SPY rank in-game. This is a <span class="highlight">one-time use</span> command that permanently links your Minecraft account to your Discord.</p>
+            
+            <div class="example">
+                <div class="example-title"><i class="fas fa-code"></i> Example</div>
+                <p><strong>Correct:</strong> !spy rank Agent007</p>
+                <p><strong>Incorrect:</strong> !spy rank agent007 (if your actual IGN is Agent007)</p>
+            </div>
+            
+            <div class="warning">
+                <div class="warning-title"><i class="fas fa-exclamation-triangle"></i> Important</div>
+                <p>Your IGN must match <span class="highlight">exactly</span> including:
+                <ul>
+                    <li>Capitalization (case-sensitive)</li>
+                    <li>Special characters</li>
+                    <li>No extra spaces before or after</li>
+                </ul>
+                There is <span class="highlight">no way to change</span> this link once established.</p>
+            </div>
+
+            <div class="command">
+                <i class="fas fa-link"></i> !spy link
+            </div>
+            <p>Verifies your current linked Minecraft account and displays:</p>
+            <ul>
+                <li>Your connected Minecraft IGN</li>
+                <li>Date and time of linking</li>
+                <li>SPY rank status (active/inactive)</li>
+            </ul>
+
+            <div class="command">
+                <i class="fas fa-question-circle"></i> !spy help
+            </div>
+            <p>Displays an interactive help menu with:</p>
+            <ul>
+                <li>All available commands</li>
+                <li>Brief descriptions of each</li>
+                <li>Usage examples</li>
+                <li>Click the 🗑️ reaction to delete the help message</li>
+            </ul>
+
+            <h3>Additional Commands</h3>
+            
+            <div class="command">
+                <i class="fas fa-info-circle"></i> !spy status
+            </div>
+            <p>Checks the current status of:</p>
+            <ul>
+                <li>Server connection</li>
+                <li>Bot uptime</li>
+                <li>Last rank synchronization</li>
+            </ul>
+
+            <div class="command">
+                <i class="fas fa-users"></i> !spy members
+            </div>
+            <p>Displays statistics about SPY rank holders:</p>
+            <ul>
+                <li>Total number of SPY agents</li>
+                <li>Newest members</li>
+                <li>Active/inactive breakdown</li>
+            </ul>
+        </div>
+
+        <div class="guide-section">
+            <h2><i class="fas fa-shield-alt"></i> System Requirements & Restrictions</h2>
+            
+            <h3>Eligibility Criteria</h3>
+            <ol>
+                <li>Your Discord account must be <span class="highlight">at least 7 days old</span></li>
+                <li>You must have the <span class="highlight">Verified role</span> in our Discord</li>
+                <li>Your Minecraft account must have <span class="highlight">joined our server at least once</span></li>
+                <li>No active bans or mutes on either platform</li>
+            </ol>
+
+            <div class="warning">
+                <div class="warning-title"><i class="fas fa-ban"></i> Strict Prohibitions</div>
+                <p>The following will result in <span class="highlight">immediate removal</span> of your SPY rank and possible bans:</p>
+                <ul>
+                    <li>Attempting to link multiple Discord accounts to one Minecraft account</li>
+                    <li>Trying to bypass the one-time use restriction</li>
+                    <li>Using special characters to impersonate others</li>
+                    <li>Sharing account access that leads to rank abuse</li>
+                </ul>
+            </div>
+
+            <h3>Channel Restrictions</h3>
+            <p>All SPY rank commands only work in <span class="highlight">#🎀・ꜱᴘʏ-ʀᴀɴᴋ</span>. This helps:</p>
+            <ul>
+                <li>Reduce spam in other channels</li>
+                <li>Keep all rank-related discussions organized</li>
+                <li>Make it easier for staff to monitor and assist</li>
+            </ul>
+        </div>
+
+        <div class="guide-section">
+            <h2><i class="fas fa-star"></i> SPY Rank Perks</h2>
+            <p>As a SPY rank holder, you unlock these exclusive benefits:</p>
+            
+            <div class="perk-grid">
+                <div class="perk-card">
+                    <div class="perk-icon"><i class="fas fa-gem"></i></div>
+                    <div class="perk-title">Exclusive Cosmetics</div>
+                    <p>Special particle effects, hats, and armor styles only for SPY agents</p>
+                </div>
+                <div class="perk-card">
+                    <div class="perk-icon"><i class="fas fa-home"></i></div>
+                    <div class="perk-title">Additional Homes</div>
+                    <p>5 extra /sethome locations (total of 8)</p>
+                </div>
+                <div class="perk-card">
+                    <div class="perk-icon"><i class="fas fa-chess-queen"></i></div>
+                    <div class="perk-title">Priority Queue</div>
+                    <p>Skip ahead in server queues during peak times</p>
+                </div>
+                <div class="perk-card">
+                    <div class="perk-icon"><i class="fas fa-comment-dots"></i></div>
+                    <div class="perk-title">Special Chat</div>
+                    <p>Access to SPY-only chat channels and Discord rooms</p>
+                </div>
+                <div class="perk-card">
+                    <div class="perk-icon"><i class="fas fa-tag"></i></div>
+                    <div class="perk-title">Discord Role</div>
+                    <p>Exclusive Discord role with special permissions</p>
+                </div>
+                <div class="perk-card">
+                    <div class="perk-icon"><i class="fas fa-calendar-star"></i></div>
+                    <div class="perk-title">Event Access</div>
+                    <p>Early access to special events and competitions</p>
+                </div>
+            </div>
+
+            <div class="note">
+                <div class="note-title"><i class="fas fa-sync-alt"></i> Synchronization Note</div>
+                <p>Rank perks may take <span class="highlight">up to 5 minutes</span> to activate after using the command. If they don't appear:</p>
+                <ol>
+                    <li>Wait 5 minutes</li>
+                    <li>Relog to the server</li>
+                    <li>Contact staff if still not active</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2><i class="fas fa-server"></i> Server Connection Guide</h2>
+            
+            <h3>First-Time Setup</h3>
+            <ol>
+                <li>Join our Discord server: <span class="highlight">discord.spymc.xyz</span></li>
+                <li>Complete verification in #welcome</li>
+                <li>Navigate to #🎀・ꜱᴘʏ-ʀᴀɴᴋ</li>
+                <li>Use <span class="highlight">!spy rank YourIGN</span> (exactly matching your Minecraft username)</li>
+                <li>Join our Minecraft server at <span class="highlight">spymc.xyz</span></li>
+                <li>Your rank should activate within 5 minutes</li>
+            </ol>
+
+            <h3>Troubleshooting</h3>
+            <p>If you're experiencing issues:</p>
+            
+            <div class="note">
+                <div class="note-title"><i class="fas fa-question-circle"></i> Common Issues</div>
+                <p><strong>Rank not appearing?</strong> Try:</p>
+                <ul>
+                    <li>Waiting 5-10 minutes</li>
+                    <li>Relogging to the Minecraft server</li>
+                    <li>Checking for typos with <span class="highlight">!spy link</span></li>
+                </ul>
+            </div>
+            
+            <div class="warning">
+                <div class="warning-title"><i class="fas fa-exclamation-circle"></i> Need Help?</div>
+                <p>If problems persist:</p>
+                <ol>
+                    <li>Check our FAQ at <span class="highlight">www.spymc.xyz/faq</span></li>
+                    <li>Create a ticket in #support-tickets</li>
+                    <li>Provide screenshots of:
+                        <ul>
+                            <li>Your !spy link output</li>
+                            <li>Your Minecraft username</li>
+                            <li>Any error messages</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="contact-info">
+            <a href="https://www.spymc.xyz" class="contact-item" target="_blank">
+                <i class="fas fa-globe"></i> Official Website
+            </a>
+            <a href="https://discord.spymc.xyz" class="contact-item" target="_blank">
+                <i class="fab fa-discord"></i> Support Discord
+            </a>
+            <a href="https://instagram.com/spymc.xyz" class="contact-item" target="_blank">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://youtube.com/@urspy" class="contact-item" target="_blank">
+                <i class="fab fa-youtube"></i> YouTube Tutorials
+            </a>
+            <a href="https://spymc.xyz/faq" class="contact-item" target="_blank">
+                <i class="fas fa-question-circle"></i> FAQ Page
+            </a>
+        </div>
+
+        <footer>
+            <p>© 2025 SpyMC Network. All rights reserved.</p>
+            <p>SPY rank system v3.2.1 | Last updated: March 2025</p>
+        </footer>
+    </div>
+</body>
+</html>
