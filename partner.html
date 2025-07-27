@@ -3,26 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Partnership - Streamline Servers & SPYMC</title>
+    <title>AleForge x SpyMC Partnership | Premium Minecraft Hosting</title>
+    <meta name="description" content="Discover the powerful partnership between AleForge and SpyMC - combining enterprise-grade hosting infrastructure with premium Minecraft gaming experience.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
         :root {
-            --primary: #00f0ff;
-            --primary-dark: #00a8ff;
-            --secondary: #7b2cbf;
-            --spymc-blue: #2b6cb0;
-            --spymc-red: #e53e3e;
-            --dark: #0a0e17;
-            --darker: #050a13;
-            --light: #e2f3ff;
-            --accent: #ff2d75;
-            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
-            --spymc-gradient: linear-gradient(135deg, var(--spymc-blue), var(--spymc-red));
-            --card-bg: rgba(20, 25, 40, 0.7);
-            --glass: rgba(255, 255, 255, 0.05);
+            --primary-cyan: #00d4ff;
+            --primary-purple: #8b5cf6;
+            --primary-pink: #ec4899;
+            --accent-green: #00ff88;
+            --accent-orange: #ff6b35;
+            --text-primary: #ffffff;
+            --text-secondary: #b0c4de;
+            --text-accent: #00d4ff;
+            --bg-primary: #0a0e17;
+            --bg-secondary: #1a1f2e;
+            --bg-card: #1e2337;
+            --border-neon: #00d4ff;
+            --shadow-neon: 0 0 20px rgba(0, 212, 255, 0.3);
+            --shadow-purple: 0 0 30px rgba(139, 92, 246, 0.4);
+            --gradient-cyber: linear-gradient(135deg, #0a0e17 0%, #1a1f2e 50%, #2a2f3e 100%);
         }
 
         * {
@@ -32,721 +37,1693 @@
         }
 
         body {
-            background-color: var(--dark);
-            color: var(--light);
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 80% 70%, rgba(123, 44, 191, 0.1) 0%, transparent 20%),
-                linear-gradient(to bottom, var(--darker), var(--dark));
-            min-height: 100vh;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            scroll-behavior: smooth;
+            position: relative;
             overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
+        /* Floating Particles Background */
         .particles {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
             pointer-events: none;
+            z-index: 1;
         }
 
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 2rem;
-            position: relative;
-            gap: 2rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .partner-logo {
-            max-width: 280px;
-            transition: all 0.5s ease;
-            z-index: 2;
-            filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.3));
-        }
-
-        .streamline-logo {
-            filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.5));
-        }
-
-        .spymc-logo {
-            filter: drop-shadow(0 0 15px rgba(43, 108, 176, 0.5));
-        }
-
-        .partner-logo:hover {
-            transform: scale(1.05);
-        }
-
-        .streamline-logo:hover {
-            filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.8));
-        }
-
-        .spymc-logo:hover {
-            filter: drop-shadow(0 0 20px rgba(43, 108, 176, 0.8));
-        }
-
-        .vs-circle {
-            background: var(--glass);
-            width: 60px;
-            height: 60px;
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.6), transparent);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 1.2rem;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            animation: pulse 2s infinite;
+            animation: floatUp 15s infinite linear;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+        }
+
+        .particle:nth-child(odd) {
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.6), transparent);
+            animation-duration: 20s;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+        }
+
+        .particle:nth-child(3n) {
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.6), transparent);
+            animation-duration: 25s;
+            width: 4px;
+            height: 4px;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+        }
+
+        .particle:nth-child(4n) {
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.6), transparent);
+            animation-duration: 18s;
+            width: 2px;
+            height: 2px;
+            box-shadow: 0 0 8px rgba(236, 72, 153, 0.5);
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Modern Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(37, 99, 235, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(37, 99, 235, 0.6); }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 50px, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0.4); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255,255,255,0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
+        /* Header Section */
         .header {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
-            letter-spacing: 1px;
-            position: relative;
-            display: inline-block;
+            background: var(--gradient-cyber);
+            color: var(--text-primary);
+            padding: 6rem 0;
             text-align: center;
-            width: 100%;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid var(--primary-cyan);
+            box-shadow: 0 10px 50px rgba(0, 212, 255, 0.2);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 40% 80%, rgba(0, 255, 136, 0.1) 0%, transparent 40%);
+            animation: float 8s ease-in-out infinite;
+            pointer-events: none;
         }
 
         .header::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: var(--gradient);
-            border-radius: 3px;
-        }
-
-        .sub-header {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            opacity: 0.9;
-            line-height: 1.8;
-            text-align: center;
-        }
-
-        .partner-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .partner-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .partner-card::before {
             content: '';
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                rgba(0, 240, 255, 0) 0%,
-                rgba(0, 240, 255, 0.1) 50%,
-                rgba(0, 240, 255, 0) 100%
-            );
-            transform: rotate(30deg);
-            transition: all 0.6s ease;
-            opacity: 0;
+            background: conic-gradient(from 0deg, transparent, rgba(0, 212, 255, 0.05), transparent);
+            animation: rotate 20s linear infinite;
+            pointer-events: none;
         }
 
-        .partner-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 240, 255, 0.2);
-            border-color: rgba(0, 240, 255, 0.3);
-        }
-
-        .partner-card:hover::before {
-            animation: shine 1.5s;
-            opacity: 1;
-        }
-
-        @keyframes shine {
-            0% { transform: rotate(30deg) translate(-30%, -30%); }
-            100% { transform: rotate(30deg) translate(30%, 30%); }
-        }
-
-        .partner-card h2 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .partner-card h2::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background: var(--gradient);
-        }
-
-        .partner-card p {
-            margin-bottom: 1.5rem;
-            opacity: 0.9;
-        }
-
-        .feature-list {
-            list-style: none;
-            margin: 1.5rem 0;
-        }
-
-        .feature-list li {
-            padding: 0.5rem 0;
-            position: relative;
-            padding-left: 1.8rem;
-            transition: all 0.3s ease;
-        }
-
-        .feature-list li:hover {
-            transform: translateX(5px);
-            color: var(--primary);
-        }
-
-        .feature-list li::before {
-            content: '\f00c';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-        }
-
-        .price-tag {
-            display: inline-block;
-            background: var(--gradient);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 700;
-            margin: 1rem 0;
-            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .price-tag:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 240, 255, 0.5);
-        }
-
-        .discount-badge {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: var(--accent);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            box-shadow: 0 5px 15px rgba(255, 45, 117, 0.4);
-            transform: rotate(15deg);
-            z-index: 1;
-            animation: pulse 1.5s infinite;
-        }
-
-        .plan-image {
-            width: 20%;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .plan-image:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 25px rgba(0, 240, 255, 0.3);
-        }
-
-        .social-links {
+        .logo-section {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-top: 3rem;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
             flex-wrap: wrap;
         }
 
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--glass);
-            backdrop-filter: blur(5px);
-            color: var(--light);
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
+        .company-logo {
+            border-radius: 20px;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.3s ease;
+            min-width: 200px;
+            text-align: center;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .social-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient);
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .company-logo:hover {
+            transform: translateY(-10px) scale(1.05);
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
         }
 
-        .social-link:hover {
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 10px 20px rgba(0, 240, 255, 0.3);
-            color: white;
+        .company-logo img {
+            max-width: 180px;
+            max-height: 100px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.1));
+            transition: filter 0.3s ease;
         }
 
-        .social-link:hover::before {
-            opacity: 1;
+        .company-logo:hover img {
+            filter: drop-shadow(0 12px 30px rgba(0,0,0,0.2));
         }
 
-        .link-item {
-            display: flex;
-            align-items: center;
-            margin: 0.8rem 0;
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            opacity: 0.9;
-            padding: 0.5rem;
-            border-radius: 5px;
-        }
-
-        .link-item:hover {
-            color: var(--primary);
-            opacity: 1;
-            transform: translateX(5px);
-            background: rgba(0, 240, 255, 0.1);
-        }
-
-        .link-item i {
-            margin-right: 0.8rem;
+        .company-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
             font-size: 1.2rem;
-            width: 25px;
-            text-align: center;
+            color: var(--text-primary);
+            margin-top: 0.5rem;
         }
 
-        .promo-code {
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px dashed var(--primary);
-            padding: 1rem;
-            border-radius: 10px;
-            margin-top: 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .partnership-symbol {
+            font-size: 3rem;
+            color: var(--accent);
+            font-weight: bold;
         }
 
-        .promo-code:hover {
-            background: rgba(0, 240, 255, 0.2);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.2);
+        .header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            background: linear-gradient(45deg, var(--primary-cyan), var(--primary-purple), var(--primary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
         }
 
-        .promo-code::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(0, 240, 255, 0.1),
-                transparent
-            );
-            animation: shine-text 3s infinite;
-        }
-
-        @keyframes shine-text {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .promo-code span {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            color: var(--primary);
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
-            transition: all 0.3s ease;
-        }
-
-        .promo-code:hover span {
-            color: white;
-            text-shadow: 0 0 15px rgba(0, 240, 255, 0.8);
-        }
-
-        .floating {
-            animation: floating 6s ease-in-out infinite;
-        }
-
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .glow {
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from { text-shadow: 0 0 5px var(--primary); }
-            to { text-shadow: 0 0 15px var(--primary), 0 0 20px var(--secondary); }
-        }
-
-        .partnership-banner {
-            background: var(--spymc-gradient);
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            text-align: center;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .partnership-banner h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: white;
-        }
-
-        .partnership-banner p {
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
             max-width: 800px;
             margin: 0 auto;
         }
 
-        .copy-message {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        /* Section Styles */
+        .section {
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
         }
 
-        .copy-message.show {
+        .section:nth-child(even) {
+            background: var(--bg-secondary);
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.02), transparent);
+            animation: slideIn 15s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes slideIn {
+            0%, 100% { left: -100%; }
+            50% { left: 100%; }
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-cyan), var(--primary-purple));
+            border-radius: 2px;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Company Cards */
+        .company-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .company-card {
+            background: var(--bg-card);
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: var(--shadow-neon), inset 0 1px 0 rgba(0, 212, 255, 0.1);
+            border: 2px solid var(--border-neon);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .company-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .company-card:hover::before {
+            left: 100%;
+        }
+
+        .company-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: var(--shadow-purple), 0 0 40px rgba(0, 212, 255, 0.4);
+            border-color: var(--primary-purple);
+        }
+
+        .company-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .company-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .company-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .company-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            color: var(--accent-green);
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-card);
+            border-radius: 15px;
+            box-shadow: var(--shadow-neon), inset 0 1px 0 rgba(0, 212, 255, 0.1);
+            border: 2px solid var(--primary-cyan);
+        }
+
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-cyan);
+            display: block;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-neon), inset 0 1px 0 rgba(0, 212, 255, 0.1);
+            border-left: 5px solid var(--accent-green);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05) 0%, transparent 50%);
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .info-box:hover::before {
             opacity: 1;
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .header {
-                font-size: 2rem;
-            }
-            
-            .sub-header {
-                font-size: 1rem;
-            }
-            
-            .partner-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .logo-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .vs-circle {
-                width: 50px;
-                height: 50px;
-                font-size: 1rem;
-            }
+        .info-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 40px rgba(0, 255, 136, 0.3), var(--shadow-neon);
+            border-left-color: var(--primary-cyan);
         }
 
-        /* Particle animation */
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(0, 240, 255, 0.5);
-            animation: float linear infinite;
-        }
-
-        .particle:nth-child(3n) {
-            background: rgba(123, 44, 191, 0.5);
-        }
-
-        .particle:nth-child(5n) {
-            background: rgba(255, 45, 117, 0.5);
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0) translateX(0); opacity: 1; }
-            100% { transform: translateY(-1000px) translateX(200px); opacity: 0; }
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.8rem;
-            border-radius: 50px;
+        .info-box h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
             font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        /* Pricing Section */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: var(--shadow-neon), inset 0 1px 0 rgba(0, 212, 255, 0.1);
+            border: 2px solid var(--primary-cyan);
+            text-align: center;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            overflow: hidden;
+        }
+
+        .pricing-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(37, 99, 235, 0.03), transparent);
+            animation: rotate 6s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .pricing-card:hover::after {
+            opacity: 1;
+        }
+
+        @keyframes rotate {
+            to { transform: rotate(360deg); }
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: var(--shadow-purple), 0 0 50px rgba(139, 92, 246, 0.4);
+            border-color: var(--primary-purple);
+        }
+
+        .pricing-header {
+            margin-bottom: 2rem;
+        }
+
+        .price {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .price-period {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary));
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 15px;
             text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.4);
+            background: linear-gradient(135deg, var(--secondary), var(--primary-blue));
+        }
+
+        .promo-banner {
+            background: linear-gradient(45deg, var(--accent), #f97316);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 2px solid var(--primary-cyan);
+            box-shadow: 0 -10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
             transition: all 0.3s ease;
-            margin-top: 1rem;
+            border: 1px solid transparent;
+        }
+
+        .footer-link:hover {
+            background: var(--primary-cyan);
+            border-color: var(--primary-cyan);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+            color: var(--bg-primary);
+        }
+
+        /* Map Styles */
+        .map-container {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-neon), inset 0 1px 0 rgba(0, 212, 255, 0.1);
+            border: 2px solid var(--primary-cyan);
+            margin: 3rem 0;
+        }
+
+        .map-wrapper {
+            position: relative;
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        #global-map {
+            height: 100%;
+            width: 100%;
+        }
+
+        .map-legend {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-neon);
+            border: 2px solid var(--primary-cyan);
+            z-index: 1000;
+            font-size: 0.9rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.3rem 0;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .aleforge-marker {
+            background: var(--primary-blue);
+        }
+
+        .spymc-marker {
+            background: var(--success);
+        }
+
+        .ddos-shield {
+            background: var(--accent);
+        }
+
+        /* Location Grid */
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .location-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow-neon), inset 0 1px 0 rgba(0, 212, 255, 0.1);
+            border: 2px solid var(--primary-cyan);
+            transition: all 0.3s ease;
+        }
+
+        .location-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--shadow-purple), 0 0 30px rgba(139, 92, 246, 0.4);
+            border-color: var(--primary-purple);
+        }
+
+        .location-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .location-flag {
+            font-size: 1.5rem;
+        }
+
+        .location-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .location-details {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .special-location {
+            border: 2px solid var(--accent-green);
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(0, 255, 136, 0.1) 100%);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+        }
+
+        /* DDoS Protection Visualization */
+        .ddos-visualization {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-neon), inset 0 1px 0 rgba(0, 212, 255, 0.1);
+            border: 2px solid var(--primary-cyan);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ddos-visualization::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(0, 212, 255, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .protection-layers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .protection-layer {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            background: var(--bg-card);
+            border: 2px solid var(--primary-cyan);
+            box-shadow: var(--shadow-neon), inset 0 1px 0 rgba(0, 212, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .protection-layer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(0, 212, 255, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .protection-layer:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--shadow-purple), 0 0 25px rgba(139, 92, 246, 0.4);
+            border-color: var(--primary-purple);
+        }
+
+        .layer-icon {
+            font-size: 3rem;
+            color: var(--primary-cyan);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        .layer-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            text-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
+        }
+
+        .layer-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Enhanced Stats */
+        .enhanced-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .enhanced-stats::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            border-radius: 30px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .enhanced-stat-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-neon), inset 0 1px 0 rgba(0, 212, 255, 0.2);
+            border: 2px solid var(--primary-cyan);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .enhanced-stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .enhanced-stat-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: var(--shadow-purple), 0 0 60px rgba(139, 92, 246, 0.4);
+            border-color: var(--primary-purple);
+            animation-play-state: paused;
+        }
+
+        .enhanced-stat-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .enhanced-stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .enhanced-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Partnership Highlight */
+        .partnership-highlight {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-purple), inset 0 1px 0 rgba(236, 72, 153, 0.2);
+            border: 2px solid var(--primary-pink);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partnership-highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(236, 72, 153, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .partnership-highlight h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .partnership-highlight p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .action-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 2rem 3rem;
+            border-radius: 20px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
             border: none;
             cursor: pointer;
-            font-family: 'Poppins', sans-serif;
+            min-width: 200px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
         }
 
-        .btn-primary {
-            background: var(--gradient);
+        .host-button {
+            background: linear-gradient(135deg, var(--primary-cyan) 0%, var(--primary-purple) 100%);
+            border: 2px solid var(--primary-cyan);
+            box-shadow: var(--shadow-neon);
+        }
+
+        .join-button {
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--primary-cyan) 100%);
+            border: 2px solid var(--accent-green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+        }
+
+        .action-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .action-button:hover::before {
+            left: 100%;
+        }
+
+        .action-button:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+        }
+
+        .action-button i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .action-button span {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .action-button small {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .server-connect {
+            position: relative;
+        }
+
+        .ip-copied {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
             color: white;
-            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+            pointer-events: none;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 240, 255, 0.5);
+        .ip-copied.show {
+            opacity: 1;
         }
 
-        .btn-spymc {
-            background: var(--spymc-gradient);
-            color: white;
-            box-shadow: 0 5px 15px rgba(43, 108, 176, 0.3);
-        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .logo-section {
+                gap: 1.5rem;
+            }
+            
+            .company-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
 
-        .btn-spymc:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(43, 108, 176, 0.5);
+            .map-wrapper {
+                height: 400px;
+            }
+
+            .map-legend {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 1rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Floating Particles Background -->
     <div class="particles" id="particles"></div>
-    <div class="copy-message" id="copyMessage">Copied to clipboard!</div>
-    
-    <div class="container">
-        <div class="logo-container">
-            <a href="https://aleforge.net" target="_blank">
-                <img src="https://i.ibb.co/XGxxKnD/logo.png" alt="Streamline Servers" class="partner-logo streamline-logo floating">
-            </a>
-            <div class="vs-circle">X</div>
-            <a href="#" target="_blank">
-                <img src="https://i.ibb.co/216tzPp7/image69.png" alt="SPYMC" class="partner-logo spymc-logo floating">
-            </a>
-        </div>
-        
-        <div class="partnership-banner">
-            <h2>Exclusive Partnership</h2>
-            <p>Streamline Servers and SPYMC have joined forces to bring you the ultimate Minecraft hosting experience with premium performance and exclusive benefits.</p>
-        </div>
-        
-        <h1 class="header">Elite Gaming Partnership</h1>
-        <p class="sub-header">We collaborate to deliver unparalleled gaming experiences. Our premium network ensures maximum performance, reliability, and exclusive benefits for every player.</p>
-        
-        <div class="partner-grid">
-            <div class="partner-card" onclick="window.open('https://streamline-servers.com/game-servers/minecraft', '_blank')">
-                <div class="discount-badge">25% OFF</div>
-                <h2>DIAMOND PLAN</h2>
-                <p>Premium gaming performance for competitive and professional servers</p>
-                
-                <img src="https://ggservers.com/images/plan-diamond.webp" alt="Diamond Plan" class="plan-image">
-                
-                <ul class="feature-list">
-                    <li><strong>4096 MB</strong> High-Speed RAM</li>
-                    <li><strong>200</strong> Player Slots</li>
-                    <li>NVMe SSD Storage (Unmetered)</li>
-                    <li>Enterprise-Grade Anti-DDoS</li>
-                    <li>24/7 Priority Support</li>
-                    <li>Instant Setup</li>
-                    <li>Free Subdomain</li>
-                    <li>One-Click Modpack Installer</li>
-                </ul>
-                
-                <div class="price-tag glow" onclick="event.stopPropagation();">Starting at $40.00/mo</div>
-                
-                <div class="promo-code" onclick="copyToClipboard('SPYMC', event)">
-                    <p>Use exclusive promo code:</p>
-                    <span>SPYMC</span>
-                    <p>for 25% off your first order!</p>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo-section">
+                <div class="company-logo">
+                    <img src="https://i.ibb.co/XGxxKnD/logo.png" alt="AleForge Logo">
+                    <div class="company-name">AleForge</div>
                 </div>
-                
-                <a href="https://streamline-servers.com/game-servers/minecraft" class="btn btn-primary" target="_blank" onclick="event.stopPropagation();">
-                    Get Started Now <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="partnership-symbol">×</div>
+                <div class="company-logo">
+                    <img src="https://i.ibb.co/216tzPp7/image69.png" alt="SpyMC Logo">
+                    <div class="company-name">SpyMC</div>
+                </div>
             </div>
+            <h1 style="animation: slideInUp 1s ease-out;">AleForge × SpyMC Alliance</h1>
+            <p style="animation: slideInUp 1s ease-out 0.3s both;">Revolutionary Partnership Uniting AleForge's Enterprise-Grade Global Infrastructure with SpyMC's Premium Minecraft Gaming Excellence. Experience ultra-low latency gaming powered by 348 Tbps DDoS protection across 9 strategic data centers worldwide, featuring specialized Asia-Pacific optimization through our Singapore partnership hub delivering sub-20ms latency across Southeast Asia for unparalleled Minecraft performance.</p>
+        </div>
+    </header>
+
+    <!-- About Partnership Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">About This Partnership</h2>
+            <p class="section-subtitle">Combining AleForge's enterprise hosting infrastructure with SpyMC's specialized Minecraft expertise to create the ultimate gaming experience.</p>
             
-            <div class="partner-card">
-                <h2>Our Partnership Benefits</h2>
-                <p>Streamline Servers and SPYMC work together to provide the best possible gaming experience for our communities.</p>
-                
-                <div class="link-item" onclick="window.open('https://streamline-servers.com', '_blank')">
-                    <i class="fas fa-globe"></i>
-                    <span>Streamline Servers Official Website</span>
-                </div>
-                
-                <div class="link-item" onclick="window.open('https://discord.gg/5xRN9kSP9V', '_blank')">
-                    <i class="fab fa-discord"></i>
-                    <span>Join our Discord Community</span>
-                </div>
-                
-                <div class="link-item" onclick="window.open('https://www.facebook.com/StreamlineServers', '_blank')">
-                    <i class="fab fa-facebook"></i>
-                    <span>Facebook Page</span>
-                </div>
-                
-                <div class="link-item" onclick="window.open('https://au.trustpilot.com/review/streamline-servers.com', '_blank')">
-                    <i class="fas fa-star"></i>
-                    <span>Trustpilot Reviews</span>
-                </div>
-                
-                <div style="margin-top: 2rem;">
-                    <h3>Why Choose This Partnership?</h3>
-                    <p>With 99.9% uptime, enterprise-grade hardware, and a team of gaming enthusiasts, we provide the ultimate hosting solution for your community.</p>
-                    
-                    <ul class="feature-list">
-                        <li>Exclusive discounts for SPYMC members</li>
-                        <li>Priority support for all servers</li>
-                        <li>Custom server configurations</li>
-                        <li>Regular community events</li>
+            <div class="company-grid">
+                <div class="company-card">
+                    <div class="company-header">
+                        <div class="company-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="company-title">AleForge</div>
+                    </div>
+                    <p class="company-description">
+                        Founded in 2018, AleForge (aleforge.net) stands as the premier gaming server hosting provider, delivering enterprise-grade infrastructure solutions to thousands of gamers worldwide. With an exceptional 4.9/5 Trustpilot rating based on over 1,200 verified reviews and a rock-solid 99.9% uptime SLA guarantee, AleForge has established itself as the trusted choice for serious gamers and content creators. Their state-of-the-art facilities feature redundant power systems, enterprise-grade networking equipment, and 24/7 monitoring by certified technicians.
+                    </p>
+                    <ul class="features-list">
+                        <li><strong>9 Strategic Global Locations:</strong> San Jose (US West), Chicago (US Central), Dallas (US South), Vint Hill (US East), Frankfurt (EU), Sydney (Oceania), Singapore (Asia-Pacific Hub), Mumbai (South Asia), Bend (Pacific Northwest) - strategically positioned for optimal global coverage</li>
+                        <li><strong>Comprehensive Game Support:</strong> Minecraft (Java & Bedrock), Terraria, Factorio, Palworld, Return to Moria, ARK, Rust, CS2, Valheim, and 50+ additional titles with instant game switching capability</li>
+                        <li><strong>Premium Hardware Infrastructure:</strong> Latest-generation AMD Ryzen 9 and Intel Xeon processors with guaranteed minimum 3.8 GHz base speeds, up to 5.0 GHz boost clocks for maximum performance</li>
+                        <li><strong>Enterprise Networking:</strong> Redundant gigabit connections as standard, premium 10 Gigabit networking available, direct peering with major ISPs for optimal routing</li>
+                        <li><strong>High-Performance Storage:</strong> NVMe SSD storage arrays with unlimited player capacity, automated backups every 4 hours, instant restore capability</li>
+                        <li><strong>Advanced Security Suite:</strong> Minecart Protection Protocol (MPP) with 348 Tbps DDoS protection, Cloudflare Spectrum integration, real-time threat detection and mitigation</li>
+                        <li><strong>Expert Support Team:</strong> 24/7/365 technical support from certified gaming specialists, average response time under 5 minutes, multilingual support available</li>
+                        <li><strong>Complete Platform Features:</strong> One-click game swapping, web hosting with SSL, WordPress hosting, dedicated servers, custom configurations, mod support, plugin management</li>
                     </ul>
                 </div>
-                
-                <a href="#" class="btn btn-spymc" target="_blank" onclick="event.stopPropagation();">
-                    Join SPYMC <i class="fas fa-users"></i>
-                </a>
+
+                <div class="company-card">
+                    <div class="company-header">
+                        <div class="company-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <div class="company-title">SpyMC</div>
+                    </div>
+                    <p class="company-description">
+                        SpyMC (www.spymc.xyz) represents the pinnacle of premium Minecraft server experiences, delivering innovative gameplay modes and exceptional performance optimization specifically designed for competitive and community-focused gaming environments. With their strategic partnership utilizing AleForge's Singapore infrastructure, SpyMC ensures ultra-low latency connections across the Asia-Pacific region, serving dedicated Minecraft enthusiasts with custom-engineered plugins, advanced economy systems, and unique survival mechanics that create truly immersive gaming experiences.
+                    </p>
+                    <ul class="features-list">
+                        <li><strong>Direct Server Connection:</strong> spymc.xyz - Optimized routing through AleForge Singapore ensures sub-20ms latency across Asia-Pacific regions</li>
+                        <li><strong>PvP Free For All Arena:</strong> Intense competitive non-stop action environment with advanced anti-cheat systems, custom weapon mechanics, and real-time leaderboards</li>
+                        <li><strong>Innovative LifeSteal Mode:</strong> Revolutionary survival gameplay featuring heart-stealing mechanics, custom enchantments, and balanced PvP systems for unique combat experiences</li>
+                        <li><strong>Advanced Economy System:</strong> Sophisticated in-game marketplace with custom currency, player shops, auction houses, and dynamic pricing algorithms for fair trading</li>
+                        <li><strong>SlimeFun Enhanced Integration:</strong> Extensive custom plugin suite featuring advanced machinery, magic systems, tech trees, and automated production chains</li>
+                        <li><strong>Premium Player Features:</strong> Custom teleportation warps, organized dueling systems, scheduled community events, achievement systems, and exclusive member rewards</li>
+                        <li><strong>Thriving Community Ecosystem:</strong> Active Discord server with 1000+ members, daily voting rewards, community challenges, and regular tournaments with prizes</li>
+                        <li><strong>Specialized Support Team:</strong> Dedicated Minecraft-focused technical specialists providing instant assistance, custom configuration support, and gameplay optimization guidance</li>
+                    </ul>
+                </div>
             </div>
         </div>
-        
-        <div class="social-links">
-            <a href="https://discord.gg/5xRN9kSP9V" target="_blank" class="social-link">
-                <i class="fab fa-discord"></i>
-            </a>
-            <a href="https://www.facebook.com/StreamlineServers" target="_blank" class="social-link">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://au.trustpilot.com/review/streamline-servers.com" target="_blank" class="social-link">
-                <i class="fas fa-star"></i>
-            </a>
-            <a href="https://x.com/StreamServers/" target="_blank" class="social-link">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="https://www.youtube.com/StreamlineServers" target="_blank" class="social-link">
-                <i class="fab fa-youtube"></i>
-            </a>
+    </section>
+
+    <!-- Partnership Benefits -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Partnership Benefits</h2>
+            <p class="section-subtitle">Experience the combined power of enterprise hosting and premium Minecraft optimization</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">99.9%</span>
+                    <span class="stat-label">Uptime Guarantee</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">9</span>
+                    <span class="stat-label">Global Locations</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Expert Support</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">4.9/5</span>
+                    <span class="stat-label">Customer Rating</span>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3><i class="fas fa-shield-alt"></i> Minecart Protection Protocol (MPP)</h3>
+                <p>AleForge's revolutionary MPP security leverages Cloudflare Spectrum and Argo Smart Routing to deliver enterprise-grade DDoS protection up to 348 Tbps with 10-30ms attack mitigation. This technology, powered by 330+ global Points of Presence across 120+ countries, ensures your gaming experience is never interrupted while optimizing network routing for 10-30% latency reduction.</p>
+            </div>
+
+            <div class="info-box">
+                <h3><i class="fas fa-rocket"></i> Premium Gaming Experience</h3>
+                <p>SpyMC's specialized Minecraft optimization combined with AleForge's enterprise infrastructure delivers unmatched gaming performance. Features include advanced economy systems, unique game modes like LifeSteal and PvP Free For All, custom plugins, and a thriving community ecosystem with voting rewards and Discord integration.</p>
+            </div>
+
+            <!-- Partnership Highlight -->
+            <div class="partnership-highlight">
+                <h3><i class="fas fa-handshake"></i> SpyMC × AleForge Singapore Partnership</h3>
+                <p>SpyMC utilizes AleForge's Singapore data center for optimal performance across Asia-Pacific regions. This strategic partnership ensures low-latency gaming experiences for players in Singapore, Malaysia, Indonesia, Thailand, and surrounding regions with enterprise-grade infrastructure and security.</p>
+                
+                <div class="action-buttons">
+                    <a href="https://aleforge.net" target="_blank" class="action-button host-button">
+                        <i class="fas fa-server"></i>
+                        <span>Host Your Server</span>
+                        <small>Start with AleForge</small>
+                    </a>
+                    <div class="server-connect">
+                        <button class="action-button join-button" onclick="copyServerIP()">
+                            <i class="fas fa-gamepad"></i>
+                            <span>Join SpyMC</span>
+                            <small>spymc.xyz</small>
+                        </button>
+                        <div class="ip-copied" id="ipCopied">IP Copied to Clipboard!</div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Global Infrastructure Map -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Global Infrastructure Network</h2>
+            <p class="section-subtitle">AleForge's worldwide data centers with DDoS protection and SpyMC's strategic Singapore presence</p>
+            
+            <div class="map-container">
+                <h3 style="margin-bottom: 1.5rem; text-align: center;"><i class="fas fa-globe"></i> Live Infrastructure Map</h3>
+                <div class="map-wrapper">
+                    <div id="global-map"></div>
+                    <div class="map-legend">
+                        <div class="legend-item">
+                            <div class="legend-color aleforge-marker"></div>
+                            <span>AleForge Data Centers</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color spymc-marker"></div>
+                            <span>SpyMC Partnership Location</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color ddos-shield"></div>
+                            <span>DDoS Protection Shield</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Location Details Grid -->
+            <div class="location-grid">
+                <div class="location-card">
+                    <div class="location-header">
+                        <span class="location-flag">🇺🇸</span>
+                        <span class="location-name">San Jose, California</span>
+                    </div>
+                    <div class="location-details">
+                        <p><strong>Region:</strong> US West Coast</p>
+                        <p><strong>Latency:</strong> <5ms to SF Bay Area</p>
+                        <p><strong>Features:</strong> Premium hardware, gigabit networking</p>
+                    </div>
+                </div>
+
+                <div class="location-card">
+                    <div class="location-header">
+                        <span class="location-flag">🇺🇸</span>
+                        <span class="location-name">Chicago, Illinois</span>
+                    </div>
+                    <div class="location-details">
+                        <p><strong>Region:</strong> US Central</p>
+                        <p><strong>Latency:</strong> <10ms to Midwest</p>
+                        <p><strong>Features:</strong> Central routing hub, high availability</p>
+                    </div>
+                </div>
+
+                <div class="location-card">
+                    <div class="location-header">
+                        <span class="location-flag">🇺🇸</span>
+                        <span class="location-name">Dallas, Texas</span>
+                    </div>
+                    <div class="location-details">
+                        <p><strong>Region:</strong> US South Central</p>
+                        <p><strong>Latency:</strong> <8ms to Texas region</p>
+                        <p><strong>Features:</strong> Major internet backbone access</p>
+                    </div>
+                </div>
+
+                <div class="location-card">
+                    <div class="location-header">
+                        <span class="location-flag">🇺🇸</span>
+                        <span class="location-name">Vint Hill, Virginia</span>
+                    </div>
+                    <div class="location-details">
+                        <p><strong>Region:</strong> US East Coast</p>
+                        <p><strong>Latency:</strong> <5ms to Washington DC</p>
+                        <p><strong>Features:</strong> Government-grade security, fiber connectivity</p>
+                    </div>
+                </div>
+
+                <div class="location-card">
+                    <div class="location-header">
+                        <span class="location-flag">🇺🇸</span>
+                        <span class="location-name">Bend, Oregon</span>
+                    </div>
+                    <div class="location-details">
+                        <p><strong>Region:</strong> US Pacific Northwest</p>
+                        <p><strong>Latency:</strong> <12ms to Oregon/Washington</p>
+                        <p><strong>Features:</strong> Green energy powered, redundant connections</p>
+                    </div>
+                </div>
+
+                <div class="location-card">
+                    <div class="location-header">
+                        <span class="location-flag">🇩🇪</span>
+                        <span class="location-name">Frankfurt, Germany</span>
+                    </div>
+                    <div class="location-details">
+                        <p><strong>Region:</strong> Central Europe</p>
+                        <p><strong>Latency:</strong> <15ms across EU</p>
+                        <p><strong>Features:</strong> GDPR compliant, DE-CIX connected</p>
+                    </div>
+                </div>
+
+                <div class="location-card special-location">
+                    <div class="location-header">
+                        <span class="location-flag">🇸🇬</span>
+                        <span class="location-name">Singapore</span>
+                        <div style="margin-left: auto;">
+                            <span style="background: var(--success); color: white; padding: 0.2rem 0.5rem; border-radius: 20px; font-size: 0.8rem;">SpyMC Partner</span>
+                        </div>
+                    </div>
+                    <div class="location-details">
+                        <p><strong>Region:</strong> Asia-Pacific Hub</p>
+                        <p><strong>Latency:</strong> <20ms across SEA</p>
+                        <p><strong>Features:</strong> SpyMC optimized, premium routing</p>
+                        <p><strong>Special:</strong> Partnership location with enhanced Minecraft optimization</p>
+                    </div>
+                </div>
+
+                <div class="location-card">
+                    <div class="location-header">
+                        <span class="location-flag">🇦🇺</span>
+                        <span class="location-name">Sydney, Australia</span>
+                    </div>
+                    <div class="location-details">
+                        <p><strong>Region:</strong> Australia/Oceania</p>
+                        <p><strong>Latency:</strong> <25ms across Australia</p>
+                        <p><strong>Features:</strong> Tier 1 carrier connections, local peering</p>
+                    </div>
+                </div>
+
+                <div class="location-card">
+                    <div class="location-header">
+                        <span class="location-flag">🇮🇳</span>
+                        <span class="location-name">Mumbai, India</span>
+                    </div>
+                    <div class="location-details">
+                        <p><strong>Region:</strong> South Asia</p>
+                        <p><strong>Latency:</strong> <30ms across India</p>
+                        <p><strong>Features:</strong> Growing market presence, local optimization</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DDoS Protection Visualization -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Enterprise DDoS Protection</h2>
+            <p class="section-subtitle">Multi-layer security architecture protecting against the largest known attacks</p>
+
+            <div class="ddos-visualization">
+                <h3 style="text-align: center; margin-bottom: 2rem;"><i class="fas fa-shield-alt"></i> Minecart Protection Protocol (MPP) Architecture</h3>
+                
+                <div class="enhanced-stats">
+                    <div class="enhanced-stat-card">
+                        <div class="enhanced-stat-icon"><i class="fas fa-shield-alt"></i></div>
+                        <span class="enhanced-stat-number">348</span>
+                        <span class="enhanced-stat-label">Tbps Protection Capacity</span>
+                    </div>
+                    <div class="enhanced-stat-card">
+                        <div class="enhanced-stat-icon"><i class="fas fa-globe"></i></div>
+                        <span class="enhanced-stat-number">330+</span>
+                        <span class="enhanced-stat-label">Global Shield Points</span>
+                    </div>
+                    <div class="enhanced-stat-card">
+                        <div class="enhanced-stat-icon"><i class="fas fa-clock"></i></div>
+                        <span class="enhanced-stat-number">10-30ms</span>
+                        <span class="enhanced-stat-label">Attack Mitigation Time</span>
+                    </div>
+                    <div class="enhanced-stat-card">
+                        <div class="enhanced-stat-icon"><i class="fas fa-route"></i></div>
+                        <span class="enhanced-stat-number">30%</span>
+                        <span class="enhanced-stat-label">Latency Reduction</span>
+                    </div>
+                </div>
+
+                <div class="protection-layers">
+                    <div class="protection-layer">
+                        <div class="layer-icon"><i class="fas fa-satellite-dish"></i></div>
+                        <div class="layer-title">Edge Detection</div>
+                        <div class="layer-description">Cloudflare's global network identifies threats at 330+ locations worldwide before they reach your server</div>
+                    </div>
+                    <div class="protection-layer">
+                        <div class="layer-icon"><i class="fas fa-filter"></i></div>
+                        <div class="layer-title">Traffic Filtering</div>
+                        <div class="layer-description">Advanced algorithms separate legitimate players from malicious bots in real-time</div>
+                    </div>
+                    <div class="protection-layer">
+                        <div class="layer-icon"><i class="fas fa-route"></i></div>
+                        <div class="layer-title">Smart Routing</div>
+                        <div class="layer-description">Argo technology finds the fastest path to your server, reducing latency by up to 30%</div>
+                    </div>
+                    <div class="protection-layer">
+                        <div class="layer-icon"><i class="fas fa-server"></i></div>
+                        <div class="layer-title">Clean Traffic</div>
+                        <div class="layer-description">Only verified legitimate traffic reaches your game server, ensuring optimal performance</div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h3><i class="fas fa-chart-line"></i> Real-World Protection Results</h3>
+                    <p>MPP has successfully mitigated attacks exceeding 100 Tbps, including the largest DDoS attacks targeting gaming infrastructure. The system automatically scales protection based on threat level, ensuring your gaming experience remains uninterrupted even during major cyber attacks targeting the gaming industry.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Pricing & Plans</h2>
+            <p class="section-subtitle">Affordable pricing with enterprise-grade features included</p>
+
+            <div class="promo-banner">
+                <strong>🎉 Summer Sale Active!</strong> Use code <strong>SUMMER25</strong> to get 3 months for the price of 2!
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>AleForge Minecraft Hosting</h3>
+                        <div class="price">$1.00<span class="price-period">/GB</span></div>
+                    </div>
+                    <ul class="features-list">
+                        <li>MPP Security included</li>
+                        <li>Instant server setup</li>
+                        <li>Unlimited players</li>
+                        <li>Free DDoS protection</li>
+                        <li>SSD storage</li>
+                        <li>24/7 support</li>
+                        <li>30-day money back guarantee</li>
+                    </ul>
+                    <a href="https://aleforge.net/games/minecraft" class="cta-button">Order Minecraft Server</a>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Web Hosting</h3>
+                        <div class="price">$2.95<span class="price-period">/month</span></div>
+                    </div>
+                    <ul class="features-list">
+                        <li>cPanel control panel</li>
+                        <li>SSL certificates included</li>
+                        <li>Unlimited bandwidth</li>
+                        <li>Free domain registration</li>
+                        <li>Daily backups</li>
+                        <li>24/7 support</li>
+                        <li>99.9% uptime guarantee</li>
+                    </ul>
+                    <a href="https://aleforge.net/web-hosting" class="cta-button">Order Web Hosting</a>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Dedicated Servers</h3>
+                        <div class="price">$58.99<span class="price-period">/month</span></div>
+                    </div>
+                    <ul class="features-list">
+                        <li>Full root access</li>
+                        <li>High-performance hardware</li>
+                        <li>DDoS protection</li>
+                        <li>Managed support available</li>
+                        <li>Multiple locations</li>
+                        <li>24/7 monitoring</li>
+                        <li>99.9% uptime SLA</li>
+                    </ul>
+                    <a href="https://aleforge.net/dedicated" class="cta-button">Order Dedicated Server</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Details -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Technical Excellence</h2>
+            <div class="company-grid">
+                <div class="company-card">
+                    <h3><i class="fas fa-cloud"></i> Infrastructure & Performance</h3>
+                    <ul class="features-list">
+                        <li><strong>Hardware:</strong> Top-tier AMD and Intel processors (minimum 3.8 GHz)</li>
+                        <li><strong>Storage:</strong> High-performance SSD drives for optimal speed</li>
+                        <li><strong>Network:</strong> Gigabit networking standard, 10 Gigabit for premium</li>
+                        <li><strong>Locations:</strong> 9 strategically placed global data centers</li>
+                        <li><strong>Monitoring:</strong> Real-time performance tracking and alerts</li>
+                        <li><strong>Redundancy:</strong> Advanced failover and backup systems</li>
+                    </ul>
+                </div>
+
+                <div class="company-card">
+                    <h3><i class="fas fa-shield-alt"></i> Security & Protection</h3>
+                    <ul class="features-list">
+                        <li><strong>DDoS Protection:</strong> Enterprise-grade Cloudflare Spectrum</li>
+                        <li><strong>Capacity:</strong> Up to 348 Tbps attack mitigation</li>
+                        <li><strong>Response Time:</strong> 10-30ms attack detection and blocking</li>
+                        <li><strong>Global Network:</strong> 330+ Points of Presence worldwide</li>
+                        <li><strong>SSL/TLS:</strong> Free certificates for all services</li>
+                        <li><strong>Monitoring:</strong> 24/7 security monitoring and incident response</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://aleforge.net" class="footer-link">AleForge Website</a>
+                <a href="https://www.spymc.xyz" class="footer-link">SpyMC Website</a>
+                <a href="https://discord.com/invite/TWBVSVsGnD" class="footer-link">AleForge Discord</a>
+                <a href="https://discord.gg/spymc-minecraft-network-ip-spymc-xyz-921023003981144125" class="footer-link">SpyMC Discord</a>
+                <a href="https://aleforge.net/blog" class="footer-link">Blog</a>
+                <a href="https://billing.aleforge.net/submitticket.php" class="footer-link">Support</a>
+            </div>
+            <p>&copy; 2025 AleForge × SpyMC Partnership. Delivering premium gaming experiences worldwide.</p>
+        </div>
+    </footer>
 
     <script>
-        // Particle animation
-        document.addEventListener('DOMContentLoaded', function() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // Random size between 2px and 6px
-                const size = Math.random() * 4 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                // Random position
-                particle.style.left = `${Math.random() * 100}vw`;
-                particle.style.top = `${Math.random() * 100}vh`;
-                
-                // Random animation duration between 10s and 20s
-                const duration = Math.random() * 10 + 10;
-                particle.style.animationDuration = `${duration}s`;
-                
-                // Random delay
-                particle.style.animationDelay = `${Math.random() * 5}s`;
-                
-                particlesContainer.appendChild(particle);
+        // Initialize the global infrastructure map
+        function initializeMap() {
+            if (typeof L === 'undefined') {
+                setTimeout(initializeMap, 100);
+                return;
             }
-        });
 
-        // Copy to clipboard function
-        function copyToClipboard(text, event) {
-            if (event) event.stopPropagation();
-            navigator.clipboard.writeText(text).then(() => {
-                const copyMessage = document.getElementById('copyMessage');
-                copyMessage.classList.add('show');
-                setTimeout(() => {
-                    copyMessage.classList.remove('show');
-                }, 2000);
+            const map = L.map('global-map').setView([20, 0], 2);
+
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors',
+                maxZoom: 18
+            }).addTo(map);
+
+            // AleForge data center locations
+            const aleforgeLocations = [
+                { name: 'San Jose, CA', lat: 37.3382, lng: -121.8863, type: 'aleforge' },
+                { name: 'Chicago, IL', lat: 41.8781, lng: -87.6298, type: 'aleforge' },
+                { name: 'Dallas, TX', lat: 32.7767, lng: -96.7970, type: 'aleforge' },
+                { name: 'Vint Hill, VA', lat: 38.7173, lng: -77.6428, type: 'aleforge' },
+                { name: 'Bend, OR', lat: 44.0581, lng: -121.3153, type: 'aleforge' },
+                { name: 'Frankfurt, Germany', lat: 50.1109, lng: 8.6821, type: 'aleforge' },
+                { name: 'Sydney, Australia', lat: -33.8688, lng: 151.2093, type: 'aleforge' },
+                { name: 'Mumbai, India', lat: 19.0760, lng: 72.8777, type: 'aleforge' },
+                { name: 'Singapore', lat: 1.3521, lng: 103.8198, type: 'spymc' }
+            ];
+
+            // Create custom markers
+            aleforgeLocations.forEach(location => {
+                const isSpyMC = location.type === 'spymc';
+                const markerColor = isSpyMC ? '#10b981' : '#2563eb';
+                const popupContent = isSpyMC ? 
+                    `<b>${location.name}</b><br/>AleForge Data Center<br/><span style="color: #10b981;">🤝 SpyMC Partnership Location</span><br/>Optimized for Asia-Pacific gaming` : 
+                    `<b>${location.name}</b><br/>AleForge Data Center<br/>Enterprise hosting infrastructure`;
+
+                // Create marker with custom styling
+                const marker = L.circleMarker([location.lat, location.lng], {
+                    radius: isSpyMC ? 12 : 8,
+                    fillColor: markerColor,
+                    color: 'white',
+                    weight: 2,
+                    opacity: 1,
+                    fillOpacity: 0.8
+                }).addTo(map);
+
+                marker.bindPopup(popupContent);
+
+                // Add pulsing effect for SpyMC location
+                if (isSpyMC) {
+                    const pulseMarker = L.circleMarker([location.lat, location.lng], {
+                        radius: 20,
+                        fillColor: markerColor,
+                        color: markerColor,
+                        weight: 1,
+                        opacity: 0.3,
+                        fillOpacity: 0.1
+                    }).addTo(map);
+                }
+
+                // Add DDoS protection shield visualization around each location
+                L.circle([location.lat, location.lng], {
+                    radius: 1000000, // 1000km radius
+                    fillColor: '#f59e0b',
+                    color: '#f59e0b',
+                    weight: 1,
+                    opacity: 0.2,
+                    fillOpacity: 0.05
+                }).addTo(map);
+            });
+
+            // Add connecting lines to show global network
+            const connectionLines = [
+                [[37.3382, -121.8863], [41.8781, -87.6298]], // San Jose to Chicago
+                [[41.8781, -87.6298], [32.7767, -96.7970]], // Chicago to Dallas
+                [[32.7767, -96.7970], [38.7173, -77.6428]], // Dallas to Vint Hill
+                [[50.1109, 8.6821], [1.3521, 103.8198]], // Frankfurt to Singapore
+                [[1.3521, 103.8198], [-33.8688, 151.2093]], // Singapore to Sydney
+                [[1.3521, 103.8198], [19.0760, 72.8777]] // Singapore to Mumbai
+            ];
+
+            connectionLines.forEach(line => {
+                L.polyline(line, {
+                    color: '#2563eb',
+                    weight: 2,
+                    opacity: 0.6,
+                    dashArray: '5, 10'
+                }).addTo(map);
             });
         }
 
-        // Make price tags copyable
-        document.querySelectorAll('.price-tag').forEach(tag => {
-            tag.addEventListener('click', function(e) {
-                const price = this.textContent.replace('Starting at ', '').trim();
-                copyToClipboard(price, e);
+        // Add smooth scroll behavior for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all company cards and pricing cards
+        document.querySelectorAll('.company-card, .pricing-card, .stat-card, .location-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Copy SpyMC IP function
+        function copyServerIP() {
+            const serverIP = 'spymc.xyz';
+            
+            // Try using the Clipboard API first
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(serverIP).then(() => {
+                    showCopiedMessage();
+                }).catch(err => {
+                    // Fallback for older browsers
+                    fallbackCopyTextToClipboard(serverIP);
+                });
+            } else {
+                // Fallback for older browsers
+                fallbackCopyTextToClipboard(serverIP);
+            }
+        }
+
+        function fallbackCopyTextToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+            textArea.style.opacity = "0";
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showCopiedMessage();
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        function showCopiedMessage() {
+            const copiedDiv = document.getElementById('ipCopied');
+            copiedDiv.classList.add('show');
+            setTimeout(() => {
+                copiedDiv.classList.remove('show');
+            }, 2000);
+        }
+
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random starting position
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize map when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create floating particles
+            createParticles();
+            
+            // Small delay to ensure map container is ready
+            setTimeout(initializeMap, 500);
         });
     </script>
 </body>
