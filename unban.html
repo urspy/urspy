@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpyMC - Unban Appeal</title>
+    <link rel="icon" href="images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00f0ff;
+            --primary-dark: #0066ff;
+            --secondary: #ff00aa;
+            --accent: #00ffaa;
+            --dark: #0a0a12;
+            --darker: #050508;
+            --light: #e0e0ff;
+            --card-bg: rgba(15, 15, 25, 0.9);
+            --card-border: rgba(0, 240, 255, 0.2);
+            --text-muted: rgba(200, 200, 255, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 170, 0.05) 0%, transparent 25%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            height: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin: 25px 0 10px;
+        }
+
+        h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin: 20px 0 8px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .announcement {
+            color: var(--secondary);
+            font-size: 1rem;
+            margin-bottom: 30px;
+            text-align: center;
+            font-style: italic;
+            padding: 15px;
+            background: rgba(255, 0, 170, 0.1);
+            border-radius: 8px;
+        }
+
+        .guide-section {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .guide-section:hover {
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.1);
+        }
+
+        p, ul, ol {
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        ul, ol {
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        ul li:before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        ol {
+            list-style-type: none;
+            counter-reset: step-counter;
+        }
+
+        ol li {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        ol li:before {
+            content: counter(step-counter);
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .warning {
+            background: rgba(255, 0, 170, 0.1);
+            border-left: 3px solid var(--secondary);
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .warning-title {
+            color: var(--secondary);
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .warning-title i {
+            margin-right: 8px;
+        }
+
+        .note {
+            background: rgba(200, 200, 255, 0.1);
+            border-left: 3px solid var(--text-muted);
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+            font-size: 0.95rem;
+        }
+
+        .note-title {
+            color: var(--text-muted);
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .note-title i {
+            margin-right: 8px;
+        }
+
+        .discord-ticket {
+            background: rgba(88, 101, 242, 0.1);
+            border: 1px solid #5865F2;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .ticket-icon {
+            font-size: 3rem;
+            color: #5865F2;
+            margin-bottom: 15px;
+        }
+
+        .ticket-steps {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+
+        .ticket-step {
+            background: rgba(88, 101, 242, 0.2);
+            border-radius: 8px;
+            padding: 15px;
+            width: 200px;
+            transition: all 0.3s ease;
+        }
+
+        .ticket-step:hover {
+            transform: translateY(-5px);
+            background: rgba(88, 101, 242, 0.3);
+        }
+
+        .step-number {
+            background: #5865F2;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+        }
+
+        .step-title {
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .discord-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: #5865F2;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .discord-btn:hover {
+            background: #4752C4;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.3);
+        }
+
+        .required-info {
+            background: rgba(0, 240, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .info-icon {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 10px 15px;
+            background: rgba(0, 240, 255, 0.1);
+            border-radius: 50px;
+        }
+
+        .contact-item:hover {
+            color: var(--accent);
+            background: rgba(0, 240, 255, 0.2);
+        }
+
+        .contact-item i {
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--card-border);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .guide-section {
+                padding: 20px;
+            }
+            
+            .ticket-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .ticket-step {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://i.ibb.co/tMF05rbH/image69.png" alt="SpyMC" class="logo">
+            <h1>SPYMC UNBAN APPEAL</h1>
+            <p class="subtitle">Submit your appeal through our Discord server to request a review of your ban</p>
+            <div class="announcement">
+                <i class="fas fa-exclamation-triangle"></i> Important: False information in appeals will result in permanent denial. Be honest and thorough.
+            </div>
+        </header>
+
+        <div class="guide-section">
+            <h2><i class="fas fa-gavel"></i> Appeal Guidelines</h2>
+            <p>To submit an unban appeal, you must create a ticket in our Discord server and include all required information:</p>
+            
+            <div class="discord-ticket">
+                <div class="ticket-icon">
+                    <i class="fab fa-discord"></i>
+                </div>
+                <h3>Submit Your Appeal Through Discord</h3>
+                <p>All ban appeals must be submitted through our official Discord server</p>
+                
+                <div class="ticket-steps">
+                    <div class="ticket-step">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Join Our Discord</div>
+                        <p>Make sure you're in our official server</p>
+                    </div>
+                    <div class="ticket-step">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Create Ticket</div>
+                        <p>Use the ticket system in #support-tickets</p>
+                    </div>
+                    <div class="ticket-step">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Provide Details</div>
+                        <p>Include all required information</p>
+                    </div>
+                    <div class="ticket-step">
+                        <div class="step-number">4</div>
+                        <div class="step-title">Wait For Response</div>
+                        <p>Staff will review your appeal</p>
+                    </div>
+                </div>
+                
+                <a href="https://discord.spymc.xyz" class="discord-btn" target="_blank">
+                    <i class="fab fa-discord"></i> Join Our Discord
+                </a>
+            </div>
+
+            <div class="required-info">
+                <h3><i class="fas fa-list-check"></i> Required Information</h3>
+                <p>Your appeal ticket must include all of the following:</p>
+                
+                <div class="info-item">
+                    <i class="fas fa-user info-icon"></i>
+                    <div>
+                        <strong>Minecraft Username</strong>
+                        <p>Your exact Minecraft username (case-sensitive)</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-id-card info-icon"></i>
+                    <div>
+                        <strong>Discord ID</strong>
+                        <p>Your full Discord username and discriminator (e.g., User#1234)</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-ban info-icon"></i>
+                    <div>
+                        <strong>Ban Reason</strong>
+                        <p>As shown when trying to join the server</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-calendar info-icon"></i>
+                    <div>
+                        <strong>Ban Date</strong>
+                        <p>Approximate date you were banned</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-file-alt info-icon"></i>
+                    <div>
+                        <strong>Detailed Explanation</strong>
+                        <p>What happened from your perspective (be honest)</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-camera info-icon"></i>
+                    <div>
+                        <strong>Evidence</strong>
+                        <p>Screenshots or videos that support your case</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning">
+                <div class="warning-title"><i class="fas fa-ban"></i> Automatic Denials</div>
+                <p>Appeals will be automatically denied if they:</p>
+                <ul>
+                    <li>Contain false information or misrepresentation</li>
+                    <li>Have insufficient evidence</li>
+                    <li>Show no acceptance of responsibility</li>
+                    <li>Attempt to blame others without proof</li>
+                    <li>Are incomplete or rushed</li>
+                    <li>Are submitted through any method other than Discord tickets</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2><i class="fas fa-question-circle"></i> Appeal Process</h2>
+            
+            <h3>What Happens After Submission?</h3>
+            <ol>
+                <li><strong>Ticket Creation:</strong> Your appeal ticket will be assigned to staff</li>
+                <li><strong>Initial Review:</strong> Staff will verify your information within 3-7 days</li>
+                <li><strong>Evidence Check:</strong> Your provided evidence will be thoroughly examined</li>
+                <li><strong>Decision:</strong> You'll receive a response in your Discord ticket</li>
+                <li><strong>If Approved:</strong> Your ban will be lifted with possible restrictions</li>
+                <li><strong>If Denied:</strong> You'll receive reasons and can appeal again after waiting period</li>
+            </ol>
+
+            <div class="note">
+                <div class="note-title"><i class="fas fa-clock"></i> Processing Times</div>
+                <p>Average response times based on ban type:</p>
+                <ul>
+                    <li>Cheating/Hacking: 7-14 days (3-month minimum wait)</li>
+                    <li>Toxicity: 3-7 days</li>
+                    <li>Bug Exploits: 5-10 days</li>
+                    <li>Discord Bans: 2-5 days</li>
+                </ul>
+            </div>
+            
+            <div class="warning">
+                <div class="warning-title"><i class="fas fa-exclamation-triangle"></i> Important Notes</div>
+                <ul>
+                    <li>Do not ping or DM staff about your appeal status - this may result in denial</li>
+                    <li>Duplicate appeals will be automatically rejected</li>
+                    <li>Bans older than 1 year may require additional verification</li>
+                    <li>All decisions are final but you may re-appeal after the waiting period</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2><i class="fas fa-book"></i> Ban Policy Reference</h2>
+            
+            <h3>Common Ban Reasons & Durations</h3>
+            <ul>
+                <li><strong>Cheating/Hacking:</strong> Permanent (first offense)</li>
+                <li><strong>Toxicity/Harassment:</strong> 30 days to permanent (based on severity)</li>
+                <li><strong>Bug Exploitation:</strong> 14 days to permanent</li>
+                <li><strong>Account Sharing:</strong> 30 day suspension</li>
+                <li><strong>Impersonation:</strong> Permanent</li>
+                <li><strong>Discord Rules Violation:</strong> 7 days to permanent</li>
+            </ul>
+
+            <h3>Successful Appeal Conditions</h3>
+            <p>Your appeal is more likely to succeed if:</p>
+            <ol>
+                <li>It's your first offense</li>
+                <li>You provide compelling evidence of innocence</li>
+                <li>You demonstrate genuine understanding of the rules</li>
+                <li>You show clear effort to prevent future issues</li>
+                <li>You've waited the appropriate time before appealing</li>
+            </ol>
+        </div>
+
+        <div class="contact-info">
+            <a href="https://discord.spymc.xyz" class="contact-item" target="_blank">
+                <i class="fab fa-discord"></i> Appeal Support Discord
+            </a>
+            <a href="https://www.spymc.xyz/rules" class="contact-item" target="_blank">
+                <i class="fas fa-scroll"></i> Server Rules
+            </a>
+            <a href="https://www.spymc.xyz/ban-policy" class="contact-item" target="_blank">
+                <i class="fas fa-gavel"></i> Full Ban Policy
+            </a>
+            <a href="https://www.spymc.xyz/faq" class="contact-item" target="_blank">
+                <i class="fas fa-question-circle"></i> Ban Appeal FAQ
+            </a>
+        </div>
+
+        <footer>
+            <p>© 2025 SpyMC Network. All rights reserved.</p>
+            <p>Ban Appeal System v2.4.1 | Last updated: June 2025</p>
+        </footer>
+    </div>
+</body>
+</html>
