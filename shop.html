@@ -266,6 +266,149 @@
             border-top: 1px solid var(--card-border);
         }
 
+        /* Coin Calculator Styles */
+        .calculator-container {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .calculator-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .slider-container {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        .coins-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            outline: none;
+        }
+
+        .coins-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            border: 2px solid var(--light);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        .coins-slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            border: 2px solid var(--light);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        .slider-ticks {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding: 0 10px;
+        }
+
+        .tick {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            position: relative;
+            text-align: center;
+            width: 20%;
+        }
+
+        .tick:before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 8px;
+            width: 2px;
+            background: var(--text-muted);
+        }
+
+        .price-display {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+        }
+
+        .price-label {
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .price-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        .price-note {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .calculator-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        .calculator-btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -277,6 +420,14 @@
             
             .rank-card, .coin-card {
                 padding: 20px;
+            }
+            
+            .calculator-container {
+                padding: 20px;
+            }
+            
+            .price-value {
+                font-size: 2rem;
             }
         }
     </style>
@@ -388,6 +539,36 @@
             </div>
         </div>
 
+        <!-- Coin Calculator Section -->
+        <div class="calculator-container">
+            <h2 class="calculator-title">COIN CALCULATOR</h2>
+            <div class="slider-container">
+                <div class="slider-label">
+                    <span>Coins: <span id="coins-value">2000</span></span>
+                    <span>Price: $<span id="price-value">1.99</span></span>
+                </div>
+                <input type="range" min="0" max="20000" value="2000" class="coins-slider" id="coins-slider">
+                <div class="slider-ticks">
+                    <div class="tick">0</div>
+                    <div class="tick">4000</div>
+                    <div class="tick">8000</div>
+                    <div class="tick">12000</div>
+                    <div class="tick">16000</div>
+                    <div class="tick">20000</div>
+                </div>
+            </div>
+            
+            <div class="price-display">
+                <div class="price-label">TOTAL PRICE</div>
+                <div class="price-value">$<span id="total-price">1.99</span></div>
+                <div class="price-note">Approximate conversion rate: 1000 coins ≈ $1</div>
+            </div>
+            
+            <button class="calculator-btn" onclick="redirectToDiscord()">
+                PURCHASE COINS
+            </button>
+        </div>
+
         <h2 class="section-title">COIN PACKAGES</h2>
         <div class="coins-grid">
             <!-- 2000 Coins -->
@@ -405,7 +586,7 @@
                         <span>2000 server coins</span>
                     </div>
                     <div class="feature coin-feature">
-                        <i class="fas fa-store"></i>
+                        <i class="fas fa-gift"></i>
                         <span>Access to exclusive items</span>
                     </div>
                 </div>
@@ -427,14 +608,9 @@
                     <div class="feature coin-feature">
                         <i class="fas fa-coins"></i>
                         <span>3000 server coins</span>
-                    </div>
                     <div class="feature coin-feature">
-                        <i class="fas fa-store"></i>
+                        <i class="fas fa-gift"></i>
                         <span>Access to exclusive items</span>
-                    </div>
-                    <div class="feature coin-feature">
-                        <i class="fas fa-percentage"></i>
-                        <span>5% bonus coins</span>
                     </div>
                 </div>
                 <button class="buy-btn coin-btn" onclick="redirectToDiscord()">
@@ -457,16 +633,8 @@
                         <span>4000 server coins</span>
                     </div>
                     <div class="feature coin-feature">
-                        <i class="fas fa-store"></i>
+                        <i class="fas fa-gift"></i>
                         <span>Access to exclusive items</span>
-                    </div>
-                    <div class="feature coin-feature">
-                        <i class="fas fa-percentage"></i>
-                        <span>10% bonus coins</span>
-                    </div>
-                    <div class="feature coin-feature">
-                        <i class="fas fa-star"></i>
-                        <span>Exclusive cosmetic particle</span>
                     </div>
                 </div>
                 <button class="buy-btn coin-btn" onclick="redirectToDiscord()">
@@ -488,18 +656,9 @@
                         <i class="fas fa-coins"></i>
                         <span>5000 server coins</span>
                     </div>
-                    </div>
                     <div class="feature coin-feature">
-                        <i class="fas fa-store"></i>
+                        <i class="fas fa-gift"></i>
                         <span>Access to exclusive items</span>
-                    </div>
-                    <div class="feature coin-feature">
-                        <i class="fas fa-percentage"></i>
-                        <span>20% bonus coins</span>
-                    </div>
-                    <div class="feature coin-feature">
-                        <i class="fas fa-star"></i>
-                        <span>Exclusive cosmetic particle</span>
                     </div>
                 </div>
                 <button class="buy-btn coin-btn" onclick="redirectToDiscord()">
@@ -522,16 +681,8 @@
                         <span>6000 server coins</span>
                     </div>
                     <div class="feature coin-feature">
-                        <i class="fas fa-store"></i>
+                        <i class="fas fa-gift"></i>
                         <span>Access to exclusive items</span>
-                    </div>
-                    <div class="feature coin-feature">
-                        <i class="fas fa-percentage"></i>
-                        <span>20% bonus coins</span>
-                    </div>
-                    <div class="feature coin-feature">
-                        <i class="fas fa-star"></i>
-                        <span>Exclusive cosmetic particle</span>
                     </div>
                 </div>
                 <button class="buy-btn coin-btn" onclick="redirectToDiscord()">
@@ -554,6 +705,46 @@
         function redirectToDiscord() {
             window.location.href = "https://discord.spymc.xyz";
         }
+
+        // Coin calculator functionality
+        const coinsSlider = document.getElementById('coins-slider');
+        const coinsValue = document.getElementById('coins-value');
+        const priceValue = document.getElementById('price-value');
+        const totalPrice = document.getElementById('total-price');
+        
+        // Define coin packages with their prices
+        const coinPackages = {
+            2000: 1.99,
+            3000: 2.71,
+            4000: 3.62,
+            5000: 4.52,
+            6000: 5.43
+        };
+        
+        // Function to calculate price based on coins
+        function calculatePrice(coins) {
+            // If it's one of the predefined packages, use the exact price
+            if (coinPackages[coins]) {
+                return coinPackages[coins];
+            }
+            
+            // For custom amounts, calculate based on approximate rate
+            // Using the average rate from the packages (about $0.00097 per coin)
+            return (coins * 0.00097).toFixed(2);
+        }
+        
+        // Update values when slider changes
+        coinsSlider.addEventListener('input', function() {
+            const coins = parseInt(this.value);
+            coinsValue.textContent = coins.toLocaleString();
+            
+            const price = calculatePrice(coins);
+            priceValue.textContent = price;
+            totalPrice.textContent = price;
+        });
+        
+        // Initialize values
+        coinsSlider.dispatchEvent(new Event('input'));
     </script>
 </body>
 </html>
