@@ -76,29 +76,63 @@
             margin: 0 auto;
         }
 
-        .ranks-grid {
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            text-align: center;
+            margin: 40px 0 20px;
+            font-size: 2rem;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+
+        .ranks-grid, .coins-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
             margin-bottom: 40px;
         }
 
-        .rank-card {
+        .rank-card, .coin-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 10px;
             padding: 25px;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
         }
 
-        .rank-card:hover {
+        .rank-card:hover, .coin-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 240, 255, 0.2);
             border-color: rgba(0, 240, 255, 0.4);
         }
 
-        .rank-header {
+        .coin-card {
+            border-color: rgba(255, 0, 170, 0.2);
+        }
+
+        .coin-card:hover {
+            border-color: rgba(255, 0, 170, 0.4);
+            box-shadow: 0 10px 25px rgba(255, 0, 170, 0.2);
+        }
+
+        .rank-header, .coin-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -107,7 +141,11 @@
             border-bottom: 1px solid var(--card-border);
         }
 
-        .rank-name {
+        .coin-header {
+            border-bottom-color: rgba(255, 0, 170, 0.2);
+        }
+
+        .rank-name, .coin-amount {
             font-family: 'Orbitron', sans-serif;
             color: var(--primary);
             font-size: 1.8rem;
@@ -115,7 +153,11 @@
             letter-spacing: 1px;
         }
 
-        .rank-price {
+        .coin-amount {
+            color: var(--secondary);
+        }
+
+        .rank-price, .coin-price {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.5rem;
             font-weight: 700;
@@ -125,12 +167,18 @@
             color: transparent;
         }
 
-        .rank-price span {
+        .coin-price {
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .rank-price span, .coin-price span {
             font-size: 0.9rem;
             color: var(--text-muted);
         }
 
-        .rank-description {
+        .rank-description, .coin-description {
             color: var(--text-muted);
             margin-bottom: 20px;
             min-height: 80px;
@@ -138,6 +186,7 @@
 
         .features-list {
             margin-bottom: 25px;
+            flex-grow: 1;
         }
 
         .feature {
@@ -152,6 +201,10 @@
             margin-right: 10px;
             width: 20px;
             text-align: center;
+        }
+
+        .coin-feature i {
+            color: var(--secondary);
         }
 
         .buy-btn {
@@ -175,6 +228,14 @@
             background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(255, 0, 170, 0.3);
+        }
+
+        .coin-btn {
+            background: linear-gradient(135deg, var(--secondary), var(--primary-dark));
+        }
+
+        .coin-btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
         }
 
         .discord-note {
@@ -210,11 +271,11 @@
                 font-size: 2rem;
             }
             
-            .ranks-grid {
+            .ranks-grid, .coins-grid {
                 grid-template-columns: 1fr;
             }
             
-            .rank-card {
+            .rank-card, .coin-card {
                 padding: 20px;
             }
         }
@@ -228,6 +289,7 @@
             <p class="subtitle">Upgrade your experience with premium ranks featuring exclusive perks and cosmetics</p>
         </header>
 
+        <h2 class="section-title">PREMIUM RANKS</h2>
         <div class="ranks-grid">
             <!-- Sniper Rank -->
             <div class="rank-card">
@@ -321,6 +383,158 @@
                     </div>
                 </div>
                 <button class="buy-btn" onclick="redirectToDiscord()">
+                    PURCHASE NOW
+                </button>
+            </div>
+        </div>
+
+        <h2 class="section-title">COIN PACKAGES</h2>
+        <div class="coins-grid">
+            <!-- 2000 Coins -->
+            <div class="coin-card">
+                <div class="coin-header">
+                    <div class="coin-amount">2000 COINS</div>
+                    <div class="coin-price">$1.99</div>
+                </div>
+                <p class="coin-description">
+                    Perfect starter package for new players looking to get some exclusive items.
+                </p>
+                <div class="features-list">
+                    <div class="feature coin-feature">
+                        <i class="fas fa-coins"></i>
+                        <span>2000 server coins</span>
+                    </div>
+                    <div class="feature coin-feature">
+                        <i class="fas fa-store"></i>
+                        <span>Access to exclusive items</span>
+                    </div>
+                </div>
+                <button class="buy-btn coin-btn" onclick="redirectToDiscord()">
+                    PURCHASE NOW
+                </button>
+            </div>
+
+            <!-- 3000 Coins -->
+            <div class="coin-card">
+                <div class="coin-header">
+                    <div class="coin-amount">3000 COINS</div>
+                    <div class="coin-price">$2.71</div>
+                </div>
+                <p class="coin-description">
+                    Great value package for regular players who want more purchasing power.
+                </p>
+                <div class="features-list">
+                    <div class="feature coin-feature">
+                        <i class="fas fa-coins"></i>
+                        <span>3000 server coins</span>
+                    </div>
+                    <div class="feature coin-feature">
+                        <i class="fas fa-store"></i>
+                        <span>Access to exclusive items</span>
+                    </div>
+                    <div class="feature coin-feature">
+                        <i class="fas fa-percentage"></i>
+                        <span>5% bonus coins</span>
+                    </div>
+                </div>
+                <button class="buy-btn coin-btn" onclick="redirectToDiscord()">
+                    PURCHASE NOW
+                </button>
+            </div>
+
+            <!-- 4000 Coins -->
+            <div class="coin-card">
+                <div class="coin-header">
+                    <div class="coin-amount">4000 COINS</div>
+                    <div class="coin-price">$3.62</div>
+                </div>
+                <p class="coin-description">
+                    Premium package for dedicated players seeking the best items in the game.
+                </p>
+                <div class="features-list">
+                    <div class="feature coin-feature">
+                        <i class="fas fa-coins"></i>
+                        <span>4000 server coins</span>
+                    </div>
+                    <div class="feature coin-feature">
+                        <i class="fas fa-store"></i>
+                        <span>Access to exclusive items</span>
+                    </div>
+                    <div class="feature coin-feature">
+                        <i class="fas fa-percentage"></i>
+                        <span>10% bonus coins</span>
+                    </div>
+                    <div class="feature coin-feature">
+                        <i class="fas fa-star"></i>
+                        <span>Exclusive cosmetic particle</span>
+                    </div>
+                </div>
+                <button class="buy-btn coin-btn" onclick="redirectToDiscord()">
+                    PURCHASE NOW
+                </button>
+            </div>
+
+            <!-- 5000 Coins -->
+            <div class="coin-card">
+                <div class="coin-header">
+                    <div class="coin-amount">5000 COINS</div>
+                    <div class="coin-price">$4.52</div>
+                </div>
+                <p class="coin-description">
+                    Excellent value for serious players who want to maximize their in-game options.
+                </p>
+                <div class="features-list">
+                    <div class="feature coin-feature">
+                        <i class="fas fa-coins"></i>
+                        <span>5000 server coins</span>
+                    </div>
+                    </div>
+                    <div class="feature coin-feature">
+                        <i class="fas fa-store"></i>
+                        <span>Access to exclusive items</span>
+                    </div>
+                    <div class="feature coin-feature">
+                        <i class="fas fa-percentage"></i>
+                        <span>20% bonus coins</span>
+                    </div>
+                    <div class="feature coin-feature">
+                        <i class="fas fa-star"></i>
+                        <span>Exclusive cosmetic particle</span>
+                    </div>
+                </div>
+                <button class="buy-btn coin-btn" onclick="redirectToDiscord()">
+                    PURCHASE NOW
+                </button>
+            </div>
+
+            <!-- 6000 Coins -->
+            <div class="coin-card">
+                <div class="coin-header">
+                    <div class="coin-amount">6000 COINS</div>
+                    <div class="coin-price">$5.43</div>
+                </div>
+                <p class="coin-description">
+                    The ultimate coin package for players who want everything the server has to offer.
+                </p>
+                <div class="features-list">
+                    <div class="feature coin-feature">
+                        <i class="fas fa-coins"></i>
+                        <span>6000 server coins</span>
+                    </div>
+                    <div class="feature coin-feature">
+                        <i class="fas fa-store"></i>
+                        <span>Access to exclusive items</span>
+                    </div>
+                    <div class="feature coin-feature">
+                        <i class="fas fa-percentage"></i>
+                        <span>20% bonus coins</span>
+                    </div>
+                    <div class="feature coin-feature">
+                        <i class="fas fa-star"></i>
+                        <span>Exclusive cosmetic particle</span>
+                    </div>
+                </div>
+                <button class="buy-btn coin-btn" onclick="redirectToDiscord()">
                     PURCHASE NOW
                 </button>
             </div>
