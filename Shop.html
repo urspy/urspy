@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpyMC Rank Shop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00f0ff;
+            --primary-dark: #0066ff;
+            --secondary: #ff00aa;
+            --accent: #00ffaa;
+            --dark: #0a0a12;
+            --darker: #050508;
+            --light: #e0e0ff;
+            --card-bg: rgba(15, 15, 25, 0.9);
+            --card-border: rgba(0, 240, 255, 0.2);
+            --text-muted: rgba(200, 200, 255, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 170, 0.05) 0%, transparent 25%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            height: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            text-align: center;
+            margin: 40px 0 20px;
+            font-size: 2rem;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+
+        .ranks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .rank-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .rank-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.2);
+            border-color: rgba(0, 240, 255, 0.4);
+        }
+
+        .rank-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .rank-name {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .rank-price {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .rank-price span {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .rank-description {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            min-height: 80px;
+        }
+
+        .features-list {
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+
+        .feature i {
+            color: var(--accent);
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .buy-btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 170, 0.3);
+        }
+
+        .discord-note {
+            text-align: center;
+            color: var(--text-muted);
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .discord-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .discord-link:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--card-border);
+        }
+
+        /* Coin Calculator Styles */
+        .calculator-container {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .calculator-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .calculator-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .calculator-controls {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slider-container {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        .coins-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            outline: none;
+        }
+
+        .coins-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            border: 2px solid var(--light);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        .coins-slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            border: 2px solid var(--light);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        .slider-ticks {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding: 0 10px;
+        }
+
+        .tick {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            position: relative;
+            text-align: center;
+            width: 20%;
+        }
+
+        .tick:before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 8px;
+            width: 2px;
+            background: var(--text-muted);
+        }
+
+        .calculator-display {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .coins-display {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 0, 170, 0.3);
+        }
+
+        .price-display {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        .price-note {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .calculator-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        .calculator-btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .ranks-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .rank-card {
+                padding: 20px;
+            }
+            
+            .calculator-container {
+                padding: 20px;
+            }
+            
+            .calculator-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .coins-display {
+                font-size: 2.5rem;
+            }
+            
+            .price-display {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://i.ibb.co/tMF05rbH/image69.png" alt="SpyMC" class="logo">
+            <h1>SPYMC RANK SHOP</h1>
+            <p class="subtitle">Upgrade your experience with premium ranks featuring exclusive perks and cosmetics</p>
+        </header>
+
+        <h2 class="section-title">PREMIUM RANKS</h2>
+        <div class="ranks-grid">
+            <!-- Sniper Rank -->
+            <div class="rank-card">
+                <div class="rank-header">
+                    <div class="rank-name">SNIPER</div>
+                    <div class="rank-price">$5.49 <span>/ ₹451</span></div>
+                </div>
+                <p class="rank-description">
+                    The ultimate prestige rank with exclusive cosmetics, VIP areas, and priority access.
+                </p>
+                <div class="features-list">
+                    <div class="feature">
+                        <i class="fas fa-crown"></i>
+                        <span>Exclusive Sniper tag</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-lock-open"></i>
+                        <span>VIP-only areas</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-bolt"></i>
+                        <span>Priority queue access</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-gem"></i>
+                        <span>Special cosmetics</span>
+                    </div>
+                </div>
+                <button class="buy-btn" onclick="redirectToDiscord()">
+                    PURCHASE NOW
+                </button>
+            </div>
+
+            <!-- Core Rank -->
+            <div class="rank-card">
+                <div class="rank-header">
+                    <div class="rank-name">CORE</div>
+                    <div class="rank-price">$4.39 <span>/ ₹363</span></div>
+                </div>
+                <p class="rank-description">
+                    Premium rank with enhanced gameplay features and special privileges.
+                </p>
+                <div class="features-list">
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Extended claims</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-home"></i>
+                        <span>Additional homes</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-rocket"></i>
+                        <span>Faster flying</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-paint-brush"></i>
+                        <span>Custom particles</span>
+                    </div>
+                </div>
+                <button class="buy-btn" onclick="redirectToDiscord()">
+                    PURCHASE NOW
+                </button>
+            </div>
+
+            <!-- Cyber Rank -->
+            <div class="rank-card">
+                <div class="rank-header">
+                    <div class="rank-name">CYBER</div>
+                    <div class="rank-price">$3.84 <span>/ ₹313</span></div>
+                </div>
+                <p class="rank-description">
+                    Enhanced rank with special cosmetics and gameplay advantages.
+                </p>
+                <div class="features-list">
+                    <div class="feature">
+                        <i class="fas fa-robot"></i>
+                        <span>Cyber-themed cosmetics</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-tools"></i>
+                        <span>Special crafting recipes</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Enhanced protections</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-paw"></i>
+                        <span>Exclusive pets</span>
+                    </div>
+                </div>
+                <button class="buy-btn" onclick="redirectToDiscord()">
+                    PURCHASE NOW
+                </button>
+            </div>
+        </div>
+
+        <!-- Coin Calculator Section -->
+        <div class="calculator-container">
+            <h2 class="calculator-title">COIN CALCULATOR</h2>
+            <div class="calculator-content">
+                <div class="calculator-controls">
+                    <div class="slider-container">
+                        <div class="slider-label">
+                            <span>Select Coin Amount:</span>
+                            <span id="coins-value">2000</span>
+                        </div>
+                        <input type="range" min="0" max="20000" value="2000" class="coins-slider" id="coins-slider">
+                        <div class="slider-ticks">
+                            <div class="tick">0</div>
+                            <div class="tick">4000</div>
+                            <div class="tick">8000</div>
+                            <div class="tick">12000</div>
+                            <div class="tick">16000</div>
+                            <div class="tick">20000</div>
+                        </div>
+                    </div>
+                    
+                    <button class="calculator-btn" onclick="redirectToDiscord()">
+                        PURCHASE COINS
+                    </button>
+                </div>
+                
+                <div class="calculator-display">
+                    <div class="coins-display"><span id="display-coins">2000</span> COINS</div>
+                    <div class="price-display">$<span id="display-price">1.99</span></div>
+                    <div class="price-note">Approximate conversion rate: 1000 coins ≈ $1</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="discord-note">
+            <p>Need help? Join our <a href="https://discord.spymc.xyz" class="discord-link" target="_blank">Discord</a> for support.</p>
+        </div>
+
+        <footer>
+            <p>© 2025 SpyMC Network. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        function redirectToDiscord() {
+            window.location.href = "https://discord.spymc.xyz";
+        }
+
+        // Coin calculator functionality
+        const coinsSlider = document.getElementById('coins-slider');
+        const coinsValue = document.getElementById('coins-value');
+        const displayCoins = document.getElementById('display-coins');
+        const displayPrice = document.getElementById('display-price');
+        
+        // Define coin packages with their prices
+        const coinPackages = {
+            2000: 1.99,
+            3000: 2.71,
+            4000: 3.62,
+            5000: 4.52,
+            6000: 5.43
+        };
+        
+        // Function to calculate price based on coins
+        function calculatePrice(coins) {
+            // If it's one of the predefined packages, use the exact price
+            if (coinPackages[coins]) {
+                return coinPackages[coins];
+            }
+            
+            // For custom amounts, calculate based on approximate rate
+            // Using the average rate from the packages (about $0.00097 per coin)
+            return (coins * 0.00097).toFixed(2);
+        }
+        
+        // Update values when slider changes
+        coinsSlider.addEventListener('input', function() {
+            const coins = parseInt(this.value);
+            coinsValue.textContent = coins.toLocaleString();
+            displayCoins.textContent = coins.toLocaleString();
+            
+            const price = calculatePrice(coins);
+            displayPrice.textContent = price;
+        });
+        
+        // Initialize values
+        coinsSlider.dispatchEvent(new Event('input'));
+    </script>
+</body>
+</html>
