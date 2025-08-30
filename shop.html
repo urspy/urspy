@@ -115,6 +115,8 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: column;
+            position: relative;
+            overflow: hidden;
         }
 
         .rank-card:hover {
@@ -123,11 +125,35 @@
             border-color: rgba(0, 240, 255, 0.4);
         }
 
+        .rank-image {
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .rank-image img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.5));
+            transition: all 0.3s ease;
+        }
+
+        .rank-card:hover .rank-image img {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.8));
+        }
+
         .rank-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             padding-bottom: 15px;
             border-bottom: 1px solid var(--card-border);
         }
@@ -430,6 +456,9 @@
         <div class="ranks-grid">
             <!-- Sniper Rank -->
             <div class="rank-card">
+                <div class="rank-image">
+                    <img src="https://i.ibb.co/sdd47s4G/protection6.png" alt="Sniper Rank">
+                </div>
                 <div class="rank-header">
                     <div class="rank-name">SNIPER</div>
                     <div class="rank-price">$5.49 <span>/ ₹451</span></div>
@@ -462,6 +491,9 @@
 
             <!-- Core Rank -->
             <div class="rank-card">
+                <div class="rank-image">
+                    <img src="https://i.ibb.co/JwShXwtH/core.png" alt="Core Rank">
+                </div>
                 <div class="rank-header">
                     <div class="rank-name">CORE</div>
                     <div class="rank-price">$4.39 <span>/ ₹363</span></div>
@@ -494,6 +526,9 @@
 
             <!-- Cyber Rank -->
             <div class="rank-card">
+                <div class="rank-image">
+                    <img src="https://i.ibb.co/P0BjXQx/cyber.png" alt="Cyber Rank">
+                </div>
                 <div class="rank-header">
                     <div class="rank-name">CYBER</div>
                     <div class="rank-price">$3.84 <span>/ ₹313</span></div>
