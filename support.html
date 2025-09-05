@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpyMC - Support Center</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="https://i.ibb.co/tMF05rbH/image69.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00f0ff;
+            --primary-dark: #0066ff;
+            --secondary: #ff00aa;
+            --accent: #00ffaa;
+            --dark: #0a0a12;
+            --darker: #050508;
+            --light: #e0e0ff;
+            --card-bg: rgba(15, 15, 25, 0.9);
+            --card-border: rgba(0, 240, 255, 0.2);
+            --text-muted: rgba(200, 200, 255, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 170, 0.05) 0%, transparent 25%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            height: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin: 25px 0 10px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .support-section {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .support-section:hover {
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.1);
+        }
+
+        p, ul {
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        li:before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .info-box {
+            background: rgba(0, 240, 255, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .info-title {
+            color: var(--primary);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .contact-card {
+            background: rgba(15, 15, 30, 0.7);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.2);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .contact-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .contact-details {
+            margin-bottom: 15px;
+        }
+
+        .contact-link {
+            display: inline-block;
+            padding: 8px 15px;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .contact-link:hover {
+            background: rgba(0, 240, 255, 0.2);
+            border-color: var(--primary);
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-question {
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .faq-answer {
+            padding-left: 30px;
+            color: var(--light);
+        }
+
+        .response-time {
+            background: rgba(0, 255, 170, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .response-title {
+            color: var(--accent);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--card-border);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .support-section {
+                padding: 20px;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://i.ibb.co/tMF05rbH/image69.png" alt="SpyMC" class="logo">
+            <h1>SPYMC SUPPORT CENTER</h1>
+            <p class="subtitle">Get help with account issues, gameplay problems, and server-related questions</p>
+        </header>
+
+        <div class="support-section">
+            <h2>How to Contact Support</h2>
+            <p>We offer multiple ways to get assistance with your SpyMC experience. Choose the method that works best for you.</p>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="contact-title">Email Support</h3>
+                    <div class="contact-details">
+                        <p>For account and billing issues</p>
+                        <p><strong>support@spymc.xyz</strong></p>
+                    </div>
+                    <a href="mailto:support@spymc.xyz" class="contact-link">Send Email</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3 class="contact-title">General Help</h3>
+                    <div class="contact-details">
+                        <p>For gameplay and general questions</p>
+                        <p><strong>help@spymc.xyz</strong></p>
+                    </div>
+                    <a href="mailto:help@spymc.xyz" class="contact-link">Send Email</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-discord"></i>
+                    </div>
+                    <h3 class="contact-title">Discord Support</h3>
+                    <div class="contact-details">
+                        <p>Join our community for real-time help</p>
+                        <p><strong>discord.spymc.xyz</strong></p>
+                    </div>
+                    <a href="https://discord.spymc.xyz" class="contact-link" target="_blank">Join Discord</a>
+                </div>
+            </div>
+            
+            <div class="response-time">
+                <div class="response-title">
+                    <i class="fas fa-clock"></i>
+                    <span>RESPONSE TIMES</span>
+                </div>
+                <p>We strive to respond to all inquiries within 24-48 hours. Discord support typically has faster response times during staff availability hours.</p>
+            </div>
+        </div>
+
+        <div class="support-section">
+            <h2>What to Include in Your Support Request</h2>
+            <p>To help us assist you faster, please include the following information in your support ticket:</p>
+            
+            <ul>
+                <li><span class="highlight">Your Minecraft username:</span> The primary account you use on our server</li>
+                <li><span class="highlight">Detailed description:</span> Explain your issue or question thoroughly</li>
+                <li><span class="highlight">Screenshots:</span> If applicable, include screenshots of the issue</li>
+                <li><span class="highlight">Error messages:</span> Copy any error messages you've received</li>
+                <li><span class="highlight">Time and date:</span> When the issue occurred or started</li>
+            </ul>
+            
+            <div class="info-box">
+                <div class="info-title">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>PRO TIP</span>
+                </div>
+                <p>For ban appeals, include your username, reason for ban (if known), and a thoughtful explanation of why you should be unbanned.</p>
+            </div>
+        </div>
+
+        <div class="support-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-question"></i>
+                    <span>How do I report a player who is breaking rules?</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Use the /report command in-game if available, or provide evidence (screenshots/video) through our Discord server in the appropriate reporting channel.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-question"></i>
+                    <span>I lost my items due to a bug. Can I get them back?</span>
+                </div>
+                <div class="faq-answer">
+                    <p>We generally don't restore lost items except in cases of verified server-side issues. Contact us with details about what happened and when.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-question"></i>
+                    <span>How do I purchase ranks or cosmetics?</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Visit our web store at <a href="https://www.spymc.xyz" style="color: var(--accent);">www.spymc.xyz</a>. For payment issues, contact support@spymc.xyz with your transaction details.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-question"></i>
+                    <span>My account was hacked. What should I do?</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Contact us immediately at support@spymc.xyz from your registered email address. We'll secure your account and help you regain access.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="support-section">
+            <h2>Support Resources</h2>
+            <p>Additional resources that might help you find answers:</p>
+            
+            <ul>
+                <li><a href="#" style="color: var(--accent);">Server Rules & Guidelines</a></li>
+                <li><a href="#" style="color: var(--accent);">Gameplay Tutorials</a></li>
+                <li><a href="#" style="color: var(--accent);">Common Technical Issues</a></li>
+                <li><a href="#" style="color: var(--accent);">Ban Appeal Process</a></li>
+            </ul>
+            
+            <div class="info-box">
+                <div class="info-title">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>URGENT ISSUES</span>
+                </div>
+                <p>For critical security issues or active exploitation, please use Discord for the fastest response. Label your message as "URGENT" in the appropriate channel.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 SpyMC Network. All rights reserved.</p>
+            <p>We're here to help you have the best possible experience on our server!</p>
+        </footer>
+    </div>
+</body>
+</html>
