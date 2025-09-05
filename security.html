@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpyMC - Security Systems</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="https://i.ibb.co/tMF05rbH/image69.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00f0ff;
+            --primary-dark: #0066ff;
+            --secondary: #ff00aa;
+            --accent: #00ffaa;
+            --dark: #0a0a12;
+            --darker: #050508;
+            --light: #e0e0ff;
+            --card-bg: rgba(15, 15, 25, 0.9);
+            --card-border: rgba(0, 240, 255, 0.2);
+            --text-muted: rgba(200, 200, 255, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 170, 0.05) 0%, transparent 25%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            height: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin: 25px 0 10px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .security-section {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .security-section:hover {
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.1);
+        }
+
+        p, ul {
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        li:before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .warning {
+            background: rgba(255, 0, 85, 0.15);
+            border-left: 4px solid var(--secondary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .warning-title {
+            color: var(--secondary);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .info-box {
+            background: rgba(0, 240, 255, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .info-title {
+            color: var(--primary);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .protocol-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .protocol-card {
+            background: rgba(15, 15, 30, 0.7);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .protocol-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.2);
+        }
+
+        .protocol-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .protocol-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: var(--accent);
+        }
+
+        .contact-item i {
+            color: var(--primary);
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .feature-item {
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            padding: 12px 15px;
+            flex: 1 0 calc(33% - 15px);
+            min-width: 200px;
+        }
+
+        .feature-item h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .security-badge {
+            text-align: center;
+            margin: 30px 0;
+            padding: 15px;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        .badge-text {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 1.2rem;
+            text-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .security-section {
+                padding: 20px;
+            }
+            
+            .protocol-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-item {
+                flex: 1 0 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://i.ibb.co/tMF05rbH/image69.png" alt="SpyMC" class="logo">
+            <h1>SPYMC SECURITY SYSTEMS</h1>
+            <p class="subtitle">Advanced protection protocols ensuring a secure and fair gaming environment</p>
+        </header>
+
+        <div class="security-badge">
+            <p class="badge-text">PROTECTED BY 100ms/net SECURITY INFRASTRUCTURE</p>
+        </div>
+
+        <div class="security-section">
+            <h2>Core Security Protocol: 100ms/net</h2>
+            <p>Our server operates on the proprietary 100ms/net security framework, providing unparalleled protection against exploits, cheating, and unauthorized access.</p>
+            
+            <div class="info-box">
+                <div class="info-title">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>SYSTEM OVERVIEW</span>
+                </div>
+                <p>The 100ms/net protocol establishes a secure, low-latency connection between our servers and validated clients, creating a protective barrier that prevents unauthorized access and malicious activities.</p>
+            </div>
+            
+            <h3>Key Security Features</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>Real-time Packet Analysis</h4>
+                    <p>Continuous monitoring of all data packets for suspicious patterns</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Behavioral Authentication</h4>
+                    <p>AI-powered analysis of player behavior to detect anomalies</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Encrypted Handshake</h4>
+                    <p>Secure connection protocol that prevents MITM attacks</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Zero Trust Architecture</h4>
+                    <p>Verify all connections regardless of origin or reputation</p>
+                </div>
+                <div class="feature-item">
+                    <h4>DDoS Mitigation</h4>
+                    <p>Advanced protection against distributed denial of service attacks</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Automatic Threat Response</h4>
+                    <p>Instant countermeasures against detected security threats</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="security-section">
+            <h2>Network Protection Systems</h2>
+            <p>Our multi-layered security approach ensures comprehensive protection at every level of our infrastructure.</p>
+            
+            <div class="protocol-grid">
+                <div class="protocol-card">
+                    <div class="protocol-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3 class="protocol-title">Player Authentication</h3>
+                    <ul>
+                        <li>Secure Mojang session validation</li>
+                        <li>Hardware fingerprinting</li>
+                        <li>Behavioral biometrics</li>
+                        <li>Multi-factor authentication options</li>
+                    </ul>
+                </div>
+                
+                <div class="protocol-card">
+                    <div class="protocol-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3 class="protocol-title">Network Security</h3>
+                    <ul>
+                        <li>Enterprise-grade firewalls</li>
+                        <li>DDoS protection with automatic scaling</li>
+                        <li>IP reputation monitoring</li>
+                        <li>Geofencing capabilities</li>
+                    </ul>
+                </div>
+                
+                <div class="protocol-card">
+                    <div class="protocol-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="protocol-title">Data Protection</h3>
+                    <ul>
+                        <li>End-to-end encryption</li>
+                        <li>Regular security audits</li>
+                        <li>Secure backup systems</li>
+                        <li>GDPR-compliant data handling</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="warning">
+                <div class="warning-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>SECURITY NOTICE</span>
+                </div>
+                <p>Any attempt to bypass our security systems, exploit vulnerabilities, or disrupt service will result in immediate permanent banning of all associated accounts and may lead to legal action.</p>
+            </div>
+        </div>
+
+        <div class="security-section">
+            <h2>Anti-Cheat & Exploit Prevention</h2>
+            <p>Our custom-built anti-cheat system works in tandem with the 100ms/net protocol to detect and prevent cheating in real-time.</p>
+            
+            <ul>
+                <li><span class="highlight">Movement Analysis:</span> Detects unnatural movement patterns, flight, speed hacking</li>
+                <li><span class="highlight">Combat Verification:</span> Validates combat actions for impossible reach, autoclicking, or aim assistance</li>
+                <li><span class="highlight">Inventory Monitoring:</span> Prevents item duplication, unauthorized item generation, or inventory manipulation</li>
+                <li><span class="highlight">Interaction Validation:</span> Ensures all player interactions with the world follow game mechanics</li>
+                <li><span class="highlight">Client Integrity Checks:</span> Verifies client modifications are within allowed parameters</li>
+            </ul>
+            
+            <div class="info-box">
+                <div class="info-title">
+                    <i class="fas fa-brain"></i>
+                    <span>ADAPTIVE LEARNING SYSTEM</span>
+                </div>
+                <p>Our security systems employ machine learning to continuously improve detection capabilities based on new threats and attack patterns, staying ahead of emerging exploitation techniques.</p>
+            </div>
+        </div>
+
+        <div class="security-section">
+            <h2>Server-Side Protections</h2>
+            <p>Beyond network security, we implement comprehensive server-side measures to ensure game integrity.</p>
+            
+            <ul>
+                <li><span class="highlight">Custom Build Limitations:</span> Prevents excessive server load from complex redstone contraptions or entity farms</li>
+                <li><span class="highlight">Chat Filtering:</span> Advanced systems to detect and prevent spam, advertising, and inappropriate content</li>
+                <li><span class="highlight">Lag Prevention:</span> Automatic detection and mitigation of performance-impacting activities</li>
+                <li><span class="highlight">Backup Systems:</span> Regular world backups with point-in-time recovery capabilities</li>
+                <li><span class="highlight">Rollback Functionality:</span> Ability to reverse malicious world changes or exploits</li>
+            </ul>
+        </div>
+
+        <div class="security-section">
+            <h2>Reporting Security Issues</h2>
+            <p>We encourage responsible disclosure of security vulnerabilities. If you discover a potential security issue:</p>
+            
+            <ul>
+                <li>Do not exploit the vulnerability or share it with others</li>
+                <li>Submit a detailed report to <span class="highlight">security@spymc.xyz</span></li>
+                <li>Include steps to reproduce the issue and any proof-of-concept code</li>
+                <li>Allow reasonable time for us to address the issue before making it public</li>
+            </ul>
+            
+            <div class="info-box">
+                <div class="info-title">
+                    <i class="fas fa-award"></i>
+                    <span>BOUNTY PROGRAM</span>
+                </div>
+                <p>We offer rewards for verified security vulnerability reports based on severity and impact. Rewards may include in-game items, ranks, or monetary compensation for critical vulnerabilities.</p>
+            </div>
+        </div>
+
+        <div class="contact-info">
+            <a href="https://www.spymc.xyz" class="contact-item" target="_blank">
+                <i class="fas fa-globe"></i> Website
+            </a>
+            <a href="https://discord.spymc.xyz" class="contact-item" target="_blank">
+                <i class="fab fa-discord"></i> Discord
+            </a>
+            <a href="mailto:support@spymc.xyz" class="contact-item">
+                <i class="fas fa-envelope"></i> Support
+            </a>
+            <a href="mailto:security@spymc.xyz" class="contact-item">
+                <i class="fas fa-shield-alt"></i> Security Team
+            </a>
+        </div>
+
+        <footer>
+            <p>© 2025 SpyMC Network. All rights reserved.</p>
+            <p>100ms/net security protocol - Patent Pending</p>
+        </footer>
+    </div>
+</body>
+</html>
