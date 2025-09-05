@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpyMC - Alt Grinding Rules</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="images/logo.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00f0ff;
+            --primary-dark: #0066ff;
+            --secondary: #ff00aa;
+            --accent: #00ffaa;
+            --dark: #0a0a12;
+            --darker: #050508;
+            --light: #e0e0ff;
+            --card-bg: rgba(15, 15, 25, 0.9);
+            --card-border: rgba(0, 240, 255, 0.2);
+            --text-muted: rgba(200, 200, 255, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 170, 0.05) 0%, transparent 25%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            height: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin: 25px 0 10px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .last-updated {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .rule-section {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .rule-section:hover {
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.1);
+        }
+
+        p, ul {
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        li:before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .warning {
+            background: rgba(255, 0, 85, 0.15);
+            border-left: 4px solid var(--secondary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .warning-title {
+            color: var(--secondary);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .example-box {
+            background: rgba(0, 240, 255, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .example-title {
+            color: var(--primary);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: var(--accent);
+        }
+
+        .contact-item i {
+            color: var(--primary);
+        }
+
+        .acceptance {
+            font-style: italic;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--card-border);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--card-border);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .rule-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://i.ibb.co/tMF05rbH/image69.png" alt="SpyMC" class="logo">
+            <h1>SPYMC ALT GRINDING RULES</h1>
+            <p class="subtitle">Specific policies regarding alternate accounts and player interactions</p>
+            <div class="last-updated">Last Updated: March 2025</div>
+        </header>
+
+        <div class="rule-section">
+            <h2>1. Definition of Alt Grinding</h2>
+            <p>Alt grinding refers to the practice of using alternate accounts to gain unfair advantages, manipulate game mechanics, or harass other players.</p>
+            
+            <div class="warning">
+                <div class="warning-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>STRICTLY PROHIBITED</span>
+                </div>
+                <p>Any form of alt grinding that provides unfair advantages or disrupts gameplay for others is strictly forbidden and will result in severe penalties.</p>
+            </div>
+        </div>
+
+        <div class="rule-section">
+            <h2>2. Primary Rule: No Targeted Harassment</h2>
+            <p>The core principle of our alt grinding policy is that you cannot use alternate accounts to specifically target or harass individual players.</p>
+            
+            <ul>
+                <li><span class="highlight">No Personal Vendettas:</span> You cannot use alts to repeatedly target the same player.</li>
+                <li><span class="highlight">Behavior Consistency:</span> Your behavior across all accounts must be consistent with server rules.</li>
+                <li><span class="highlight">No Revenge Killing:</span> Using alts for revenge kills against specific players is prohibited.</li>
+                <li><span class="highlight">Respect All Players:</span> You must treat all players with respect, regardless of which account you're using.</li>
+            </ul>
+            
+            <div class="example-box">
+                <div class="example-title">
+                    <i class="fas fa-check-circle"></i>
+                    <span>ALLOWED EXAMPLE</span>
+                </div>
+                <p>Using an alternate account for normal gameplay where you encounter various players randomly and treat them all fairly.</p>
+            </div>
+            
+            <div class="warning">
+                <div class="warning-title">
+                    <i class="fas fa-times-circle"></i>
+                    <span>NOT ALLOWED EXAMPLE</span>
+                </div>
+                <p>Creating multiple accounts specifically to hunt down and repeatedly kill a player you have a personal issue with.</p>
+            </div>
+        </div>
+
+        <div class="rule-section">
+            <h2>3. Specific Restrictions</h2>
+            <p>Detailed restrictions regarding alternate account usage:</p>
+            
+            <ul>
+                <li><span class="highlight">No Same-Player Targeting:</span> You cannot repeatedly target the same player across different accounts.</li>
+                <li><span class="highlight">Kill Limit:</span> Do not kill the same player more than 3 times in a 24-hour period using any account.</li>
+                <li><span class="highlight">No Behavior Mismatch:</span> Your behavior must be consistent across all accounts - no "Jekyll and Hyde" personas.</li>
+                <li><span class="highlight">No Friend Assistance:</span> Do not use friends' accounts or coordinate with friends to target specific players.</li>
+                <li><span class="highlight">No Event Manipulation:</span> Do not use alternate accounts to manipulate events, competitions, or voting systems.</li>
+            </ul>
+        </div>
+
+        <div class="rule-section">
+            <h2>4. Fair PvP Guidelines</h2>
+            <p>Rules for player versus player combat involving alternate accounts:</p>
+            
+            <ul>
+                <li><span class="highlight">Random Encounters Only:</span> PvP should occur through natural, random gameplay encounters.</li>
+                <li><span class="highlight">No Hunting:</span> Do not actively seek out specific players to engage in combat.</li>
+                <li><span class="highlight">Respect Combat Logs:</span> If a player recently logged out from combat, do not wait with an alt account.</li>
+                <li><span class="highlight">No Stream Sniping:</span> Do not use alternate accounts to gain information about streamers' locations.</li>
+            </ul>
+        </div>
+
+        <div class="rule-section">
+            <h2>5. Economic Restrictions</h2>
+            <p>Rules regarding alternate accounts and the server economy:</p>
+            
+            <ul>
+                <li><span class="highlight">No Resource Farming:</span> Do not use alternate accounts to farm resources, votes, or rewards.</li>
+                <li><span class="highlight">No Market Manipulation:</span> Do not use alternate accounts to manipulate market prices.</li>
+                <li><span class="highlight">No Item Transfer:</span> Avoid transferring valuable items between your accounts.</li>
+                <li><span class="highlight">No Vote Boosting:</span> Do not use alternate accounts to artificially boost vote counts.</li>
+            </ul>
+        </div>
+
+        <div class="rule-section">
+            <h2>6. Punishments for Violations</h2>
+            <p>Consequences for breaking alt grinding rules:</p>
+            
+            <ul>
+                <li><span class="highlight">First Offense:</span> 7-day ban on all associated accounts</li>
+                <li><span class="highlight">Second Offense:</span> 30-day ban on all associated accounts</li>
+                <li><span class="highlight">Severe or Repeated Violations:</span> Permanent network ban on all accounts</li>
+                <li><span class="highlight">Economic Abuse:</span> Reset of ill-gotten gains and temporary ban</li>
+                <li><span class="highlight">Harassment Cases:</span> Immediate permanent ban for severe harassment</li>
+            </ul>
+            
+            <div class="warning">
+                <div class="warning-title">
+                    <i class="fas fa-gavel"></i>
+                    <span>STAFF DISCRETION</span>
+                </div>
+                <p>Server staff reserve the right to determine appropriate punishments based on the severity of infractions and may apply more severe penalties for extreme cases.</p>
+            </div>
+        </div>
+
+        <div class="rule-section">
+            <h2>7. Reporting Alt Grinding Abuse</h2>
+            <p>How to report violations of these rules:</p>
+            
+            <ul>
+                <li><span class="highlight">Evidence Required:</span> Provide screenshots, videos, or other evidence when reporting</li>
+                <li><span class="highlight">Discord Reports:</span> Use the appropriate channels in our Discord server</li>
+                <li><span class="highlight">In-Game Reports:</span> Use /report when available for immediate issues</li>
+                <li><span class="highlight">Be Specific:</span> Include usernames, timestamps, and detailed descriptions</li>
+                <li><span class="highlight">No False Reports:</span> Intentionally false reports may result in punishment</li>
+            </ul>
+        </div>
+
+        <div class="contact-info">
+            <a href="https://www.spymc.xyz" class="contact-item" target="_blank">
+                <i class="fas fa-globe"></i> Website
+            </a>
+            <a href="https://discord.spymc.xyz" class="contact-item" target="_blank">
+                <i class="fab fa-discord"></i> Discord
+            </a>
+            <a href="https://instagram.com/spymc.xyz" class="contact-item" target="_blank">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://youtube.com/@urspy" class="contact-item" target="_blank">
+                <i class="fab fa-youtube"></i> YouTube
+            </a>
+        </div>
+
+        <div class="acceptance">
+            <p>By playing on SpyMC, you agree to abide by these alt grinding rules. Ignorance of these rules is not an excuse for violation.</p>
+        </div>
+
+        <footer>
+            <p>© 2025 SpyMC Network. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
