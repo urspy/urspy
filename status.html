@@ -281,14 +281,6 @@
             border: 1px solid rgba(0, 240, 255, 0.1);
         }
 
-        .ip-masked {
-            filter: blur(4px);
-            opacity: 0.8;
-            margin: 0 3px;
-            min-width: 45px;
-            text-align: center;
-        }
-
         .ping-value {
             display: inline-block;
             padding: 8px 16px;
@@ -470,11 +462,11 @@
         // Server data
         const servers = {
             "SPYMC": "spymc.xyz:25565",
-            "Survival": "127.0. 0.1:25565",
-            "Lobby": "127.0. 0.1:25565",
-            "FFA2": "127.0. 0.1:25565",
-            "OG": "127.0. 0.1:25565",
-            "Other": "127.0. 0.1:25565"
+            "Survival": "127.0.0.1:25565",
+            "Lobby": "127.0.0.1:25565",
+            "FFA2": "127.0.0.1:25565",
+            "OG": "127.0.0.1:25565",
+            "Other": "127.0.0.1:25565"
         };
 
         // Global variables
@@ -484,28 +476,8 @@
         let pingCount = 0;
         const refreshInterval = 5000; // 5 seconds
 
-        // Mask IP address by blurring middle part
-        function maskIP(ip) {
-            if (ip.includes(':')) {
-                const [address, port] = ip.split(':');
-                if (address.includes('.')) {
-                    // IPv4 address - show first and last octet, blur middle
-                    const parts = address.split('.');
-                    if (parts.length === 4) {
-                        return `<span>${parts[0]}.</span><span class="ip-masked">${parts[1]}.${parts[2]}</span><span>.${parts[3]}:${port}</span>`;
-                    }
-                }
-                // Domain - blur middle part
-                const domainParts = address.split('.');
-                if (domainParts.length >= 2) {
-                    const mainPart = domainParts[0];
-                    const maskedLength = Math.max(5, mainPart.length - 4);
-                    const visibleStart = mainPart.substring(0, 2);
-                    const visibleEnd = mainPart.substring(mainPart.length - 2);
-                    const maskedMiddle = mainPart.substring(2, mainPart.length - 2);
-                    return `<span>${visibleStart}</span><span class="ip-masked">${maskedMiddle}</span><span>${visibleEnd}.${domainParts.slice(1).join('.')}:${port}</span>`;
-                }
-            }
+        // Show clear IP address (removed blurring)
+        function showIP(ip) {
             return ip;
         }
 
@@ -533,7 +505,7 @@
                         <div class="server-details">
                             <div class="detail-item">
                                 <div class="detail-label"><i class="fas fa-server"></i> Server Address</div>
-                                <div class="detail-value"><span class="ip-address">${maskIP(ip)}</span></div>
+                                <div class="detail-value"><span class="ip-address">${showIP(ip)}</span></div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-label"><i class="fas fa-tachometer-alt"></i> Ping</div>
