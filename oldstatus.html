@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpyMC | Live Server Status</title>
+    <link rel="icon" href="images/logo.png">
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00f0ff;
+            --primary-dark: #0066ff;
+            --secondary: #ff00aa;
+            --accent: #00ffaa;
+            --dark: #0a0a12;
+            --darker: #050508;
+            --light: #e0e0ff;
+            --card-bg: rgba(15, 15, 25, 0.9);
+            --card-border: rgba(0, 240, 255, 0.2);
+            --text-muted: rgba(200, 200, 255, 0.6);
+            --online: #00ff88;
+            --offline: #ff5555;
+            --ping-excellent: #00ff88;
+            --ping-good: #55ff55;
+            --ping-fair: #ffff55;
+            --ping-poor: #ffaa55;
+            --ping-bad: #ff5555;
+            --refresh-time: 30s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 170, 0.05) 0%, transparent 25%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            border-bottom: 1px solid var(--card-border);
+            position: relative;
+        }
+
+        .logo {
+            height: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px var(--primary));
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 15px var(--primary));
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+            opacity: 0.7;
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 255, 170, 0.3);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .servers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .server-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .server-card:hover {
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .server-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .server-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .server-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .server-name {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--light);
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .server-status {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .status-online {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--online);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+        }
+
+        .status-offline {
+            background: rgba(255, 85, 85, 0.2);
+            color: var(--offline);
+            border: 1px solid rgba(255, 85, 85, 0.3);
+        }
+
+        .server-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .detail-item {
+            margin-bottom: 15px;
+        }
+
+        .detail-label {
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-label i {
+            color: var(--primary);
+            width: 20px;
+            text-align: center;
+        }
+
+        .detail-value {
+            font-size: 1.2rem;
+            color: var(--light);
+        }
+
+        .ip-address {
+            background: rgba(0, 240, 255, 0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-family: monospace;
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+        }
+
+        .ip-masked {
+            filter: blur(4px);
+            opacity: 0.8;
+            margin: 0 3px;
+            min-width: 45px;
+            text-align: center;
+        }
+
+        .ping-value {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .ping-excellent {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--ping-excellent);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .ping-good {
+            background: rgba(85, 255, 85, 0.2);
+            color: var(--ping-good);
+            border: 1px solid rgba(85, 255, 85, 0.3);
+        }
+
+        .ping-fair {
+            background: rgba(255, 255, 85, 0.2);
+            color: var(--ping-fair);
+            border: 1px solid rgba(255, 255, 85, 0.3);
+        }
+
+        .ping-poor {
+            background: rgba(255, 170, 85, 0.2);
+            color: var(--ping-poor);
+            border: 1px solid rgba(255, 170, 85, 0.3);
+        }
+
+        .ping-bad {
+            background: rgba(255, 85, 85, 0.2);
+            color: var(--ping-bad);
+            border: 1px solid rgba(255, 85, 85, 0.3);
+        }
+
+        .player-count {
+            grid-column: span 2;
+        }
+
+        .player-bar-container {
+            width: 100%;
+            background: rgba(0, 240, 255, 0.1);
+            height: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+        }
+
+        .player-bar {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 170, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--card-border);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .refresh-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .refresh-icon {
+            color: var(--primary);
+            animation: spin var(--refresh-time) linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .servers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .server-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .player-count {
+                grid-column: span 1;
+            }
+        }
+
+        .pulse-online {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 136, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://i.ibb.co/tMF05rbH/image69.png" alt="SpyMC" class="logo">
+            <h1>SPYMC SERVER STATUS</h1>
+            <p class="subtitle"> </p>
+            <p class="subtitle">Real-time surveillance and operational oversight of all SpyMC game servers, ensuring every heartbeat, no loopholes, just command-grade dominance.</p>
+        </header>
+
+        <div class="stats-grid" id="statsBar">
+            <div class="stat-card">
+                <div class="stat-value" id="totalServers">0</div>
+                <div class="stat-label">Total Servers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="onlineServers">0</div>
+                <div class="stat-label">Online Now</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="totalPlayers">0</div>
+                <div class="stat-label">Players Online</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="avgPing">-</div>
+                <div class="stat-label">Average Ping</div>
+            </div>
+        </div>
+
+        <h2><i class="fas fa-server"></i> Server Status</h2>
+        <div class="servers-grid" id="servers"></div>
+
+        <footer>
+            <div class="footer-content">
+                <div class="refresh-info">
+                    <i class="fas fa-sync-alt refresh-icon"></i>
+                    <span>Auto-refreshing every 5 seconds..</span>
+                </div>
+                <div class="copyright">
+                    © 2025 SpyMC Network. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Server data
+        const servers = {
+            "SPYMC": "spymc.xyz:25565",
+            "Survival": "127.0. 0.1:25565",
+            "Lobby": "127.0. 0.1:25565",
+            "FFA2": "127.0. 0.1:25565",
+            "OG": "127.0. 0.1:25565",
+            "Other": "127.0. 0.1:25565"
+        };
+
+        // Global variables
+        let totalOnlinePlayers = 0;
+        let onlineServerCount = 0;
+        let pingSum = 0;
+        let pingCount = 0;
+        const refreshInterval = 5000; // 5 seconds
+
+        // Mask IP address by blurring middle part
+        function maskIP(ip) {
+            if (ip.includes(':')) {
+                const [address, port] = ip.split(':');
+                if (address.includes('.')) {
+                    // IPv4 address - show first and last octet, blur middle
+                    const parts = address.split('.');
+                    if (parts.length === 4) {
+                        return `<span>${parts[0]}.</span><span class="ip-masked">${parts[1]}.${parts[2]}</span><span>.${parts[3]}:${port}</span>`;
+                    }
+                }
+                // Domain - blur middle part
+                const domainParts = address.split('.');
+                if (domainParts.length >= 2) {
+                    const mainPart = domainParts[0];
+                    const maskedLength = Math.max(5, mainPart.length - 4);
+                    const visibleStart = mainPart.substring(0, 2);
+                    const visibleEnd = mainPart.substring(mainPart.length - 2);
+                    const maskedMiddle = mainPart.substring(2, mainPart.length - 2);
+                    return `<span>${visibleStart}</span><span class="ip-masked">${maskedMiddle}</span><span>${visibleEnd}.${domainParts.slice(1).join('.')}:${port}</span>`;
+                }
+            }
+            return ip;
+        }
+
+        // Get ping color class
+        function getPingClass(ping) {
+            if (ping < 50) return 'ping-excellent';
+            if (ping < 100) return 'ping-good';
+            if (ping < 150) return 'ping-fair';
+            if (ping < 200) return 'ping-poor';
+            return 'ping-bad';
+        }
+
+        // Create server cards
+        function createServerElements() {
+            const serverContainer = document.getElementById('servers');
+            serverContainer.innerHTML = '';
+
+            for (const [name, ip] of Object.entries(servers)) {
+                const serverHTML = `
+                    <div class="server-card" id="${name}Card">
+                        <div class="server-header">
+                            <div class="server-name">${name}</div>
+                            <div class="server-status" id="${name}Status">Checking...</div>
+                        </div>
+                        <div class="server-details">
+                            <div class="detail-item">
+                                <div class="detail-label"><i class="fas fa-server"></i> Server Address</div>
+                                <div class="detail-value"><span class="ip-address">${maskIP(ip)}</span></div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label"><i class="fas fa-tachometer-alt"></i> Ping</div>
+                                <div class="detail-value"><span id="${name}Ping" class="ping-value">-</span></div>
+                            </div>
+                            <div class="detail-item player-count">
+                                <div class="detail-label"><i class="fas fa-users"></i> Players Online</div>
+                                <div class="detail-value" id="${name}PlayerCount">- / -</div>
+                                <div class="player-bar-container">
+                                    <div class="player-bar" id="${name}PlayerBar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                serverContainer.innerHTML += serverHTML;
+            }
+
+            // Update total servers count
+            document.getElementById('totalServers').textContent = Object.keys(servers).length;
+        }
+
+        // Fetch server ping using Cloudflare DNS API
+        async function fetchPing(serverIP, name) {
+            try {
+                const startTime = performance.now();
+                const response = await fetch(`https://cloudflare-dns.com/dns-query?name=${serverIP.split(':')[0]}&type=A`, {
+                    headers: { 'Accept': 'application/dns-json' }
+                });
+                await response.json();
+                const ping = Math.round(performance.now() - startTime);
+
+                const pingElement = document.getElementById(`${name}Ping`);
+                pingElement.textContent = `${ping} ms`;
+                pingElement.className = `ping-value ${getPingClass(ping)}`;
+                
+                return ping;
+            } catch (error) {
+                console.error(`Ping Error (${name}):`, error);
+                const pingElement = document.getElementById(`${name}Ping`);
+                pingElement.textContent = "-";
+                pingElement.className = "ping-value";
+                return null;
+            }
+        }
+
+        // Fetch server status
+        async function fetchServerStatus() {
+            // Reset counters
+            totalOnlinePlayers = 0;
+            onlineServerCount = 0;
+            pingSum = 0;
+            pingCount = 0;
+
+            // Check each server
+            for (const [name, ip] of Object.entries(servers)) {
+                try {
+                    const response = await fetch(`https://api.mcstatus.io/v2/status/java/${ip}`);
+                    const data = await response.json();
+
+                    if (data.online) {
+                        const onlinePlayers = data.players.online;
+                        const maxPlayers = data.players.max || 100;
+                        const ping = await fetchPing(ip, name);
+
+                        // Update UI
+                        document.getElementById(`${name}Status`).className = "server-status status-online pulse-online";
+                        document.getElementById(`${name}Status`).textContent = "Online";
+                        document.getElementById(`${name}PlayerCount`).textContent = `${onlinePlayers} / ${maxPlayers}`;
+
+                        const playerPercentage = Math.min(100, (onlinePlayers / maxPlayers) * 100);
+                        document.getElementById(`${name}PlayerBar`).style.width = `${playerPercentage}%`;
+
+                        // Update stats
+                        totalOnlinePlayers += onlinePlayers;
+                        onlineServerCount++;
+                        if (ping) {
+                            pingSum += ping;
+                            pingCount++;
+                        }
+
+                        // Add animation for online servers
+                        anime({
+                            targets: `#${name}Card`,
+                            scale: [1, 1.03, 1],
+                            duration: 800,
+                            easing: 'easeOutElastic(1, .5)'
+                        });
+                    } else {
+                        document.getElementById(`${name}Status`).className = "server-status status-offline";
+                        document.getElementById(`${name}Status`).textContent = "Offline";
+                        document.getElementById(`${name}PlayerCount`).textContent = "- / -";
+                        document.getElementById(`${name}PlayerBar`).style.width = "0%";
+                        
+                        const pingElement = document.getElementById(`${name}Ping`);
+                        pingElement.textContent = "-";
+                        pingElement.className = "ping-value";
+                    }
+                } catch (error) {
+                    console.error(`Error fetching ${name}:`, error);
+                    document.getElementById(`${name}Status`).className = "server-status status-offline";
+                    document.getElementById(`${name}Status`).textContent = "Error";
+                    document.getElementById(`${name}PlayerCount`).textContent = "- / -";
+                    document.getElementById(`${name}PlayerBar`).style.width = "0%";
+                    
+                    const pingElement = document.getElementById(`${name}Ping`);
+                    pingElement.textContent = "-";
+                    pingElement.className = "ping-value";
+                }
+            }
+
+            // Update stats bar
+            updateStatsBar();
+        }
+
+        // Update stats bar
+        function updateStatsBar() {
+            anime({
+                targets: '#onlineServers',
+                innerHTML: [0, onlineServerCount],
+                round: 1,
+                easing: 'easeOutElastic(1, .5)',
+                duration: 1000
+            });
+
+            anime({
+                targets: '#totalPlayers',
+                innerHTML: [0, totalOnlinePlayers],
+                round: 1,
+                easing: 'easeOutElastic(1, .5)',
+                duration: 1000
+            });
+
+            const avgPing = pingCount > 0 ? Math.round(pingSum / pingCount) : '-';
+            const avgPingElement = document.getElementById('avgPing');
+            avgPingElement.textContent = avgPing === '-' ? avgPing : `${avgPing} ms`;
+            
+            if (avgPing !== '-') {
+                avgPingElement.className = `stat-value ${getPingClass(avgPing)}`;
+            } else {
+                avgPingElement.className = 'stat-value';
+            }
+        }
+
+        // Initialize everything
+        function init() {
+            createServerElements();
+            fetchServerStatus();
+            setInterval(fetchServerStatus, refreshInterval);
+        }
+
+        // Start the application
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
